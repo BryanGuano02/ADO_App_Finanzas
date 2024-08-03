@@ -1617,7 +1617,7 @@
 											"font": "Arial;13;0",
 											"left": 181,
 											"top": 229,
-											"width": 101.75537109375,
+											"width": 101,
 											"height": 25,
 											"stereotypeLabel": {
 												"$ref": "AAAAAAGQ5L8MClrbOzo="
@@ -1817,7 +1817,7 @@
 											"font": "Arial;13;0",
 											"left": 188,
 											"top": 45,
-											"width": 95.25537109375,
+											"width": 94,
 											"height": 25,
 											"stereotypeLabel": {
 												"$ref": "AAAAAAGQ5L8o2lsJmS8="
@@ -2016,7 +2016,7 @@
 											"font": "Arial;13;0",
 											"left": 376.5,
 											"top": 53,
-											"width": 77.91357421875,
+											"width": 77,
 											"height": 25,
 											"stereotypeLabel": {
 												"$ref": "AAAAAAGQ5L9QiVs3pK0="
@@ -2215,7 +2215,7 @@
 											"font": "Arial;13;0",
 											"left": 531.5,
 											"top": 117,
-											"width": 93.814453125,
+											"width": 93,
 											"height": 25,
 											"stereotypeLabel": {
 												"$ref": "AAAAAAGQ5L+hm1tlGVQ="
@@ -2414,7 +2414,7 @@
 											"font": "Arial;13;0",
 											"left": 479.5,
 											"top": 237,
-											"width": 113.30810546875,
+											"width": 113,
 											"height": 25,
 											"stereotypeLabel": {
 												"$ref": "AAAAAAGQ5L+821uTIRE="
@@ -2809,7 +2809,7 @@
 											"font": "Arial;13;0",
 											"left": 374.5,
 											"top": 405,
-											"width": 107.53173828125,
+											"width": 107,
 											"height": 25,
 											"stereotypeLabel": {
 												"$ref": "AAAAAAGQ5L/oG1vvhyM="
@@ -3008,7 +3008,7 @@
 											"font": "Arial;13;0",
 											"left": 176.5,
 											"top": 421,
-											"width": 117.6435546875,
+											"width": 117,
 											"height": 25,
 											"stereotypeLabel": {
 												"$ref": "AAAAAAGQ5MAGYlwdGwI="
@@ -4083,7 +4083,7 @@
 												"$ref": "AAAAAAGQ9ItvG3fIa28="
 											},
 											"font": "Arial;13;0",
-											"left": 61.39453125,
+											"left": 60.68359375,
 											"top": 45,
 											"width": 28.17724609375,
 											"height": 13,
@@ -4098,7 +4098,7 @@
 											"font": "Arial;13;1",
 											"left": 29,
 											"top": 45,
-											"width": 22.39453125,
+											"width": 21.68359375,
 											"height": 13,
 											"text": "link"
 										}
@@ -9232,7 +9232,7 @@
 												"$ref": "AAAAAAGQ9Iv+eXkpOBI="
 											},
 											"font": "Arial;13;0",
-											"left": 77.39453125,
+											"left": 76.68359375,
 											"top": 261,
 											"width": 28.17724609375,
 											"height": 13,
@@ -9247,7 +9247,7 @@
 											"font": "Arial;13;1",
 											"left": 45,
 											"top": 261,
-											"width": 22.39453125,
+											"width": 21.68359375,
 											"height": 13,
 											"text": "link"
 										}
@@ -14698,7 +14698,7 @@
 														"$ref": "AAAAAAGQ9I2Y8XxV9CU="
 													},
 													"font": "Arial;13;0",
-													"left": 93.39453125,
+													"left": 92.68359375,
 													"top": 53,
 													"width": 28.17724609375,
 													"height": 13,
@@ -14713,7 +14713,7 @@
 													"font": "Arial;13;1",
 													"left": 61,
 													"top": 53,
-													"width": 22.39453125,
+													"width": 21.68359375,
 													"height": 13,
 													"text": "link"
 												}
@@ -15358,9 +15358,9 @@
 																"$ref": "AAAAAAGQ9DQIQ7Z2Chc="
 															},
 															"font": "Arial;13;0",
-															"left": 32.72998046875,
+															"left": 30.55908203125,
 															"top": 5,
-															"width": 155.30810546875,
+															"width": 144.78369140625,
 															"height": 13,
 															"text": "Análisis - CU. Filtrar Fecha"
 														},
@@ -15373,7 +15373,7 @@
 															"font": "Arial;13;1",
 															"left": 13,
 															"top": 5,
-															"width": 13.72998046875,
+															"width": 11.55908203125,
 															"height": 13,
 															"text": "sd"
 														}
@@ -15424,7 +15424,7 @@
 																"$ref": "AAAAAAGQ9I3YOoFbfTg="
 															},
 															"font": "Arial;13;0",
-															"left": 77.39453125,
+															"left": 76.68359375,
 															"top": 37,
 															"width": 28.17724609375,
 															"height": 13,
@@ -15439,7 +15439,7 @@
 															"font": "Arial;13;1",
 															"left": 45,
 															"top": 37,
-															"width": 22.39453125,
+															"width": 21.68359375,
 															"height": 13,
 															"text": "link"
 														}
@@ -16241,9 +16241,9 @@
 																"$ref": "AAAAAAGQ5NWpgK4hIpc="
 															},
 															"font": "Arial;13;0",
-															"left": 32.72998046875,
+															"left": 30.55908203125,
 															"top": 21,
-															"width": 169.06982421875,
+															"width": 155.61279296875,
 															"height": 13,
 															"text": "Análisis - CU. Ver Dashboard"
 														},
@@ -16256,7 +16256,7 @@
 															"font": "Arial;13;1",
 															"left": 13,
 															"top": 21,
-															"width": 13.72998046875,
+															"width": 11.55908203125,
 															"height": 13,
 															"text": "sd"
 														}
@@ -16295,7 +16295,7 @@
 																"$ref": "AAAAAAGQ9I23kXyqRF8="
 															},
 															"font": "Arial;13;0",
-															"left": 69.39453125,
+															"left": 68.68359375,
 															"top": 429,
 															"width": 28.17724609375,
 															"height": 13,
@@ -16310,7 +16310,7 @@
 															"font": "Arial;13;1",
 															"left": 37,
 															"top": 429,
-															"width": 22.39453125,
+															"width": 21.68359375,
 															"height": 13,
 															"text": "link"
 														}
@@ -19722,9 +19722,9 @@
 																"$ref": "AAAAAAGRBpXXxGQvjxU="
 															},
 															"font": "Arial;13;0",
-															"left": 32.72998046875,
+															"left": 30.55908203125,
 															"top": 13,
-															"width": 147.392578125,
+															"width": 136.119140625,
 															"height": 13,
 															"text": "Análisis - CU. Ver Cuenta"
 														},
@@ -19737,7 +19737,7 @@
 															"font": "Arial;13;1",
 															"left": 13,
 															"top": 13,
-															"width": 13.72998046875,
+															"width": 11.55908203125,
 															"height": 13,
 															"text": "sd"
 														}
@@ -19776,7 +19776,7 @@
 																"$ref": "AAAAAAGRBpbnImSrA3U="
 															},
 															"font": "Arial;13;0",
-															"left": 61.39453125,
+															"left": 60.68359375,
 															"top": 309,
 															"width": 28.17724609375,
 															"height": 13,
@@ -19791,7 +19791,7 @@
 															"font": "Arial;13;1",
 															"left": 29,
 															"top": 309,
-															"width": 22.39453125,
+															"width": 21.68359375,
 															"height": 13,
 															"text": "link"
 														}
@@ -21988,9 +21988,9 @@
 																"$ref": "AAAAAAGRBr8kuwqlykw="
 															},
 															"font": "Arial;13;0",
-															"left": 24.72998046875,
+															"left": 22.55908203125,
 															"top": 13,
-															"width": 178.43896484375,
+															"width": 168.6318359375,
 															"height": 13,
 															"text": "Análisis - CU. Ver Movimientos"
 														},
@@ -22003,7 +22003,7 @@
 															"font": "Arial;13;1",
 															"left": 5,
 															"top": 13,
-															"width": 13.72998046875,
+															"width": 11.55908203125,
 															"height": 13,
 															"text": "sd"
 														}
@@ -22054,7 +22054,7 @@
 																"$ref": "AAAAAAGRBsFgIwtn7WI="
 															},
 															"font": "Arial;13;0",
-															"left": 61.39453125,
+															"left": 60.68359375,
 															"top": 405,
 															"width": 28.17724609375,
 															"height": 13,
@@ -22069,7 +22069,7 @@
 															"font": "Arial;13;1",
 															"left": 29,
 															"top": 405,
-															"width": 22.39453125,
+															"width": 21.68359375,
 															"height": 13,
 															"text": "link"
 														}
@@ -23760,9 +23760,9 @@
 																"$ref": "AAAAAAGRC7JfeGP7xx4="
 															},
 															"font": "Arial;13;0",
-															"left": 88.72998046875,
+															"left": 86.55908203125,
 															"top": 21,
-															"width": 205.8798828125,
+															"width": 196.07275390625,
 															"height": 13,
 															"text": "Análisis - CU. Eliminar Movimientos"
 														},
@@ -23775,7 +23775,7 @@
 															"font": "Arial;13;1",
 															"left": 69,
 															"top": 21,
-															"width": 13.72998046875,
+															"width": 11.55908203125,
 															"height": 13,
 															"text": "sd"
 														}
@@ -25835,7 +25835,7 @@
 																"$ref": "AAAAAAGRC9wlPpeYA3k="
 															},
 															"font": "Arial;13;0",
-															"left": 138.39453125,
+															"left": 137.68359375,
 															"top": 145,
 															"width": 28.17724609375,
 															"height": 13,
@@ -25850,7 +25850,7 @@
 															"font": "Arial;13;1",
 															"left": 106,
 															"top": 145,
-															"width": 22.39453125,
+															"width": 21.68359375,
 															"height": 13,
 															"text": "link"
 														}
@@ -26268,9 +26268,9 @@
 																"$ref": "AAAAAAGRC8J57NSnQKs="
 															},
 															"font": "Arial;13;0",
-															"left": 40.72998046875,
+															"left": 38.55908203125,
 															"top": 5,
-															"width": 216.00439453125,
+															"width": 204.71826171875,
 															"height": 13,
 															"text": "Análisis - CU. Actualizar Movimientos"
 														},
@@ -26283,7 +26283,7 @@
 															"font": "Arial;13;1",
 															"left": 21,
 															"top": 5,
-															"width": 13.72998046875,
+															"width": 11.55908203125,
 															"height": 13,
 															"text": "sd"
 														}
@@ -26334,7 +26334,7 @@
 																"$ref": "AAAAAAGRC8NFutX/n5I="
 															},
 															"font": "Arial;13;0",
-															"left": 85.39453125,
+															"left": 84.68359375,
 															"top": 125,
 															"width": 28.17724609375,
 															"height": 13,
@@ -26349,7 +26349,7 @@
 															"font": "Arial;13;1",
 															"left": 53,
 															"top": 125,
-															"width": 22.39453125,
+															"width": 21.68359375,
 															"height": 13,
 															"text": "link"
 														}
@@ -29518,9 +29518,9 @@
 																"$ref": "AAAAAAGRDd57jsYLWJs="
 															},
 															"font": "Arial;13;0",
-															"left": 32.72998046875,
+															"left": 30.55908203125,
 															"top": 13,
-															"width": 161.83984375,
+															"width": 149.830078125,
 															"height": 13,
 															"text": "Análisis - CU. Ver Categoria"
 														},
@@ -29533,7 +29533,7 @@
 															"font": "Arial;13;1",
 															"left": 13,
 															"top": 13,
-															"width": 13.72998046875,
+															"width": 11.55908203125,
 															"height": 13,
 															"text": "sd"
 														}
@@ -29585,7 +29585,7 @@
 																"$ref": "AAAAAAGRDd7tbcbHsIY="
 															},
 															"font": "Arial;13;0",
-															"left": 65.39453125,
+															"left": 64.68359375,
 															"top": 245,
 															"width": 28.17724609375,
 															"height": 13,
@@ -29600,7 +29600,7 @@
 															"font": "Arial;13;1",
 															"left": 33,
 															"top": 245,
-															"width": 22.39453125,
+															"width": 21.68359375,
 															"height": 13,
 															"text": "link"
 														}
@@ -35067,8 +35067,8 @@
 														"$ref": "AAAAAAGRDxbOdfN33Jc="
 													},
 													"font": "Arial;13;0",
-													"left": 232,
-													"top": 672,
+													"left": 256,
+													"top": 744,
 													"width": 100,
 													"height": 64,
 													"text": "Al formulario le mandamos el objeto cuenta o solo el saldo??"
@@ -35677,9 +35677,9 @@
 																"$ref": "AAAAAAGREObbzliEg7g="
 															},
 															"font": "Arial;13;0",
-															"left": 32.72998046875,
+															"left": 30.55908203125,
 															"top": 13,
-															"width": 182.05712890625,
+															"width": 167.88916015625,
 															"height": 13,
 															"text": "Análisis - CU. Registrar Ingreso"
 														},
@@ -35692,7 +35692,7 @@
 															"font": "Arial;13;1",
 															"left": 13,
 															"top": 13,
-															"width": 13.72998046875,
+															"width": 11.55908203125,
 															"height": 13,
 															"text": "sd"
 														}
@@ -38922,7 +38922,7 @@
 																"$ref": "AAAAAAGRERBt1g+hL6I="
 															},
 															"font": "Arial;13;0",
-															"left": 70.39453125,
+															"left": 69.68359375,
 															"top": 273,
 															"width": 28.17724609375,
 															"height": 13,
@@ -38937,7 +38937,7 @@
 															"font": "Arial;13;1",
 															"left": 38,
 															"top": 273,
-															"width": 22.39453125,
+															"width": 21.68359375,
 															"height": 13,
 															"text": "link"
 														}
@@ -39539,9 +39539,9 @@
 																"$ref": "AAAAAAGREP8GolIUETw="
 															},
 															"font": "Arial;13;0",
-															"left": 32.72998046875,
+															"left": 30.55908203125,
 															"top": 13,
-															"width": 217.69287109375,
+															"width": 199.89404296875,
 															"height": 13,
 															"text": "Análisis - CU. Registrar Transferencia"
 														},
@@ -39554,7 +39554,7 @@
 															"font": "Arial;13;1",
 															"left": 13,
 															"top": 13,
-															"width": 13.72998046875,
+															"width": 11.55908203125,
 															"height": 13,
 															"text": "sd"
 														}
@@ -42133,7 +42133,7 @@
 																"$ref": "AAAAAAGRERBL9QfUDRE="
 															},
 															"font": "Arial;13;0",
-															"left": 87.39453125,
+															"left": 86.68359375,
 															"top": 428,
 															"width": 28.17724609375,
 															"height": 13,
@@ -42148,7 +42148,7 @@
 															"font": "Arial;13;1",
 															"left": 55,
 															"top": 428,
-															"width": 22.39453125,
+															"width": 21.68359375,
 															"height": 13,
 															"text": "link"
 														}
@@ -42875,7 +42875,7 @@
 														"$ref": "AAAAAAGRBSCs3iYYgpE="
 													},
 													"font": "Arial;13;0",
-													"left": 72.39453125,
+													"left": 71.68359375,
 													"top": 40,
 													"width": 28.17724609375,
 													"height": 13,
@@ -42890,7 +42890,7 @@
 													"font": "Arial;13;1",
 													"left": 40,
 													"top": 40,
-													"width": 22.39453125,
+													"width": 21.68359375,
 													"height": 13,
 													"text": "link"
 												}
@@ -44607,7 +44607,8 @@
 													"_parent": {
 														"$ref": "AAAAAAGREM34tO/YYt8="
 													},
-													"name": "saldoCuenta"
+													"name": "saldoCuenta",
+													"type": ""
 												}
 											]
 										}
@@ -44635,7 +44636,8 @@
 													"_parent": {
 														"$ref": "AAAAAAGREPg+FmbzOWM="
 													},
-													"name": "saldoCuenta"
+													"name": "saldoCuenta",
+													"type": ""
 												}
 											]
 										}
@@ -44663,7 +44665,8 @@
 													"_parent": {
 														"$ref": "AAAAAAGREQaLOlsPi7s="
 													},
-													"name": "cuenta"
+													"name": "cuenta",
+													"type": ""
 												}
 											]
 										}
@@ -44704,7 +44707,7 @@
 														"$ref": "AAAAAAGRBSCs3iYk0KU="
 													},
 													"font": "Arial;13;0",
-													"left": 88.39453125,
+													"left": 87.68359375,
 													"top": 41,
 													"width": 28.17724609375,
 													"height": 13,
@@ -44719,7 +44722,7 @@
 													"font": "Arial;13;1",
 													"left": 56,
 													"top": 41,
-													"width": 22.39453125,
+													"width": 21.68359375,
 													"height": 13,
 													"text": "link"
 												}
@@ -45463,7 +45466,8 @@
 													"_parent": {
 														"$ref": "AAAAAAGREM0WnO3uWwU="
 													},
-													"name": "idCuenta"
+													"name": "idCuenta",
+													"type": ""
 												}
 											]
 										},
@@ -45481,7 +45485,8 @@
 													"_parent": {
 														"$ref": "AAAAAAGREM6IlfHcf08="
 													},
-													"name": "concepto"
+													"name": "concepto",
+													"type": ""
 												},
 												{
 													"_type": "UMLParameter",
@@ -45526,7 +45531,8 @@
 													"_parent": {
 														"$ref": "AAAAAAGREPcBKF5oHbY="
 													},
-													"name": "idCuenta"
+													"name": "idCuenta",
+													"type": ""
 												}
 											]
 										},
@@ -45544,7 +45550,8 @@
 													"_parent": {
 														"$ref": "AAAAAAGREPjZ4GkAJLQ="
 													},
-													"name": "concepto"
+													"name": "concepto",
+													"type": ""
 												},
 												{
 													"_type": "UMLParameter",
@@ -45589,7 +45596,8 @@
 													"_parent": {
 														"$ref": "AAAAAAGREQLajVQzU10="
 													},
-													"name": "transferencia"
+													"name": "transferencia",
+													"type": ""
 												}
 											]
 										},
@@ -50150,7 +50158,7 @@
 														"$ref": "AAAAAAGRBSbniTgHjjw="
 													},
 													"font": "Arial;13;0",
-													"left": 77.39453125,
+													"left": 76.68359375,
 													"top": 261,
 													"width": 28.17724609375,
 													"height": 13,
@@ -50165,7 +50173,7 @@
 													"font": "Arial;13;1",
 													"left": 45,
 													"top": 261,
-													"width": 22.39453125,
+													"width": 21.68359375,
 													"height": 13,
 													"text": "link"
 												}
@@ -51666,7 +51674,8 @@
 													"_parent": {
 														"$ref": "AAAAAAGREM8+7PmdS0A="
 													},
-													"name": "valor"
+													"name": "valor",
+													"type": ""
 												}
 											]
 										}
@@ -51976,7 +51985,8 @@
 													"_parent": {
 														"$ref": "AAAAAAGREM+OVP149XQ="
 													},
-													"name": "valor"
+													"name": "valor",
+													"type": ""
 												}
 											]
 										}
@@ -52046,7 +52056,8 @@
 													"_parent": {
 														"$ref": "AAAAAAGREPlQeHGYb00="
 													},
-													"name": "ingreso"
+													"name": "ingreso",
+													"type": ""
 												}
 											]
 										}
@@ -52144,7 +52155,8 @@
 													"_parent": {
 														"$ref": "AAAAAAGRENnNE2NUmuc="
 													},
-													"name": "egreso"
+													"name": "egreso",
+													"type": ""
 												}
 											]
 										}
@@ -52789,7 +52801,7 @@
 														"$ref": "AAAAAAGRBkAjwu18zWY="
 													},
 													"font": "Arial;13;0",
-													"left": 72.39453125,
+													"left": 71.68359375,
 													"top": 40,
 													"width": 28.17724609375,
 													"height": 13,
@@ -52804,7 +52816,7 @@
 													"font": "Arial;13;1",
 													"left": 40,
 													"top": 40,
-													"width": 22.39453125,
+													"width": 21.68359375,
 													"height": 13,
 													"text": "link"
 												}
@@ -53507,7 +53519,7 @@
 														"$ref": "AAAAAAGRBkAjw+2eEuI="
 													},
 													"font": "Arial;13;0",
-													"left": 88.39453125,
+													"left": 87.68359375,
 													"top": 41,
 													"width": 28.17724609375,
 													"height": 13,
@@ -53522,7 +53534,7 @@
 													"font": "Arial;13;1",
 													"left": 56,
 													"top": 41,
-													"width": 22.39453125,
+													"width": 21.68359375,
 													"height": 13,
 													"text": "link"
 												}
@@ -58066,7 +58078,7 @@
 														"$ref": "AAAAAAGRBkAjxO6D8BU="
 													},
 													"font": "Arial;13;0",
-													"left": 77.39453125,
+													"left": 76.68359375,
 													"top": 261,
 													"width": 28.17724609375,
 													"height": 13,
@@ -58081,7 +58093,7 @@
 													"font": "Arial;13;1",
 													"left": 45,
 													"top": 261,
-													"width": 22.39453125,
+													"width": 21.68359375,
 													"height": 13,
 													"text": "link"
 												}
