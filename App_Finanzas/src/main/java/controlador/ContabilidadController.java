@@ -27,11 +27,11 @@ public class ContabilidadController extends HttpServlet {
 	}
 
 	private void ruteador(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		String ruta = (req.getParameter("ruta") != null)? "verCuenta": req.getParameter("ruta");
+		String ruta = (req.getParameter("ruta") != null) ? req.getParameter("ruta") : "verCuenta";		
 		
 		switch (ruta) {
 		case "verDashboard":
-			this.verDashboard(req, resp);
+			verDashboard(req, resp);
 			break;
 		case "verCuenta":
 			this.verCuenta(req, resp);
@@ -40,10 +40,17 @@ public class ContabilidadController extends HttpServlet {
 	}
 
 	private void verDashboard(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		System.out.print("HOla");
+		// obtener parámetros
+		
+//		hablar con el modelo
+		
+//		llamar a la vista
+		resp.sendRedirect("jsp/VerDashboard.jsp");
+		
 	}
 
 	private void verCuenta(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		System.out.print("cuenta");
 
 	}
 
