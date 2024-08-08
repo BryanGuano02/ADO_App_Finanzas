@@ -5,7 +5,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Ver Dashboard</title>
+    <title>Ver Da4shboard</title>
 </head>
 <body>
 <h1>Hola</h1>
