@@ -4,8 +4,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Ver Dashboard</title>
+    <meta charset="UTF-8">
+    <title>Ver Dashboard</title>
 </head>
 <body>
 <h1>Hola</h1>

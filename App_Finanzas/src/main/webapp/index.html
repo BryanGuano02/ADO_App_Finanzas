@@ -1,11 +1,26 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<meta http-equiv="refresh"
-	content="0; url=ContabilidadController?ruta=verDashboard" />
-<title>Insert title here</title>
+    <meta charset="UTF-8">
+    <script>
+        window.onload = function () {
+            // Obtener la fecha de hoy
+            const today = new Date();
+            const day = String(today.getDate()).padStart(2, '0');
+            const month = String(today.getMonth() + 1).padStart(2, '0'); // Mes empieza en 0
+            const year = today.getFullYear();
+
+            // Crear la fecha del primer día del mes actual
+            const firstDay = `${year}-${month}-01`;
+            const todayFormatted = `${year}-${month}-${day}`;
+
+            // Redirigir con los parámetros de fecha
+            const url = `ContabilidadController?ruta=verDashboard&fechaInicio=${firstDay}&fechaFin=${todayFormatted}`;
+            window.location.href = url;
+        }
+    </script>
+    <title>Redireccionando...</title>
 </head>
 <body>
-<h3>hoasofi</h3>
+<h1>hoa</h1>
 </body>

@@ -11,7 +11,7 @@ public class Cuenta implements Serializable {
 	private String nombre;
 	private double total;
 
-	private List<Cuenta> cuentas = null;
+	private static List<Cuenta> cuentas = null;
 
 	public Cuenta() {
 	}
@@ -48,7 +48,7 @@ public class Cuenta implements Serializable {
 
 //	MÈTODOS DE NEGOCIO
 
-	public List<Cuenta> getTodo() {
+	public static List<Cuenta> getTodo() {
 		if (cuentas == null) {
 			cuentas = new ArrayList<Cuenta>();
 

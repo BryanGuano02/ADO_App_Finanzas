@@ -11,96 +11,106 @@ import jakarta.servlet.http.HttpServletResponse;
 @WebServlet("/ContabilidadController")
 public class ContabilidadController extends HttpServlet {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+    /**
+     *
+     */
+    private static final long serialVersionUID = 1L;
 
-	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		this.ruteador(req, resp);
-	}
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        this.ruteador(req, resp);
+    }
 
-	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		this.ruteador(req, resp);
-	}
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        this.ruteador(req, resp);
+    }
 
-	private void ruteador(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		String ruta = (req.getParameter("ruta") != null) ? req.getParameter("ruta") : "verCuenta";		
-		
-		switch (ruta) {
-		case "verDashboard":
-			verDashboard(req, resp);
-			break;
-		case "verCuenta":
-			this.verCuenta(req, resp);
-			break;
-		}
-	}
+    private void ruteador(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String ruta = (req.getParameter("ruta") != null) ? req.getParameter("ruta") : "verCuenta";
 
-	private void verDashboard(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		// obtener parámetros
-		
+        System.out.println(ruta);
+        switch (ruta) {
+            case "verDashboard":
+                verDashboard(req, resp);
+                break;
+            case "verCuenta":
+                this.verCuenta(req, resp);
+                break;
+        }
+    }
+
+    private void verDashboard(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        // obtener parámetros
+        String fechaInicio = req.getParameter("fechaInicio");
+        String fechaActual = req.getParameter("fechaFin");
+
 //		hablar con el modelo
-		
-//		llamar a la vista
-		resp.sendRedirect("jsp/VerDashboard.jsp");
-		
-	}
+        List<Cuenta> cuentas = Cuenta.getTodo(); //TODO: El saldo de la cuenta es también en base a las fechas
 
-	private void verCuenta(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		System.out.print("cuenta");
+        req.setAttribute("cuentas", cuentas);
+//TODO: Mandar los parámetros restantes  de mostrar()
+//		llamar a la vista - mostrar()
+        req.getRequestDispatcher("jsp/VerDashboard.jsp").forward(req, resp);
 
-	}
 
-	private void verMovimientos(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-	}
+    }
 
-	private void verCategoria(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-	}
+    private void verCuenta(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        System.out.print("cuenta");
 
-	private void eliminarMovimiento(HttpServletRequest req, HttpServletResponse resp)
-			throws ServletException, IOException {
-	}
+    }
 
-	private void confirmarEliminacion(HttpServletRequest req, HttpServletResponse resp)
-			throws ServletException, IOException {
-	}
+    private void verMovimientos(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    }
 
-	private void actualizarMovimiento(HttpServletRequest req, HttpServletResponse resp)
-			throws ServletException, IOException {
-	}
+    private void verCategoria(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    }
 
-	private void confirmarActualizacion(HttpServletRequest req, HttpServletResponse resp)
-			throws ServletException, IOException {
-	}
+    private void eliminarMovimiento(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException {
+    }
 
-	private void registrarlnfoActualizacion(HttpServletRequest req, HttpServletResponse resp)
-			throws ServletException, IOException {
-	}
+    private void confirmarEliminacion(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException {
+    }
 
-	private void registrarGasto(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-	}
+    private void actualizarMovimiento(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException {
+    }
 
-	private void ingresarlnfoGasto(HttpServletRequest req, HttpServletResponse resp)
-			throws ServletException, IOException {
-	}
+    private void confirmarActualizacion(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException {
+    }
 
-	private void registrarlngreso(HttpServletRequest req, HttpServletResponse resp)
-			throws ServletException, IOException {
-	}
+    private void registrarlnfoActualizacion(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException {
+    }
 
-	private void ingresarlnfolngreso(HttpServletRequest req, HttpServletResponse resp)
-			throws ServletException, IOException {
-	}
+    private void registrarGasto(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-	private void registrarTransferencia(HttpServletRequest req, HttpServletResponse resp)
-			throws ServletException, IOException {
-	}
+    }
 
-	private void ingresarlnfoTransferencia(HttpServletRequest req, HttpServletResponse resp)
-			throws ServletException, IOException {
-	}
+    private void ingresarlnfoGasto(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException {
+
+    }
+
+    private void registrarlngreso(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException {
+
+    }
+
+    private void ingresarlnfolngreso(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException {
+    }
+
+    private void registrarTransferencia(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException {
+    }
+
+    private void ingresarlnfoTransferencia(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException {
+    }
 
 }
