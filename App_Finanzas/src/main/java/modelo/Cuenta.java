@@ -59,7 +59,7 @@ public class Cuenta implements Serializable {
 		return cuentas;
 	}
 
-	public Cuenta getCuentaPorId(int idCuenta) {
+	public Cuenta obtenerCuentaPorId(int idCuenta) {
 		for (Cuenta cuenta : getTodo()) {
 			if (cuenta.getId() == idCuenta) {
 				return cuenta;
@@ -69,8 +69,6 @@ public class Cuenta implements Serializable {
 	}
 
 	public void actualizarSaldo(double valor) {
-		for (Cuenta cuenta : getTodo()) {
-			cuenta.setTotal(cuenta.getTotal() + valor);
-		}
+		setTotal(getTotal() + valor);
 	}
 }
