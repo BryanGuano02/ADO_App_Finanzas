@@ -64,6 +64,7 @@ public class ContabilidadController extends HttpServlet {
     }
 
     private void verDashboard(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+//        1. Obtener parámetros
         HttpSession session = req.getSession();
 
         LocalDate fechaInicio = null;
@@ -77,13 +78,16 @@ public class ContabilidadController extends HttpServlet {
             session.setAttribute("fechaActual", fechaActual);
         }
 
-        //hablar con el modelo
+//        2. Hablar con el modelo
         CuentaDAO cuentadao = new CuentaDAO();
         List<Cuenta> cuentas = cuentadao.obtenerTodo(); //TODO: El saldo de la cuenta es también en base a las fechas
 
+
         req.setAttribute("cuentas", cuentas);
-//TODO: Mandar los parámetros restantes  de mostrar()
-//		llamar a la vista - mostrar()
+
+        //req.setAttribute("ingresos", ingresos);
+        //TODO: Mandar los parámetros restantes  de mostrar()
+        //		llamar a la vista - mostrar()
         req.getRequestDispatcher("jsp/VerDashboard.jsp").forward(req, resp);
 
 
@@ -93,7 +97,21 @@ public class ContabilidadController extends HttpServlet {
     }
 
     private void verCuenta(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        System.out.print("cuenta");
+//        1.
+        int idCuenta = Integer.parseInt(req.getParameter("idCuenta"));
+
+//        2.
+        CuentaDAO cuentaDao = new CuentaDAO();
+        Cuenta cuenta = cuentaDao.obtenerCuentaPorId(idCuenta);
+
+        MovimientoDAO movimientoDao = new MovimientoDAO();
+        List<MovimientoDTO> movimientos = movimientoDao.obtenerMovimientosPorIdCuenta(idCuenta);
+
+        req.setAttribute("cuenta", cuenta);
+        req.setAttribute("movimientos", movimientos);
+
+//        3.
+        req.getRequestDispatcher("jsp/VerCuenta.jsp").forward(req, resp);
 
     }
 

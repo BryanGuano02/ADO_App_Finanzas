@@ -48,6 +48,23 @@ public class MovimientoDAO implements Serializable {
 
         return movimientos;
     }
+
+    public List<MovimientoDTO> obtenerMovimientosPorIdCuenta(int idCuenta) {
+        EntityManager em = emf.createEntityManager();
+        List<Movimiento> movimientos = null;
+
+        try {
+            // Consulta JPQL para obtener movimientos por id de cuenta
+            movimientos = em.createQuery(
+                            "SELECT m FROM Movimiento m WHERE m.cuenta.id = :idCuenta", Movimiento.class)
+                    .setParameter("idCuenta", idCuenta)
+                    .getResultList();
+        } finally {
+            em.close(); // Asegurarse de cerrar el EntityManager
+        }
+
+        return movimientos;
+    }
 }
 
 
