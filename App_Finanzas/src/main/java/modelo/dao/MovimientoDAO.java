@@ -5,6 +5,7 @@ import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 import jakarta.persistence.TypedQuery;
 import modelo.dto.MovimientoDTO;
+import modelo.entidades.Movimiento;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -50,15 +51,19 @@ public class MovimientoDAO implements Serializable {
     }
 
     public List<MovimientoDTO> obtenerMovimientosPorIdCuenta(int idCuenta) {
-        EntityManager em = emf.createEntityManager();
-        List<Movimiento> movimientos = null;
+        emf = Persistence.createEntityManagerFactory("chaucherita_PU");
+        EntityManager em = null;
+        List<MovimientoDTO> movimientos = null;
 
         try {
-            // Consulta JPQL para obtener movimientos por id de cuenta
-            movimientos = em.createQuery(
-                            "SELECT m FROM Movimiento m WHERE m.cuenta.id = :idCuenta", Movimiento.class)
-                    .setParameter("idCuenta", idCuenta)
-                    .getResultList();
+            // Crea el EntityManager
+            em = emf.createEntityManager();
+
+            // Create and execute the JPQL query
+            String jpql = "SELECT m FROM Movimiento m WHERE m.fecha BETWEEN :desde AND :hasta";
+            TypedQuery<MovimientoDTO> query = em.createQuery(jpql, MovimientoDTO.class);
+            query.setParameter("desde", desde);
+            query.setParameter("hasta", hasta);
         } finally {
             em.close(); // Asegurarse de cerrar el EntityManager
         }
