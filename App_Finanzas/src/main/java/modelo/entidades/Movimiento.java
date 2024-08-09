@@ -1,21 +1,55 @@
 package modelo.entidades;
 
+import jakarta.persistence.*;
+
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
-public class Movimiento {
+
+
+@Entity
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+public class Movimiento implements Serializable {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+    @Column(name = "valor")
+    private Double valor;
+    @Column(name = "concepto")
     private String concepto;
+    @Column(name = "fecha")
     private LocalDate fecha;
-    private double valor;
+
+    @ManyToOne(cascade = CascadeType.REFRESH)
+    @JoinColumn(name = "Cuenta_origen")
+    private Cuenta Cuenta_Origen;
+
+
+    @ManyToOne(cascade = CascadeType.REFRESH)
+    @JoinColumn(name = "cuenta_destino")
+    private Cuenta cuenta_Destino;
+
+
+
+    @ManyToOne(cascade = CascadeType.REFRESH)
+    @JoinColumn(name = "categoria_id")
+    private Categoria categoria;
 
     public Movimiento() {
     }
 
-    public Movimiento(String concepto, LocalDate fecha, double valor) {
-        this.concepto = concepto;
-        this.fecha = fecha;
+
+    public Movimiento(Double valor, Integer id, LocalDate fecha, Cuenta cuenta_Origen, Cuenta cuenta_Destino, String concepto, Categoria categoria) {
         this.valor = valor;
+        this.id = id;
+        this.fecha = fecha;
+        this.Cuenta_Origen = cuenta_Origen;
+        this.cuenta_Destino = cuenta_Destino;
+        this.concepto = concepto;
+        this.categoria = categoria;
     }
 
     public String getConcepto() {
@@ -65,5 +99,13 @@ public class Movimiento {
 
     public List<Movimiento> obtenerMovimientosPorIdCategoria(int idCategoria){
         return null;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public Integer getId() {
+        return id;
     }
 }

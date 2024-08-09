@@ -10,6 +10,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import modelo.dto.MovimientoDTO;
 import modelo.entidades.*;
 import modelo.dao.*;
 
@@ -43,6 +44,9 @@ public class ContabilidadController extends HttpServlet {
                 break;
             case "filtrarPorFechas":
                 this.filtrarPorFechas(req, resp);
+                break;
+            case "verMovimientos":
+                this.verMovimientos(req, resp);
                 break;
         }
     }
@@ -94,6 +98,23 @@ public class ContabilidadController extends HttpServlet {
     }
 
     private void verMovimientos(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        // Obtener las fechas desde la solicitud
+        LocalDate desde = LocalDate.parse(req.getParameter("desde"));
+        LocalDate hasta = LocalDate.parse(req.getParameter("hasta"));
+
+        // Crear una instancia del DAO para acceder a los movimientos
+        MovimientoDAO movimientoDAO = new MovimientoDAO();
+
+        // Llamar al método obtenerTodo del DAO para obtener los movimientos
+        List<MovimientoDTO> movimientos = movimientoDAO.obtenerTodo(desde, hasta);
+
+        // Establecer los movimientos en la solicitud para ser enviados a la vista
+        req.setAttribute("movimientos", movimientos);
+
+        // Llamar a la vista para mostrar los movimientos
+        req.getRequestDispatcher("jsp/VerMovimientos.jsp").forward(req, resp);
+
+
     }
 
     private void verCategoria(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

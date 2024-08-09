@@ -17,13 +17,6 @@ public class Cuenta implements Serializable {
 	private String nombre;
 	private double total;
 
-	@OneToMany(mappedBy = "cuenta")
-	private ArrayList<Ingreso> ingresos;
-	@OneToMany(mappedBy = "cuenta")
-	private ArrayList<Egreso> egresos;
-	@OneToMany(mappedBy = "cuenta")
-	private ArrayList<Transferencia> transferencias ;
-
 
 
 	public Cuenta() {

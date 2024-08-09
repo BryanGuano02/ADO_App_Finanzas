@@ -1,30 +1,34 @@
 package modelo.entidades;
 
+import jakarta.persistence.*;
+
+import java.io.Serial;
+import java.io.Serializable;
+import java.lang.reflect.Type;
 import java.util.Date;
 import java.util.List;
 
-public class Categoria {
-    private int id;
+@Entity
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@Table(name = "Categoria")
+public class Categoria implements Serializable {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer ID;
     private String nombre;
     private Date fechaCreacion;
-    private List<Movimiento> movimientos;
+    private Double value;
 
-    private List<Categoria> categorias = null;
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
+    public Categoria(Date fechaCreacion, Double value, String nombre, Integer ID) {
+        this.fechaCreacion = fechaCreacion;
+        this.value = value;
         this.nombre = nombre;
+        this.ID = ID;
+    }
+
+    public Categoria() {
+
     }
 
     public Date getFechaCreacion() {
@@ -35,45 +39,27 @@ public class Categoria {
         this.fechaCreacion = fechaCreacion;
     }
 
-    public List<Categoria> getCategorias() {
-        return categorias;
+    public Double getValue() {
+        return value;
     }
 
-    public void setCategorias(List<Categoria> categorias) {
-        this.categorias = categorias;
+    public void setValue(Double value) {
+        this.value = value;
     }
 
-    public List<Movimiento> getMovimientos() {
-        return movimientos;
+    public String getNombre() {
+        return nombre;
     }
 
-    public void setMovimientos(List<Movimiento> movimientos) {
-        this.movimientos = movimientos;
-    }
-
-    public Categoria() {
-    }
-
-    public Categoria(int id, String nombre) {
-        this.id = id;
+    public void setNombre(String nombre) {
         this.nombre = nombre;
     }
 
-    public Categoria obtenerCategoriaPorId(int idCategoria) {
-        if (categorias == null) {
-            return null;
-        }
-
-        for (Categoria categoria : categorias) {
-            if (categoria != null && categoria.getId() == idCategoria) {
-                return categoria;
-            }
-        }
-
-        return null;
+    public Integer getID() {
+        return ID;
     }
 
-    public void actualizarSaldo(double valor) {
-
+    public void setID(Integer ID) {
+        this.ID = ID;
     }
 }

@@ -1,4 +1,4 @@
 package modelo.dao;
 
-public class IngresoDAO {
+public class IngresoDAO extends MovimientoDAO{
 }

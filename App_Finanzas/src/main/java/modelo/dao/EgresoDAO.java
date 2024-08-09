@@ -1,4 +1,4 @@
 package modelo.dao;
 
-public class EgresoDAO {
+public class EgresoDAO extends CuentaDAO {
 }

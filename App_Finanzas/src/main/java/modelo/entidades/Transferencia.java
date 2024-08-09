@@ -1,5 +1,5 @@
 package modelo.entidades;
 
-public class Transferencia {
+public class Transferencia extends Movimiento{
 
 }
