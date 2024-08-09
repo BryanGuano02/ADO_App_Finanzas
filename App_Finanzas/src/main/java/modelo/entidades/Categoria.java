@@ -1,10 +1,13 @@
-package modelo;
+package modelo.entidades;
 
+import java.util.Date;
 import java.util.List;
 
 public class Categoria {
     private int id;
     private String nombre;
+    private Date fechaCreacion;
+    private List<Movimiento> movimientos;
 
     private List<Categoria> categorias = null;
 
@@ -22,6 +25,30 @@ public class Categoria {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+
+    public Date getFechaCreacion() {
+        return fechaCreacion;
+    }
+
+    public void setFechaCreacion(Date fechaCreacion) {
+        this.fechaCreacion = fechaCreacion;
+    }
+
+    public List<Categoria> getCategorias() {
+        return categorias;
+    }
+
+    public void setCategorias(List<Categoria> categorias) {
+        this.categorias = categorias;
+    }
+
+    public List<Movimiento> getMovimientos() {
+        return movimientos;
+    }
+
+    public void setMovimientos(List<Movimiento> movimientos) {
+        this.movimientos = movimientos;
     }
 
     public Categoria() {
@@ -46,7 +73,7 @@ public class Categoria {
         return null;
     }
 
-    public void actualizarSaldo(double valor){
+    public void actualizarSaldo(double valor) {
 
     }
 }

@@ -1,12 +1,18 @@
-package modelo;
+package modelo.entidades;
+
+import jakarta.persistence.*;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+@Entity
+@Table(name="Cuenta")
 public class Cuenta implements Serializable {
 
 	private static final long serialVersionUID = 1L;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	private String nombre;
 	private double total;
@@ -48,7 +54,7 @@ public class Cuenta implements Serializable {
 
 //	MÈTODOS DE NEGOCIO
 
-	public static List<Cuenta> getTodo() {
+	public static List<Cuenta> obtenerTodo() {
 		if (cuentas == null) {
 			cuentas = new ArrayList<Cuenta>();
 
@@ -60,7 +66,7 @@ public class Cuenta implements Serializable {
 	}
 
 	public Cuenta obtenerCuentaPorId(int idCuenta) {
-		for (Cuenta cuenta : getTodo()) {
+		for (Cuenta cuenta : obtenerTodo()) {
 			if (cuenta.getId() == idCuenta) {
 				return cuenta;
 			}

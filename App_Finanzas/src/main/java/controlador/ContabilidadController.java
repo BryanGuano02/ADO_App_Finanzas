@@ -1,7 +1,7 @@
 package controlador;
 
 import java.io.IOException;
-import java.util.ArrayList;
+import java.time.LocalDate;
 import java.util.List;
 
 import jakarta.servlet.ServletException;
@@ -10,7 +10,8 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import modelo.Cuenta;
+import modelo.entidades.CategoriaIngreso;
+import modelo.entidades.Cuenta;
 
 @WebServlet("/ContabilidadController")
 public class ContabilidadController extends HttpServlet {
@@ -33,7 +34,6 @@ public class ContabilidadController extends HttpServlet {
     private void ruteador(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String ruta = (req.getParameter("ruta") != null) ? req.getParameter("ruta") : "verCuenta";
 
-        System.out.println(ruta);
         switch (ruta) {
             case "verDashboard":
                 verDashboard(req, resp);
@@ -41,22 +41,48 @@ public class ContabilidadController extends HttpServlet {
             case "verCuenta":
                 this.verCuenta(req, resp);
                 break;
+            case "filtrarPorFechas":
+                this.filtrarPorFechas(req, resp);
+                break;
         }
     }
 
+    private void filtrarPorFechas(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException {
+        LocalDate fechaInicio = LocalDate.parse(req.getParameter("fechaInicio"));
+        LocalDate fechaActual = LocalDate.parse(req.getParameter("fechaFin"));
+
+        HttpSession session = req.getSession();
+        session.setAttribute("fechaInicio", fechaInicio);
+        session.setAttribute("fechaActual", fechaActual);
+
+        resp.sendRedirect("/ContabilidadController?ruta=verDashboard");
+    }
+
     private void verDashboard(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        // obtener parámetros
-        String fechaInicio = req.getParameter("fechaInicio");
-        String fechaActual = req.getParameter("fechaFin");
+        HttpSession session = req.getSession();
+
+        LocalDate fechaInicio = null;
+        LocalDate fechaActual = null;
+
+        if (session.getAttribute("fechaInicio") == null && session.getAttribute("fechaActual") == null) {
+            fechaInicio = LocalDate.now().withDayOfMonth(1);
+            fechaActual = LocalDate.now().plusDays(1);
+
+            session.setAttribute("fechaInicio", fechaInicio);
+            session.setAttribute("fechaActual", fechaActual);
+        }
 
 //		hablar con el modelo
-        List<Cuenta> cuentas = Cuenta.getTodo(); //TODO: El saldo de la cuenta es también en base a las fechas
-
+        List<Cuenta> cuentas = Cuenta.obtenerTodo(); //TODO: El saldo de la cuenta es también en base a las fechas
+        List<CategoriaIngreso> categoriasIngreso = CategoriaIngreso.obtenerTodoPorFecha(fechaInicio, fechaActual);
         req.setAttribute("cuentas", cuentas);
 //TODO: Mandar los parámetros restantes  de mostrar()
 //		llamar a la vista - mostrar()
         req.getRequestDispatcher("jsp/VerDashboard.jsp").forward(req, resp);
 
+
+        System.out.print(session.getAttribute("fechaInicio"));
 
     }
 
