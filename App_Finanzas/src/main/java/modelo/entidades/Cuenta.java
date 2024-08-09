@@ -17,7 +17,14 @@ public class Cuenta implements Serializable {
 	private String nombre;
 	private double total;
 
-	private static List<Cuenta> cuentas = null;
+	@OneToMany(mappedBy = "cuenta")
+	private ArrayList<Ingreso> ingresos;
+	@OneToMany(mappedBy = "cuenta")
+	private ArrayList<Egreso> egresos;
+	@OneToMany(mappedBy = "cuenta")
+	private ArrayList<Transferencia> transferencias ;
+
+
 
 	public Cuenta() {
 	}
@@ -52,27 +59,18 @@ public class Cuenta implements Serializable {
 		this.total = total;
 	}
 
-//	MÈTODOS DE NEGOCIO
+//	MÈTODOS DE NEGOCI87
 
-	public static List<Cuenta> obtenerTodo() {
-		if (cuentas == null) {
-			cuentas = new ArrayList<Cuenta>();
-
-			cuentas.add(new Cuenta(1, "Banco", 1.5));
-			cuentas.add(new Cuenta(2, "Chanchito", 10.5));
-
-		}
-		return cuentas;
-	}
-
-	public Cuenta obtenerCuentaPorId(int idCuenta) {
-		for (Cuenta cuenta : obtenerTodo()) {
-			if (cuenta.getId() == idCuenta) {
-				return cuenta;
-			}
-		}
-		return null;
-	}
+//	public static List<Cuenta> obtenerTodo() {
+//		if (cuentas == null) {
+//			cuentas = new ArrayList<Cuenta>();
+//
+//			cuentas.add(new Cuenta(1, "Banco", 1.5));
+//			cuentas.add(new Cuenta(2, "Chanchito", 10.5));
+//
+//		}
+//		return cuentas;
+//
 
 	public void actualizarSaldo(double valor) {
 		setTotal(getTotal() + valor);

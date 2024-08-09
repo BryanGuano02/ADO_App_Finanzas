@@ -8,13 +8,9 @@
     <title>Ver Da4shboard</title>
 </head>
 <body>
-<h1>Hola</h1>
-
 <c:forEach items="${cuentas}" var="cuenta">
     <h1>${cuenta.nombre}</h1>
-    <h1>hola</h1>
 </c:forEach>
-
 
 </body>
 </html>

@@ -10,8 +10,8 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import modelo.entidades.CategoriaIngreso;
-import modelo.entidades.Cuenta;
+import modelo.entidades.*;
+import modelo.dao.*;
 
 @WebServlet("/ContabilidadController")
 public class ContabilidadController extends HttpServlet {
@@ -73,9 +73,10 @@ public class ContabilidadController extends HttpServlet {
             session.setAttribute("fechaActual", fechaActual);
         }
 
-//		hablar con el modelo
-        List<Cuenta> cuentas = Cuenta.obtenerTodo(); //TODO: El saldo de la cuenta es también en base a las fechas
-        List<CategoriaIngreso> categoriasIngreso = CategoriaIngreso.obtenerTodoPorFecha(fechaInicio, fechaActual);
+        //hablar con el modelo
+        CuentaDAO cuentadao = new CuentaDAO();
+        List<Cuenta> cuentas = cuentadao.obtenerTodo(); //TODO: El saldo de la cuenta es también en base a las fechas
+
         req.setAttribute("cuentas", cuentas);
 //TODO: Mandar los parámetros restantes  de mostrar()
 //		llamar a la vista - mostrar()
@@ -83,6 +84,7 @@ public class ContabilidadController extends HttpServlet {
 
 
         System.out.print(session.getAttribute("fechaInicio"));
+        //System.out.println();
 
     }
 
