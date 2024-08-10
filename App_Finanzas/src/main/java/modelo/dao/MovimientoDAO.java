@@ -2,6 +2,7 @@ package modelo.dao;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.Persistence;
 import jakarta.persistence.TypedQuery;
 import modelo.dto.MovimientoDTO;
 import modelo.entidades.CategoriaEgreso;
@@ -17,6 +18,10 @@ public class MovimientoDAO implements Serializable {
 
     private static final long serialVersionUID = 1L;
     private EntityManagerFactory emf;
+
+    public MovimientoDAO() {
+        emf = Persistence.createEntityManagerFactory("chaucherita_PU");
+    }
 
     public List<MovimientoDTO> obtenerTodo(LocalDate desde, LocalDate hasta) {
         EntityManager em = null;

@@ -2,6 +2,7 @@ package modelo.dao;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.Persistence;
 import jakarta.persistence.TypedQuery;
 import modelo.dto.CategoriaEgresoDTO;
 import modelo.dto.MovimientoDTO;
@@ -18,11 +19,15 @@ import java.util.List;
 public class CategoriaEgresoDAO implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    private EntityManagerFactory emf;
+    private EntityManagerFactory emf = null;
+    private EntityManager em = null;
 
+    public CategoriaEgresoDAO() {
+        emf = Persistence.createEntityManagerFactory("Contabilidad");
+        em = emf.createEntityManager();
+    }
 
     public CategoriaEgreso obtenerCategoriaPorId(int idCategoria) {
-        EntityManager em = null;
         CategoriaEgreso categoriasEgreso = null;
 
         try {
@@ -51,7 +56,6 @@ public class CategoriaEgresoDAO implements Serializable {
     }
 
     public List<CategoriaEgreso> obtenerTodo() {
-        EntityManager em = null;
         List<CategoriaEgreso> categoriasEgreso = null;
         try {
             em = emf.createEntityManager();

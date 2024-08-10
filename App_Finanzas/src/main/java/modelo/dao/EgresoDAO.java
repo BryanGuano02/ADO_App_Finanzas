@@ -2,17 +2,18 @@ package modelo.dao;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
-import modelo.entidades.CategoriaEgreso;
-import modelo.entidades.Cuenta;
+import jakarta.persistence.Persistence;
 import modelo.entidades.Egreso;
 
 import java.io.Serializable;
-import java.time.LocalDate;
 
-public class EgresoDAO  implements Serializable {
+public class EgresoDAO implements Serializable {
     private static final long serialVersionUID = 1L;
     private EntityManagerFactory emf;
 
+    public EgresoDAO() {
+        emf = Persistence.createEntityManagerFactory("chaucherita_PU");
+    }
 
     public void guardarEgreso(Egreso egreso) {
         EntityManager em = emf.createEntityManager();

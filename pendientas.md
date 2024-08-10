@@ -12,8 +12,9 @@
 7. Ver Categoria: empezado
 8. Registrar Gasto: empezado
    1. Cómo actualizar el saldo de cuenta y categoría?? Se le pasa el id o el objeto clase??
-9.  Registrar Ingreso: por hacer
-10. Registrar Transferencia: por hacer
+9.  Registrar Ingreso: incompleto
+     1.  Agregar cancelar()??
+11. Registrar Transferencia: por hacer
 
 # Pendientes en los diagramas
 
@@ -26,5 +27,6 @@
    1. Actualiza comunicación y secuencia con la obtención de todas las categorias de un tipo
 7. Ver Categoria: completo
 8. Registrar Gasto: completo
-9.  Registrar Ingreso: completo
+9.  Registrar Ingreso: incompleto?
+    1.  Agregar cancelar()??
 10. Registrar Transferencia: completo
