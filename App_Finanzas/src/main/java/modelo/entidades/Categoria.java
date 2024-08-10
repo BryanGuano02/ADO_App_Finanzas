@@ -19,17 +19,18 @@ public class Categoria implements Serializable {
     private Integer ID;
     private String nombre;
     private LocalDate fechaCreacion;
-    private Double value;
+    private Double total;
 
-    public Categoria(LocalDate fechaCreacion, Double value, String nombre, Integer ID) {
-        this.fechaCreacion = fechaCreacion;
-        this.value = value;
-        this.nombre = nombre;
-        this.ID = ID;
-    }
 
     public Categoria() {
 
+    }
+
+    public Categoria(LocalDate fechaCreacion, Double total, String nombre, Integer ID) {
+        this.ID = ID;
+        this.nombre = nombre;
+        this.fechaCreacion = fechaCreacion;
+        this.total = total;
     }
 
     public LocalDate getFechaCreacion() {
@@ -41,11 +42,11 @@ public class Categoria implements Serializable {
     }
 
     public Double getValue() {
-        return value;
+        return total;
     }
 
-    public void setValue(Double value) {
-        this.value = value;
+    public void setValue(Double total) {
+        this.total = total;
     }
 
     public String getNombre() {

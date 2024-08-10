@@ -5,11 +5,14 @@ import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 import jakarta.persistence.TypedQuery;
 import modelo.entidades.Cuenta;
+import modelo.entidades.Movimiento;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class CuentaDAO {
+public class CuentaDAO implements Serializable {
 
+    private static final long serialVersionUID = 1L;
     private EntityManagerFactory emf;
 
     public CuentaDAO() {
@@ -57,19 +60,29 @@ public class CuentaDAO {
         return cuenta;
     }
 
-    public void actualizarSaldo(int idCuenta, double valor) {
+    public void actualizarSaldo(Cuenta cuenta, double valor) {
         EntityManager em = emf.createEntityManager();
 
         try {
-            em.getTransaction().begin();
-            Cuenta cuenta = em.find(Cuenta.class, idCuenta);
-            if (cuenta != null) {
-                cuenta.setTotal(cuenta.getTotal() + valor);
-                em.merge(cuenta);
-            }
+            em = emf.createEntityManager();
+
+            // Consulta para obtener los movimientos entre dos fechas
+            String jpql = "UPDATE Cuenta c SET c.total = c.total + :valor WHERE c.id = :idCuenta";
+            TypedQuery query = (TypedQuery) em.createQuery(jpql);
+            query.setParameter("valor", valor); // Asegúrate de que 'valor' esté definido en tu código
+            query.setParameter("idCuenta", cuenta.getId());
+
+            query.executeUpdate();
             em.getTransaction().commit();
+        } catch (Exception e) {
+            if (em.getTransaction().isActive()) {
+                em.getTransaction().rollback();
+            }
+            e.printStackTrace();
         } finally {
-            em.close();
+            if (em != null) {
+                em.close();
+            }
         }
     }
 

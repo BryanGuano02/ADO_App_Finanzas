@@ -7,6 +7,7 @@ import jakarta.persistence.OneToOne;
 import java.io.Serializable;
 import java.time.LocalDate;
 
+
 @Entity
 public class Egreso extends Movimiento implements Serializable {
 
@@ -17,16 +18,26 @@ public class Egreso extends Movimiento implements Serializable {
 
 
 
-    public Egreso(Double valor, Integer id, LocalDate fecha, Cuenta cuentaOrigen, Cuenta cuentaDestino, String concepto, Categoria categoria) {
-        super(valor, id, fecha, cuentaOrigen, cuentaDestino, concepto, categoria);
-        this.cuentaOrigen = cuentaOrigen;
-//     tthis.cuentaOrigen = cuentaOrigen;
+    public Egreso( String concepto, LocalDate fecha, double valor, Cuenta cuentaOrigen, CategoriaEgreso categoria) {
+        super( concepto, fecha, valor);
+        CuentaOrigen = cuentaOrigen;
+        Categoria = categoria;
     }
 
-    public Egreso() {
-
+    public Cuenta getCuentaOrigen() {
+        return CuentaOrigen;
     }
 
-    // Getters y Se;
+    public void setCuentaOrigen(Cuenta cuentaOrigen) {
+        CuentaOrigen = cuentaOrigen;
+    }
+
+    public CategoriaEgreso getCategoria() {
+        return Categoria;
+    }
+
+    public void setCategoria(CategoriaEgreso categoria) {
+        Categoria = categoria;
+    }
 }
 

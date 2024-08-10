@@ -5,7 +5,6 @@ import jakarta.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Date;
-import java.util.List;
 
 
 @Entity
@@ -117,5 +116,37 @@ public class Movimiento implements Serializable {
 
     public Cuenta getCuenta_Origen() {
         return cuentaOrigenID;
+    }
+
+    public Integer getId() {
+        return Id;
+    }
+
+    public void setId(Integer id) {
+        Id = id;
+    }
+
+    public String getConcepto() {
+        return Concepto;
+    }
+
+    public void setConcepto(String concepto) {
+        Concepto = concepto;
+    }
+
+    public LocalDate getFecha() {
+        return Fecha;
+    }
+
+    public void setFecha(LocalDate fecha) {
+        Fecha = fecha;
+    }
+
+    public double getValor() {
+        return Valor;
+    }
+
+    public void setValor(double valor) {
+        Valor = valor;
     }
 }

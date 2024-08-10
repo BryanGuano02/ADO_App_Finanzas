@@ -23,7 +23,7 @@ public class CategoriaEgresoDAO implements Serializable {
     private EntityManager em = null;
 
     public CategoriaEgresoDAO() {
-        emf = Persistence.createEntityManagerFactory("Contabilidad");
+        emf = Persistence.createEntityManagerFactory("chaucherita_PU");
         em = emf.createEntityManager();
     }
 
@@ -81,5 +81,31 @@ public class CategoriaEgresoDAO implements Serializable {
             }
         }
         return categoriasEgreso;
+    }
+
+    public void actualizarSaldo(CategoriaEgreso categoriaEgreso, double valor) {
+        EntityManager em = emf.createEntityManager();
+
+        try {
+            em = emf.createEntityManager();
+
+            // Consulta para obtener los movimientos entre dos fechas
+            String jpql = "UPDATE CategoriaEgreso ce SET ce.total = ce.total + :valor WHERE ce.id = :idCategoria";
+            TypedQuery query = (TypedQuery) em.createQuery(jpql);
+            query.setParameter("valor", valor); // Asegúrate de que 'valor' esté definido en tu código
+            query.setParameter("idCategoria", categoriaEgreso.getID());
+
+            query.executeUpdate();
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            if (em.getTransaction().isActive()) {
+                em.getTransaction().rollback();
+            }
+            e.printStackTrace();
+        } finally {
+            if (em != null) {
+                em.close();
+            }
+        }
     }
 }

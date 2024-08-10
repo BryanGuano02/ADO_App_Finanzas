@@ -18,7 +18,7 @@ public class CategoriaIngresoDAO implements Serializable {
     private EntityManager em = null;
 
     public CategoriaIngresoDAO() {
-        emf = Persistence.createEntityManagerFactory("Contabilidad");
+        emf = Persistence.createEntityManagerFactory("chaucherita_PU");
         em = emf.createEntityManager();
     }
 
@@ -47,19 +47,19 @@ public class CategoriaIngresoDAO implements Serializable {
         return categoriasIngreso;
     }
 
-    public CategoriaTransferencia obtenerCategoriaPorId(int idCategoria) {
-        CategoriaEgreso categoriasEgreso = null;
+    public CategoriaIngreso obtenerCategoriaPorId(int idCategoria) {
+        CategoriaIngreso categoriasIngreso = null;
 
         try {
             em = emf.createEntityManager();
 
             // Consulta para obtener los Movimientos
-            String jpql = "SELECT ce FROM CategoriaEgreso ce WHERE ce.id = :idCategoria ";
+            String jpql = "SELECT ci FROM CategoriaIngreso ci WHERE ce.id = :idCategoria ";
 
-            TypedQuery<CategoriaEgreso> query = em.createQuery(jpql, CategoriaEgreso.class);
+            TypedQuery<CategoriaIngreso> query = em.createQuery(jpql, CategoriaIngreso.class);
             query.setParameter("idCategoria", idCategoria);
 
-            categoriasEgreso = (CategoriaEgreso) query.getResultList();
+            categoriasIngreso = (CategoriaIngreso) query.getResultList();
 
         } catch (Exception e) {
             e.printStackTrace(); // Manejo básico de excepciones
@@ -72,6 +72,32 @@ public class CategoriaIngresoDAO implements Serializable {
             }
         }
 
-        return categoriasEgreso;
+        return categoriasIngreso;
+    }
+
+    public void actualizarSaldo(CategoriaIngreso categoriaIngreso, double valor) {
+        EntityManager em = emf.createEntityManager();
+
+        try {
+            em = emf.createEntityManager();
+
+            // Consulta para obtener los movimientos entre dos fechas
+            String jpql = "UPDATE CategoriaIngreso ci SET ci.total = ci.total + :valor WHERE ci.id = :idCategoria";
+            TypedQuery query = (TypedQuery) em.createQuery(jpql);
+            query.setParameter("valor", valor); // Asegúrate de que 'valor' esté definido en tu código
+            query.setParameter("idCategoria", categoriaIngreso.getID());
+
+            query.executeUpdate();
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            if (em.getTransaction().isActive()) {
+                em.getTransaction().rollback();
+            }
+            e.printStackTrace();
+        } finally {
+            if (em != null) {
+                em.close();
+            }
+        }
     }
 }

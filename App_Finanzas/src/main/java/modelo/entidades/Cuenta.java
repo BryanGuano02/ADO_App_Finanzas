@@ -17,8 +17,6 @@ public class Cuenta implements Serializable {
 	private String nombre;
 	private double total;
 
-
-
 	public Cuenta() {
 	}
 
