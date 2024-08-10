@@ -14,9 +14,7 @@
 # Pendientes en los diagramas
 
 1. Ver Dashboard: completo
-2. Filtrar Fecha: incompleto
-   1. Falta diagrama clases y secuencia
-   2. Revisar diagrama de análisis si está bien
+2. Filtrar Fecha: completo
 3. Ver Cuenta: completo
 4. Ver Movimientos: completo
 5. Eliminar Movimientos: completo
