@@ -11,18 +11,17 @@ public class MovimientoDTO implements Serializable {
     private Date fecha;
     private String concepto;
     private double valor;
-    private int cuentaOrigen;
-    private int cuentaDestino;
-    private String tipoDeMovimiento;
+    private String cuentaOrigen;
+    private String cuentaDestino;
 
-    public MovimientoDTO(String id, Date fecha, String concepto, double valor, int cuentaOrigen, int    cuentaDestino, String tipoDeMovimiento) {
+
+    public MovimientoDTO(String id, Date fecha, String concepto, double valor, String cuentaOrigen, String cuentaDestino) {
         this.id = id;
         this.fecha = fecha;
         this.concepto = concepto;
         this.valor = valor;
         this.cuentaOrigen = cuentaOrigen;
         this.cuentaDestino = cuentaDestino;
-        this.tipoDeMovimiento = tipoDeMovimiento;
     }
     public String getConcepto() {
         return concepto;
@@ -52,18 +51,4 @@ public class MovimientoDTO implements Serializable {
         return fecha;
     }
 
-
-    public String getCuentaOrigen() {
-        CuentaDAO CuentaDAO = new CuentaDAO();
-        return CuentaDAO.obtenerCuentaPorId(cuentaOrigen).getNombre();
-    }
-
-    public String getCuentaDestino() {
-        CuentaDAO CuentaDAO = new CuentaDAO();
-        return CuentaDAO.obtenerCuentaPorId(cuentaDestino).getNombre();
-    }
-
-    public String getTipoDeMovimiento() {
-        return tipoDeMovimiento;
-    }
 }

@@ -26,9 +26,6 @@ public class Cuenta implements Serializable {
 		this.id = id;
 		this.nombre = nombre;
 		this.total = total;
-		this.ingresos = new ArrayList<>();
-		this.transferencias = new ArrayList<>();
-		this.egresos = new ArrayList<>();
 	}
 
 	public int getId() {
@@ -68,7 +65,4 @@ public class Cuenta implements Serializable {
 //		return cuentas;
 //
 
-	public void actualizarSaldo(double valor) {
-		setTotal(getTotal() + valor);
-	}
 }

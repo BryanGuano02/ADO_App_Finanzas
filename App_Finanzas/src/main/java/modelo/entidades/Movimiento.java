@@ -23,26 +23,26 @@ public class Movimiento implements Serializable {
     private LocalDate fecha;
 
     @ManyToOne(cascade = CascadeType.REFRESH)
-    @JoinColumn(name = "cuenta_origen")
-    private Cuenta cuentaOrigen;
+    @JoinColumn(name = "id")
+    private Cuenta cuentaOrigenID;
 
     @ManyToOne(cascade = CascadeType.REFRESH)
-    @JoinColumn(name = "cuenta_destino")
-    private Cuenta cuentaDestino;
+    @JoinColumn(name = "id")
+    private Cuenta cuentaDestinoID;
 
     @ManyToOne(cascade = CascadeType.REFRESH)
-    @JoinColumn(name = "categoria_id")
+    @JoinColumn(name = "id")
     private Categoria categoria;
 
     public Movimiento() {
     }
 
-    public Movimiento(Double valor, Integer id, LocalDate fecha, Cuenta cuenta_Origen, Cuenta cuenta_Destino, String concepto, Categoria categoria) {
+    public Movimiento(Double valor, Integer id, LocalDate fecha, Cuenta cuentaOrigen, Cuenta cuentaDestino, String concepto, Categoria categoria) {
         this.valor = valor;
         this.id = id;
         this.fecha = fecha;
-        this.cuentaOrigen = cuenta_Origen;
-        this.cuentaDestino = cuenta_Destino;
+        this.cuentaOrigenID = cuentaOrigen;
+        this.cuentaDestinoID = cuentaDestino;
         this.concepto = concepto;
         this.categoria = categoria;
     }
@@ -107,11 +107,15 @@ public class Movimiento implements Serializable {
     }
 
     public Cuenta getCuenta_Destino() {
-        return cuentaDestino;
+        return cuentaDestinoID;
     }
 
 
     public Categoria getCategoria() {
         return  categoria;
+    }
+
+    public Cuenta getCuenta_Origen() {
+        return cuentaOrigenID;
     }
 }

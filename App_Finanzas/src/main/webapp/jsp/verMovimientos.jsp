@@ -20,7 +20,6 @@
         <th>Valor</th>
         <th>Cuenta Origen</th>
         <th>Cuenta Destino</th>
-        <th>Tipo de Movimiento</th>
     </tr>
     </thead>
     <tbody>
@@ -32,7 +31,6 @@
             <td>${movimiento.valor}</td>
             <td>${movimiento.cuentaOrigen}</td>
             <td>${movimiento.cuentaDestino}</td>
-            <td>${movimiento.tipoDeMovimiento}</td>
         </tr>
     </c:forEach>
     </tbody>

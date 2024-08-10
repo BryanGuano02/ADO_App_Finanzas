@@ -24,7 +24,7 @@ public class CuentaDAO {
         try {
             TypedQuery<Cuenta> query = em.createQuery("SELECT c FROM Cuenta c", Cuenta.class);
             cuentas = query.getResultList();
-            if (cuentas.isEmpty()){
+            if (cuentas.isEmpty()) {
                 cuentas.add(new Cuenta(1, "Bnc. Pichincha", 10));
                 cuentas.add(new Cuenta(2, "Bnc. Pichincha Papá", 21));
                 cuentas.add(new Cuenta(3, "Bnc. Guayaquil", 41.82));

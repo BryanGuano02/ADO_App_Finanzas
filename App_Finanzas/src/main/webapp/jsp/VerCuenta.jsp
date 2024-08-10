@@ -7,7 +7,7 @@
     <title>Ver Cuenta</title>
 </head>
 <body>
-<h1> ${cuenta.id}</h1>
+<h1> ${cuenta.nombre}</h1>
 
 <table>
     <thead>

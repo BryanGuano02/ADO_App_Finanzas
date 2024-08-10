@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import java.io.Serial;
 import java.io.Serializable;
 import java.lang.reflect.Type;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -17,10 +18,10 @@ public class Categoria implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer ID;
     private String nombre;
-    private Date fechaCreacion;
+    private LocalDate fechaCreacion;
     private Double value;
 
-    public Categoria(Date fechaCreacion, Double value, String nombre, Integer ID) {
+    public Categoria(LocalDate fechaCreacion, Double value, String nombre, Integer ID) {
         this.fechaCreacion = fechaCreacion;
         this.value = value;
         this.nombre = nombre;
@@ -31,11 +32,11 @@ public class Categoria implements Serializable {
 
     }
 
-    public Date getFechaCreacion() {
+    public LocalDate getFechaCreacion() {
         return fechaCreacion;
     }
 
-    public void setFechaCreacion(Date fechaCreacion) {
+    public void setFechaCreacion(LocalDate fechaCreacion) {
         this.fechaCreacion = fechaCreacion;
     }
 
