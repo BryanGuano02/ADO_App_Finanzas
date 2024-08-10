@@ -25959,9 +25959,9 @@
 																"$ref": "AAAAAAGRC7JfeGP7xx4="
 															},
 															"font": "Arial;13;0",
-															"left": 46.55908203125,
+															"left": 48.72998046875,
 															"top": 13,
-															"width": 196.07275390625,
+															"width": 205.8798828125,
 															"height": 13,
 															"text": "Análisis - CU. Eliminar Movimientos"
 														},
@@ -25974,7 +25974,7 @@
 															"font": "Arial;13;1",
 															"left": 29,
 															"top": 13,
-															"width": 11.55908203125,
+															"width": 13.72998046875,
 															"height": 13,
 															"text": "sd"
 														}
@@ -28040,7 +28040,7 @@
 																"$ref": "AAAAAAGRC9wlPpeYA3k="
 															},
 															"font": "Arial;13;0",
-															"left": 620.68359375,
+															"left": 621.39453125,
 															"top": 45,
 															"width": 28.17724609375,
 															"height": 13,
@@ -28055,7 +28055,7 @@
 															"font": "Arial;13;1",
 															"left": 589,
 															"top": 45,
-															"width": 21.68359375,
+															"width": 22.39453125,
 															"height": 13,
 															"text": "link"
 														}
@@ -28092,7 +28092,7 @@
 																"$ref": "AAAAAAGRLTEx0WtAUOY="
 															},
 															"font": "Arial;13;0",
-															"left": 620.68359375,
+															"left": 621.39453125,
 															"top": 77,
 															"width": 188.54443359375,
 															"height": 13,
@@ -28107,7 +28107,7 @@
 															"font": "Arial;13;1",
 															"left": 589,
 															"top": 77,
-															"width": 21.68359375,
+															"width": 22.39453125,
 															"height": 13,
 															"text": "link"
 														}
@@ -28144,7 +28144,7 @@
 																"$ref": "AAAAAAGRLTFx0XIpECw="
 															},
 															"font": "Arial;13;0",
-															"left": 620.68359375,
+															"left": 621.39453125,
 															"top": 109,
 															"width": 192.1435546875,
 															"height": 13,
@@ -28159,7 +28159,7 @@
 															"font": "Arial;13;1",
 															"left": 589,
 															"top": 109,
-															"width": 21.68359375,
+															"width": 22.39453125,
 															"height": 13,
 															"text": "link"
 														}
@@ -62234,7 +62234,7 @@
 															"left": 16,
 															"top": 8,
 															"width": 1344,
-															"height": 704,
+															"height": 656,
 															"nameLabel": {
 																"$ref": "AAAAAAGRHcgmByku/uY="
 															},
@@ -62465,7 +62465,7 @@
 																	"left": 281,
 																	"top": 81,
 																	"width": 1,
-																	"height": 201
+																	"height": 202
 																}
 															],
 															"fillColor": "#A3FFA3",
@@ -62473,7 +62473,7 @@
 															"left": 184,
 															"top": 40,
 															"width": 194.83984375,
-															"height": 242,
+															"height": 243,
 															"nameCompartment": {
 																"$ref": "AAAAAAGRHci1VipvLbs="
 															},
@@ -63427,17 +63427,17 @@
 																		"$ref": "AAAAAAGRHcw4pyvEG80="
 																	},
 																	"font": "Arial;13;0",
-																	"left": 292,
-																	"top": 244,
-																	"width": 263.0087890625,
+																	"left": 181,
+																	"top": 248,
+																	"width": 476.18212890625,
 																	"height": 13,
-																	"alpha": 1.5707963267948966,
-																	"distance": 10,
+																	"alpha": 1.2277730198584995,
+																	"distance": 14.866068747318506,
 																	"hostEdge": {
 																		"$ref": "AAAAAAGRHcw4pyvFqzo="
 																	},
 																	"edgePosition": 1,
-																	"text": "1.3 : mostrarFormulario(saldoCuenta: double)"
+																	"text": "1.3 : mostrarFormulario(saldoCuenta: double, categoriasEgreso: CategoriaEgreso)"
 																},
 																{
 																	"_type": "EdgeLabelView",
@@ -78758,8 +78758,8 @@
 																		"$ref": "AAAAAAGRLYboPbuEhC4="
 																	},
 																	"font": "Arial;13;0",
-																	"left": 69.39453125,
-																	"top": 725,
+																	"left": 77.39453125,
+																	"top": 637,
 																	"width": 28.17724609375,
 																	"height": 13,
 																	"text": "Main"
@@ -78771,16 +78771,16 @@
 																		"$ref": "AAAAAAGRLYboPbuEhC4="
 																	},
 																	"font": "Arial;13;1",
-																	"left": 37,
-																	"top": 725,
+																	"left": 45,
+																	"top": 637,
 																	"width": 22.39453125,
 																	"height": 13,
 																	"text": "link"
 																}
 															],
 															"font": "Arial;13;0",
-															"left": 32,
-															"top": 720,
+															"left": 40,
+															"top": 632,
 															"width": 100,
 															"height": 23,
 															"nameLabel": {
@@ -78807,8 +78807,8 @@
 																		"$ref": "AAAAAAGRLYb3jruQuJ8="
 																	},
 																	"font": "Arial;13;0",
-																	"left": 69.39453125,
-																	"top": 757,
+																	"left": 77.39453125,
+																	"top": 669,
 																	"width": 217.69287109375,
 																	"height": 13,
 																	"text": "Análisis - CU. Registrar Transferencia"
@@ -78820,16 +78820,16 @@
 																		"$ref": "AAAAAAGRLYb3jruQuJ8="
 																	},
 																	"font": "Arial;13;1",
-																	"left": 37,
-																	"top": 757,
+																	"left": 45,
+																	"top": 669,
 																	"width": 22.39453125,
 																	"height": 13,
 																	"text": "link"
 																}
 															],
 															"font": "Arial;13;0",
-															"left": 32,
-															"top": 752,
+															"left": 40,
+															"top": 664,
 															"width": 260.08740234375,
 															"height": 23,
 															"nameLabel": {
@@ -78856,8 +78856,8 @@
 																		"$ref": "AAAAAAGRLYcOrbucHqE="
 																	},
 																	"font": "Arial;13;0",
-																	"left": 69.39453125,
-																	"top": 789,
+																	"left": 77.39453125,
+																	"top": 701,
 																	"width": 193.1337890625,
 																	"height": 13,
 																	"text": "DCD_CD_RegistrarTransferencia"
@@ -78869,16 +78869,16 @@
 																		"$ref": "AAAAAAGRLYcOrbucHqE="
 																	},
 																	"font": "Arial;13;1",
-																	"left": 37,
-																	"top": 789,
+																	"left": 45,
+																	"top": 701,
 																	"width": 22.39453125,
 																	"height": 13,
 																	"text": "link"
 																}
 															],
 															"font": "Arial;13;0",
-															"left": 32,
-															"top": 784,
+															"left": 40,
+															"top": 696,
 															"width": 235.5283203125,
 															"height": 23,
 															"nameLabel": {
@@ -95779,7 +95779,7 @@
 														"$ref": "AAAAAAGRGd63e8E63wI="
 													},
 													"font": "Arial;13;0",
-													"left": 71.68359375,
+													"left": 72.39453125,
 													"top": 40,
 													"width": 28.17724609375,
 													"height": 13,
@@ -95794,7 +95794,7 @@
 													"font": "Arial;13;1",
 													"left": 40,
 													"top": 40,
-													"width": 21.68359375,
+													"width": 22.39453125,
 													"height": 13,
 													"text": "link"
 												}
@@ -95854,7 +95854,7 @@
 															"font": "Arial;13;1",
 															"left": 117,
 															"top": 263,
-															"width": 149.484375,
+															"width": 303.3642578125,
 															"height": 13,
 															"text": "VerCuenta"
 														},
@@ -95892,7 +95892,7 @@
 													"font": "Arial;13;0",
 													"left": 112,
 													"top": 256,
-													"width": 159.484375,
+													"width": 313.3642578125,
 													"height": 25,
 													"stereotypeLabel": {
 														"$ref": "AAAAAAGRGd63e8E/5io="
@@ -95920,7 +95920,7 @@
 													"font": "Arial;13;0",
 													"left": 112,
 													"top": 281,
-													"width": 159.484375,
+													"width": 313.3642578125,
 													"height": 10
 												},
 												{
@@ -95946,9 +95946,9 @@
 															"font": "Arial;13;0",
 															"left": 117,
 															"top": 296,
-															"width": 149.484375,
+															"width": 303.3642578125,
 															"height": 13,
-															"text": "+mostrar(cuenta: Cuenta)",
+															"text": "+mostrar(cuenta: Cuenta, movimientos: Movimiento)",
 															"horizontalAlignment": 0
 														}
 													],
@@ -95956,7 +95956,7 @@
 													"font": "Arial;13;0",
 													"left": 112,
 													"top": 291,
-													"width": 159.484375,
+													"width": 313.3642578125,
 													"height": 23
 												},
 												{
@@ -95999,7 +95999,7 @@
 											"containerChangeable": true,
 											"left": 112,
 											"top": 256,
-											"width": 158.484375,
+											"width": 312.3642578125,
 											"height": 58,
 											"nameCompartment": {
 												"$ref": "AAAAAAGRGd63e8E+Jzo="
@@ -96704,7 +96704,7 @@
 															"font": "Arial;13;1",
 															"left": 181,
 															"top": 527,
-															"width": 242.693359375,
+															"width": 460.20849609375,
 															"height": 13,
 															"text": "VerRegistrarGasto"
 														},
@@ -96742,7 +96742,7 @@
 													"font": "Arial;13;0",
 													"left": 176,
 													"top": 520,
-													"width": 252.693359375,
+													"width": 470.20849609375,
 													"height": 25,
 													"stereotypeLabel": {
 														"$ref": "AAAAAAGRGd63e8FtEyU="
@@ -96770,7 +96770,7 @@
 													"font": "Arial;13;0",
 													"left": 176,
 													"top": 545,
-													"width": 252.693359375,
+													"width": 470.20849609375,
 													"height": 10
 												},
 												{
@@ -96796,9 +96796,27 @@
 															"font": "Arial;13;0",
 															"left": 181,
 															"top": 560,
-															"width": 242.693359375,
+															"width": 460.20849609375,
 															"height": 13,
-															"text": "+mostrarFormulario(saldoCuenta: double)",
+															"text": "+mostrarFormulario(saldoCuenta: double, categoriasEgreso: CategoriaEgreso)",
+															"horizontalAlignment": 0
+														},
+														{
+															"_type": "UMLOperationView",
+															"_id": "AAAAAAGROiab9z9Rt10=",
+															"_parent": {
+																"$ref": "AAAAAAGRGd63e8Fy2J0="
+															},
+															"model": {
+																"$ref": "AAAAAAGROP6N2aLKk7g="
+															},
+															"fillColor": "#A3FFA3",
+															"font": "Arial;13;0",
+															"left": 181,
+															"top": 575,
+															"width": 460.20849609375,
+															"height": 13,
+															"text": "+mostrarAdvertencia()",
 															"horizontalAlignment": 0
 														}
 													],
@@ -96806,8 +96824,8 @@
 													"font": "Arial;13;0",
 													"left": 176,
 													"top": 555,
-													"width": 252.693359375,
-													"height": 23
+													"width": 470.20849609375,
+													"height": 38
 												},
 												{
 													"_type": "UMLReceptionCompartmentView",
@@ -96849,8 +96867,8 @@
 											"containerChangeable": true,
 											"left": 176,
 											"top": 520,
-											"width": 251.693359375,
-											"height": 58,
+											"width": 469.20849609375,
+											"height": 73,
 											"nameCompartment": {
 												"$ref": "AAAAAAGRGd63e8Fs5Eg="
 											},
@@ -96910,7 +96928,7 @@
 															"font": "Arial;13;1",
 															"left": 165,
 															"top": 375,
-															"width": 242.693359375,
+															"width": 333.72509765625,
 															"height": 13,
 															"text": "VerRegistrarIngreso"
 														},
@@ -96948,7 +96966,7 @@
 													"font": "Arial;13;0",
 													"left": 160,
 													"top": 368,
-													"width": 252.693359375,
+													"width": 343.72509765625,
 													"height": 25,
 													"stereotypeLabel": {
 														"$ref": "AAAAAAGRGd63fMF4/AE="
@@ -96976,7 +96994,7 @@
 													"font": "Arial;13;0",
 													"left": 160,
 													"top": 393,
-													"width": 252.693359375,
+													"width": 343.72509765625,
 													"height": 10
 												},
 												{
@@ -97002,9 +97020,9 @@
 															"font": "Arial;13;0",
 															"left": 165,
 															"top": 408,
-															"width": 242.693359375,
+															"width": 333.72509765625,
 															"height": 13,
-															"text": "+mostrarFormulario()",
+															"text": "+mostrarFormulario(categoriasIngreso: CategoriaIngreso)",
 															"horizontalAlignment": 0
 														}
 													],
@@ -97012,7 +97030,7 @@
 													"font": "Arial;13;0",
 													"left": 160,
 													"top": 403,
-													"width": 252.693359375,
+													"width": 343.72509765625,
 													"height": 23
 												},
 												{
@@ -97055,7 +97073,7 @@
 											"containerChangeable": true,
 											"left": 160,
 											"top": 368,
-											"width": 251.693359375,
+											"width": 342.72509765625,
 											"height": 58,
 											"nameCompartment": {
 												"$ref": "AAAAAAGRGd63e8F3Cw8="
@@ -97116,7 +97134,7 @@
 															"font": "Arial;13;1",
 															"left": 189,
 															"top": 615,
-															"width": 211.60888671875,
+															"width": 398.49658203125,
 															"height": 13,
 															"text": "VerRegistrarTransferencia"
 														},
@@ -97154,7 +97172,7 @@
 													"font": "Arial;13;0",
 													"left": 184,
 													"top": 608,
-													"width": 221.60888671875,
+													"width": 408.49658203125,
 													"height": 25,
 													"stereotypeLabel": {
 														"$ref": "AAAAAAGRGd63fMGDesY="
@@ -97182,7 +97200,7 @@
 													"font": "Arial;13;0",
 													"left": 184,
 													"top": 633,
-													"width": 221.60888671875,
+													"width": 408.49658203125,
 													"height": 10
 												},
 												{
@@ -97208,9 +97226,27 @@
 															"font": "Arial;13;0",
 															"left": 189,
 															"top": 648,
-															"width": 211.60888671875,
+															"width": 398.49658203125,
 															"height": 13,
-															"text": "+mostrarFormulario()",
+															"text": "+mostrarFormulario(categoriaTransferencia: CategoriaTransferencia)",
+															"horizontalAlignment": 0
+														},
+														{
+															"_type": "UMLOperationView",
+															"_id": "AAAAAAGROiab9z9UWHI=",
+															"_parent": {
+																"$ref": "AAAAAAGRGd63fMGI8Xc="
+															},
+															"model": {
+																"$ref": "AAAAAAGRORBPGUBjaII="
+															},
+															"fillColor": "#A3FFA3",
+															"font": "Arial;13;0",
+															"left": 189,
+															"top": 663,
+															"width": 398.49658203125,
+															"height": 13,
+															"text": "+mostrarAdvertencia()",
 															"horizontalAlignment": 0
 														}
 													],
@@ -97218,8 +97254,8 @@
 													"font": "Arial;13;0",
 													"left": 184,
 													"top": 643,
-													"width": 221.60888671875,
-													"height": 23
+													"width": 408.49658203125,
+													"height": 38
 												},
 												{
 													"_type": "UMLReceptionCompartmentView",
@@ -97261,8 +97297,8 @@
 											"containerChangeable": true,
 											"left": 184,
 											"top": 608,
-											"width": 220.60888671875,
-											"height": 58,
+											"width": 407.49658203125,
+											"height": 73,
 											"nameCompartment": {
 												"$ref": "AAAAAAGRGd63fMGC/oE="
 											},
@@ -97542,6 +97578,17 @@
 													},
 													"name": "saldoCuenta",
 													"type": "double"
+												},
+												{
+													"_type": "UMLParameter",
+													"_id": "AAAAAAGROicUPD9bzTs=",
+													"_parent": {
+														"$ref": "AAAAAAGRGd63fMGjyFo="
+													},
+													"name": "categoriasEgreso",
+													"type": {
+														"$ref": "AAAAAAGQ5MQnnnMxsEY="
+													}
 												}
 											]
 										},
@@ -97569,7 +97616,20 @@
 											"_parent": {
 												"$ref": "AAAAAAGRGd63fMGlVTU="
 											},
-											"name": "mostrarFormulario"
+											"name": "mostrarFormulario",
+											"parameters": [
+												{
+													"_type": "UMLParameter",
+													"_id": "AAAAAAGROibSxD9YdEM=",
+													"_parent": {
+														"$ref": "AAAAAAGRGd63fMGmk4M="
+													},
+													"name": "categoriasIngreso",
+													"type": {
+														"$ref": "AAAAAAGQ5MQnnnMsYbc="
+													}
+												}
+											]
 										}
 									]
 								},
@@ -97587,7 +97647,20 @@
 											"_parent": {
 												"$ref": "AAAAAAGRGd63fMGoI/U="
 											},
-											"name": "mostrarFormulario"
+											"name": "mostrarFormulario",
+											"parameters": [
+												{
+													"_type": "UMLParameter",
+													"_id": "AAAAAAGROief3z9gh5w=",
+													"_parent": {
+														"$ref": "AAAAAAGRGd63fMGpWNU="
+													},
+													"name": "categoriaTransferencia",
+													"type": {
+														"$ref": "AAAAAAGQ5MQnnnMzffo="
+													}
+												}
+											]
 										},
 										{
 											"_type": "UMLOperation",

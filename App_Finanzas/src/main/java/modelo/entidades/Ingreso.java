@@ -6,7 +6,7 @@ import jakarta.persistence.OneToOne;
 
 public class Ingreso extends Movimiento{
     @OneToOne
-    @JoinColumn(name = "cuenta_origen_id") // Esto define la columna de la clave foránea en la tabla "Ingreso"
+    @JoinColumn(name = "id") // Esto define la columna de la clave foránea en la tabla "Ingreso"
     private Cuenta cuentaOrigen;
 
     // Getters y Setters

@@ -8,7 +8,7 @@ import java.time.LocalDate;
 
 @Entity
 public class Egreso extends Movimiento{
-   /* @OneToOne
+   @OneToOne
     @JoinColumn(name = "cuenta_origen_id") // Esto define la columna de la clave foránea en la tabla "Ingreso"
     private Cuenta cuentaOrigen;*/
 
