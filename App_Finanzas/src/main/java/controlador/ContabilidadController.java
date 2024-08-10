@@ -34,7 +34,6 @@ public class ContabilidadController extends HttpServlet {
 
     private void ruteador(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String ruta = (req.getParameter("ruta") != null) ? req.getParameter("ruta") : "verCuenta";
-
         switch (ruta) {
             case "verDashboard":
                 verDashboard(req, resp);
@@ -74,6 +73,12 @@ public class ContabilidadController extends HttpServlet {
                 break;
             case "confirmarEliminacion":
                 confirmarEliminacion(req, resp);
+                break;
+            case "registrarIngreso":
+                registrarIngreso(req, resp);
+                break;
+            case "ingresarInfoTransferencia":
+                ingresarInfoTransferencia(req, resp);
                 break;
         }
     }
@@ -115,6 +120,14 @@ public class ContabilidadController extends HttpServlet {
         req.setAttribute("cuentas", cuentas);
         req.setAttribute("categoriasEgreso", categoriasEgreso);
 
+
+        CategoriaIngreso categoria = new CategoriaIngreso("CHAUCHAS", 1);
+        CategoriaIngresoDAO categoriaIngresoDAO = new CategoriaIngresoDAO();
+        categoriaIngresoDAO.ingresar(categoria);
+        Ingreso ingreso = new Ingreso("prueba", LocalDate.now(), 12, cuentas.get(1), categoria);
+        IngresoDAO ingresoDAO = new IngresoDAO();
+        ingresoDAO.guardarIngreso(ingreso);
+
         //req.setAttribute("ingresos", ingresos);
         //TODO: Mandar los parámetros restantes  de mostrar()
         //		llamar a la vista - mostrar()
@@ -140,17 +153,28 @@ public class ContabilidadController extends HttpServlet {
     }
 
     private void verMovimientos(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        // Obtener las fechas desde la solicitud
-        LocalDate desde = LocalDate.parse(req.getParameter("desde"));
-        LocalDate hasta = LocalDate.parse(req.getParameter("hasta"));
 
-        // Crear una instancia del DAO para acceder a los movimientos
+        // Obtener las fechas desde la solicitud
+        HttpSession session = req.getSession();
+
+        // Obtener las fechas desde la solicitud
+        LocalDate desde = (LocalDate) session.getAttribute("fechaInicio");
+        LocalDate hasta = (LocalDate) session.getAttribute("fechaActual");
+
+        // Verificar si alguna de las fechas es nula y establecer valores predeterminados si es necesario
+        if (desde == null && hasta == null) {
+            desde = LocalDate.now().withDayOfMonth(1);
+            session.setAttribute("fechaInicio", desde);
+
+            hasta = LocalDate.now().plusDays(1);
+            session.setAttribute("fechaActual", hasta);
+        }
+
         MovimientoDAO movimientoDAO = new MovimientoDAO();
 
-        // Llamar al método obtenerTodo del DAO para obtener los movimientos
+
         List<MovimientoDTO> movimientos = movimientoDAO.obtenerTodo(desde, hasta);
 
-        // Establecer los movimientos en la solicitud para ser enviados a la vista
         req.setAttribute("movimientos", movimientos);
 
         // Llamar a la vista para mostrar los movimientos
@@ -164,10 +188,10 @@ public class ContabilidadController extends HttpServlet {
         Categoria categoria = categoriaDao.obtenerCategoriaPorId(idCategoria);
 
         MovimientoDAO movimientoDao = new MovimientoDAO();
-        //List<MovimientoDTO> movimientos = movimientoDao.obtenerMovimientosPorIdCategoria(idCategoria);
+//        List<MovimientoDTO> movimientos = movimientoDao.obtenerMovimientosPorIdCategoria(idCategoria);
 
         req.setAttribute("categoria", categoria);
-        //req.setAttribute("movimientos", movimientos);
+//        req.setAttribute("movimientos", movimientos);
 
         // Llamar a la vista para mostrar la categoría y sus movimientos
         req.getRequestDispatcher("jsp/VerCategoria.jsp").forward(req, resp);
@@ -179,11 +203,11 @@ public class ContabilidadController extends HttpServlet {
 
         // Step 1.1: Fetch the movement details using MovimientoDAO
         MovimientoDAO movimientoDao = new MovimientoDAO();
-        //Movimiento movimiento = movimientoDao.obtenerMovimientoPorIdMovimiento(idMovimiento);
+        MovimientoDTO movimiento = movimientoDao.obtenerMovimientoPorIdMovimiento(idMovimiento);
 
         // Step 1.2: Show a confirmation page to the user
-        // req.setAttribute("movimiento", movimiento);
-        req.getRequestDispatcher("jsp/verMovimientos.jsp").forward(req, resp);
+        req.setAttribute("movimiento", movimiento);
+        req.getRequestDispatcher("jsp/VerMovimientos.jsp").forward(req, resp);
     }
 
 
@@ -197,7 +221,7 @@ public class ContabilidadController extends HttpServlet {
 
             // Step 2.1: If confirmed, delete the movement using MovimientoDAO
             MovimientoDAO movimientoDao = new MovimientoDAO();
-            //  movimientoDao.eliminarMovimiento(idMovimiento);
+            int respuesta = movimientoDao.eliminarMovimiento(idMovimiento);
 
             // Redirect to the movement list after deletion
             resp.sendRedirect("VerMovimientosServlet");
@@ -295,6 +319,8 @@ public class ContabilidadController extends HttpServlet {
         cuentaDao.actualizarSaldo(cuenta, valor);
 //        actualizar categoria
         categoriaEgresoDao.actualizarSaldo(categoriaEgreso, valor);
+        CategoriaIngreso categoria = new CategoriaIngreso("Prueba", 1);
+        Ingreso ingreso = new Ingreso("prueba", LocalDate.now(), 12, cuenta, categoria);
 
 //        3.
         resp.sendRedirect("/ContabilidadController?ruta=verCuenta");
@@ -313,10 +339,8 @@ public class ContabilidadController extends HttpServlet {
         CategoriaIngresoDAO categoriaIngresoDAO = new CategoriaIngresoDAO();
         List<CategoriaIngreso> categoriasIngreso = categoriaIngresoDAO.obtenerTodo();
 
-        req.setAttribute("saldoCuenta", cuenta.getTotal());
+//        req.setAttribute("saldoCuenta", cuenta.getTotal());
         req.setAttribute("categoriasIngreso", categoriasIngreso);
-
-        // actualizarIdCuenta(req, idCuenta);
 
 //        3.
         req.getRequestDispatcher("jsp/VerRegistrarIngreso.jsp").forward(req, resp);

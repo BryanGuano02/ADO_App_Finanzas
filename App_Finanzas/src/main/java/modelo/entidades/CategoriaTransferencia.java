@@ -2,12 +2,14 @@ package modelo.entidades;
 
 import jakarta.persistence.Entity;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 @Entity
-public class CategoriaTransferencia extends Categoria{
+public class CategoriaTransferencia extends Categoria implements Serializable {
 
-    public CategoriaTransferencia(LocalDate fechaCreacion, Double total, String nombre, Integer ID) {
-        super(fechaCreacion, total, nombre, ID);
+
+    public CategoriaTransferencia(  String nombre, Integer ID) {
+        super( nombre, ID);
     }
 
 

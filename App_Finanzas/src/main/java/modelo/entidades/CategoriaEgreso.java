@@ -10,5 +10,10 @@ import java.util.List;
 public class CategoriaEgreso extends Categoria implements Serializable {
 
 
+    public CategoriaEgreso() {
+    }
 
+    public CategoriaEgreso( String nombre, Integer ID) {
+        super(nombre, ID);
+    }
 }

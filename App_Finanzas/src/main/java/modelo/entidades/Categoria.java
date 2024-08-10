@@ -18,8 +18,9 @@ public class Categoria implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer ID;
+
+
     private String nombre;
-    private LocalDate fechaCreacion;
     private Double total;
 
 
@@ -27,20 +28,11 @@ public class Categoria implements Serializable {
 
     }
 
-    public Categoria(LocalDate fechaCreacion, Double total, String nombre, Integer ID) {
+    public Categoria(String nombre, Integer ID) {
         this.ID = ID;
         this.nombre = nombre;
-        this.fechaCreacion = fechaCreacion;
-        this.total = total;
     }
 
-    public LocalDate getFechaCreacion() {
-        return fechaCreacion;
-    }
-
-    public void setFechaCreacion(LocalDate fechaCreacion) {
-        this.fechaCreacion = fechaCreacion;
-    }
 
     public Double getValue() {
         return total;

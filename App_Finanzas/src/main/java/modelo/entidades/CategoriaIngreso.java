@@ -11,20 +11,17 @@ import java.util.List;
 public class CategoriaIngreso extends Categoria implements Serializable {
 
     private static final long serialVersionUID = 1L;
-
-    @Column
-    private String Nombre;
-
-    @Id
+   /* @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-
+    private int Idingreso;*/
 
 
 
     public CategoriaIngreso() {
     }
 
-
+    public CategoriaIngreso( String nombre, Integer ID) {
+        super(nombre, ID);
+    }
 
 }

@@ -15,9 +15,11 @@ public class Ingreso extends Movimiento implements Serializable {
 
 
     private static final long serialVersionUID = 1L;
+
     @ManyToOne
     private Cuenta CuentaDestino;
-    @JoinColumn(name = "Categoria_ID", insertable = false, updatable = false)
+    @ManyToOne
+    @JoinColumn(name = "Categoria_ID")
     private CategoriaIngreso categoria;
 
     public Ingreso() {}

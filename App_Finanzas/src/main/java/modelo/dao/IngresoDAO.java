@@ -7,7 +7,7 @@ import modelo.entidades.Ingreso;
 
 import java.io.Serializable;
 
-public class IngresoDAO implements Serializable {
+public class IngresoDAO extends MovimientoDAO implements Serializable {
     private static final long serialVersionUID = 1L;
     private EntityManagerFactory emf;
 

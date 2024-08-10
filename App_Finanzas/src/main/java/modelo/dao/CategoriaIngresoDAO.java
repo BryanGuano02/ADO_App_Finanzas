@@ -11,7 +11,7 @@ import java.io.Serializable;
 import java.util.List;
 
 
-public class CategoriaIngresoDAO implements Serializable {
+public class CategoriaIngresoDAO extends CategoriaDAO implements Serializable{
     private static final long serialVersionUID = 1L;
 
     private EntityManagerFactory emf = null;
@@ -20,6 +20,28 @@ public class CategoriaIngresoDAO implements Serializable {
     public CategoriaIngresoDAO() {
         emf = Persistence.createEntityManagerFactory("chaucherita_PU");
         em = emf.createEntityManager();
+    }
+
+
+    public void ingresar(CategoriaIngreso categoriaIngreso) {
+        EntityManager em = null;
+        try {
+            em = emf.createEntityManager();
+            em.getTransaction().begin();  // Inicia la transacción
+
+            em.persist(categoriaIngreso); // Persiste la entidad en la base de datos
+
+            em.getTransaction().commit(); // Finaliza la transacción (commit)
+        } catch (Exception e) {
+            if (em != null && em.getTransaction().isActive()) {
+                em.getTransaction().rollback(); // Hace rollback si ocurre una excepción
+            }
+            e.printStackTrace();
+        } finally {
+            if (em != null) {
+                em.close(); // Cierra el EntityManager
+            }
+        }
     }
 
     public List<CategoriaIngreso> obtenerTodo() {
