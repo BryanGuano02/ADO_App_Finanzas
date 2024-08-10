@@ -47765,13 +47765,13 @@
 																"$ref": "AAAAAAGREQf9hWo0jpY="
 															},
 															"font": "Arial;13;0",
-															"left": 79.55517578125,
+															"left": 49.92431640625,
 															"top": 536,
-															"width": 477.8896484375,
+															"width": 537.1513671875,
 															"height": 13,
 															"alpha": -1.9100884181719215,
 															"distance": 18.027756377319946,
-															"text": "2 : ingresarInfoTransferencia(concepto, fecha, idCuentaDestino, valor, idCategoria)"
+															"text": "2 : ingresarInfoTransferencia(idCuenta, concepto, fecha, idCuentaDestino, valor, idCategoria)"
 														},
 														{
 															"_type": "NodeLabelView",
@@ -52912,7 +52912,7 @@
 														"$ref": "AAAAAAGRBSCs3iYk0KU="
 													},
 													"font": "Arial;13;0",
-													"left": 87.68359375,
+													"left": 88.39453125,
 													"top": 41,
 													"width": 28.17724609375,
 													"height": 13,
@@ -52927,7 +52927,7 @@
 													"font": "Arial;13;1",
 													"left": 56,
 													"top": 41,
-													"width": 21.68359375,
+													"width": 22.39453125,
 													"height": 13,
 													"text": "link"
 												}
@@ -53261,7 +53261,7 @@
 															"top": 310,
 															"width": 569.3564453125,
 															"height": 13,
-															"text": "+ingresarInfoGasto(concepto, fecha, valor, idCategoria)",
+															"text": "+ingresarInfoGasto(idCuenta, concepto, fecha, valor, idCategoria)",
 															"horizontalAlignment": 0
 														},
 														{
@@ -53297,7 +53297,7 @@
 															"top": 340,
 															"width": 569.3564453125,
 															"height": 13,
-															"text": "+ingresarInfoIngreso(concepto, fecha, valor, idCategoria)",
+															"text": "+ingresarInfoIngreso(idCuenta, concepto, fecha, valor, idCategoria)",
 															"horizontalAlignment": 0
 														},
 														{
@@ -53333,7 +53333,7 @@
 															"top": 370,
 															"width": 569.3564453125,
 															"height": 13,
-															"text": "+ingresarInfoTransferencia(concepto, fecha, idCuentaDestino, valor, idCategoria)",
+															"text": "+ingresarInfoTransferencia(idCuenta, concepto, fecha, idCuentaDestino, valor, idCategoria)",
 															"horizontalAlignment": 0
 														},
 														{
@@ -53363,6 +53363,7 @@
 															"model": {
 																"$ref": "AAAAAAGROO6xPAOf2Vg="
 															},
+															"fillColor": "#FF8282",
 															"font": "Arial;13;0",
 															"left": 117,
 															"top": 400,
@@ -53420,7 +53421,7 @@
 											"left": 112,
 											"top": 120,
 											"width": 578.3564453125,
-											"height": 283,
+											"height": 298,
 											"nameCompartment": {
 												"$ref": "AAAAAAGRBSCs3iYoQwQ="
 											},
@@ -53725,8 +53726,7 @@
 													"_parent": {
 														"$ref": "AAAAAAGREM6IlfHcf08="
 													},
-													"name": "concepto",
-													"type": ""
+													"name": "idCuenta"
 												},
 												{
 													"_type": "UMLParameter",
@@ -53734,8 +53734,7 @@
 													"_parent": {
 														"$ref": "AAAAAAGREM6IlfHcf08="
 													},
-													"name": "fecha",
-													"type": ""
+													"name": "concepto"
 												},
 												{
 													"_type": "UMLParameter",
@@ -53743,12 +53742,19 @@
 													"_parent": {
 														"$ref": "AAAAAAGREM6IlfHcf08="
 													},
-													"name": "valor",
-													"type": ""
+													"name": "fecha"
 												},
 												{
 													"_type": "UMLParameter",
 													"_id": "AAAAAAGRENuPXpZEidk=",
+													"_parent": {
+														"$ref": "AAAAAAGREM6IlfHcf08="
+													},
+													"name": "valor"
+												},
+												{
+													"_type": "UMLParameter",
+													"_id": "AAAAAAGRPXZB7pr3J4w=",
 													"_parent": {
 														"$ref": "AAAAAAGREM6IlfHcf08="
 													},
@@ -53790,8 +53796,7 @@
 													"_parent": {
 														"$ref": "AAAAAAGREPjZ4GkAJLQ="
 													},
-													"name": "concepto",
-													"type": ""
+													"name": "idCuenta"
 												},
 												{
 													"_type": "UMLParameter",
@@ -53799,8 +53804,7 @@
 													"_parent": {
 														"$ref": "AAAAAAGREPjZ4GkAJLQ="
 													},
-													"name": "fecha",
-													"type": ""
+													"name": "concepto"
 												},
 												{
 													"_type": "UMLParameter",
@@ -53808,12 +53812,19 @@
 													"_parent": {
 														"$ref": "AAAAAAGREPjZ4GkAJLQ="
 													},
-													"name": "valor",
-													"type": ""
+													"name": "fecha"
 												},
 												{
 													"_type": "UMLParameter",
 													"_id": "AAAAAAGREP0FqCHpYCo=",
+													"_parent": {
+														"$ref": "AAAAAAGREPjZ4GkAJLQ="
+													},
+													"name": "valor"
+												},
+												{
+													"_type": "UMLParameter",
+													"_id": "AAAAAAGRPXZODJr6PyQ=",
 													"_parent": {
 														"$ref": "AAAAAAGREPjZ4GkAJLQ="
 													},
@@ -53855,8 +53866,7 @@
 													"_parent": {
 														"$ref": "AAAAAAGREQgwFWq3WoE="
 													},
-													"name": "concepto",
-													"type": ""
+													"name": "idCuenta"
 												},
 												{
 													"_type": "UMLParameter",
@@ -53864,8 +53874,7 @@
 													"_parent": {
 														"$ref": "AAAAAAGREQgwFWq3WoE="
 													},
-													"name": "fecha",
-													"type": ""
+													"name": "concepto"
 												},
 												{
 													"_type": "UMLParameter",
@@ -53873,8 +53882,7 @@
 													"_parent": {
 														"$ref": "AAAAAAGREQgwFWq3WoE="
 													},
-													"name": "idCuentaDestino",
-													"type": ""
+													"name": "fecha"
 												},
 												{
 													"_type": "UMLParameter",
@@ -53882,12 +53890,19 @@
 													"_parent": {
 														"$ref": "AAAAAAGREQgwFWq3WoE="
 													},
-													"name": "valor",
-													"type": ""
+													"name": "idCuentaDestino"
 												},
 												{
 													"_type": "UMLParameter",
 													"_id": "AAAAAAGREQ81Y9Ootio=",
+													"_parent": {
+														"$ref": "AAAAAAGREQgwFWq3WoE="
+													},
+													"name": "valor"
+												},
+												{
+													"_type": "UMLParameter",
+													"_id": "AAAAAAGRPXZWQpr9Ius=",
 													"_parent": {
 														"$ref": "AAAAAAGREQgwFWq3WoE="
 													},
@@ -80263,7 +80278,7 @@
 																	"left": 337,
 																	"top": 81,
 																	"width": 1,
-																	"height": 337
+																	"height": 225
 																}
 															],
 															"fillColor": "#A3FFA3",
@@ -80271,7 +80286,7 @@
 															"left": 216,
 															"top": 40,
 															"width": 242.54248046875,
-															"height": 378,
+															"height": 266,
 															"nameCompartment": {
 																"$ref": "AAAAAAGRHgcuhoFNOJE="
 															},
@@ -81572,17 +81587,17 @@
 																		"$ref": "AAAAAAGRHgcuh4GiT5w="
 																	},
 																	"font": "Arial;13;0",
-																	"left": 6,
+																	"left": 24,
 																	"top": 303,
-																	"width": 673.72119140625,
+																	"width": 753.9365234375,
 																	"height": 13,
-																	"alpha": -3.899970630573772,
-																	"distance": 26.1725046566048,
+																	"alpha": 0.45333859489815437,
+																	"distance": 43.382023926967726,
 																	"hostEdge": {
 																		"$ref": "AAAAAAGRHgcuhoGKFHQ="
 																	},
 																	"edgePosition": 1,
-																	"text": "2 : ingresarInfoTransferencia(concepto: String, fecha: LocalDate, idCuentaDestino: int, valor: double, idCategoria: int)"
+																	"text": "2 : ingresarInfoTransferencia(idCuenta: int, concepto: String, fecha: LocalDate, idCuentaDestino: int, valor: double, idCategoria: int)"
 																},
 																{
 																	"_type": "EdgeLabelView",
@@ -101917,7 +101932,7 @@
 															"top": 325,
 															"width": 781.79345703125,
 															"height": 13,
-															"text": "+ingresarInfoGasto(concepto: String, fecha: LocalDate, valor: double, idCategoria: int)",
+															"text": "+ingresarInfoGasto(idCuenta: int, concepto: String, fecha: LocalDate, valor: double, idCategoria: int)",
 															"horizontalAlignment": 0
 														},
 														{
@@ -101953,7 +101968,7 @@
 															"top": 355,
 															"width": 781.79345703125,
 															"height": 13,
-															"text": "+ingresarInfoIngreso(concepto: String, fecha: LocalDate, valor: double, idCategoria: int)",
+															"text": "+ingresarInfoIngreso(idCuenta: int, concepto: String, fecha: LocalDate, valor: double, idCategoria: int)",
 															"horizontalAlignment": 0
 														},
 														{
@@ -101989,7 +102004,7 @@
 															"top": 385,
 															"width": 781.79345703125,
 															"height": 13,
-															"text": "+ingresarInfoTransferencia(concepto: String, fecha: LocalDate, idCuentaDestino: int, valor: double, idCategoria: int)",
+															"text": "+ingresarInfoTransferencia(idCuenta: int, concepto: String, fecha: LocalDate, idCuentaDestino: int, valor: double, idCategoria: int)",
 															"horizontalAlignment": 0
 														},
 														{
@@ -102628,12 +102643,21 @@
 													"_parent": {
 														"$ref": "AAAAAAGRGd63fcHmECU="
 													},
+													"name": "idCuenta",
+													"type": "int"
+												},
+												{
+													"_type": "UMLParameter",
+													"_id": "AAAAAAGRGd63fcHoLS4=",
+													"_parent": {
+														"$ref": "AAAAAAGRGd63fcHmECU="
+													},
 													"name": "concepto",
 													"type": "String"
 												},
 												{
 													"_type": "UMLParameter",
-													"_id": "AAAAAAGRGd63fcHoLS4=",
+													"_id": "AAAAAAGRGd63fcHpdlE=",
 													"_parent": {
 														"$ref": "AAAAAAGRGd63fcHmECU="
 													},
@@ -102642,7 +102666,7 @@
 												},
 												{
 													"_type": "UMLParameter",
-													"_id": "AAAAAAGRGd63fcHpdlE=",
+													"_id": "AAAAAAGRGd63fcHqfhQ=",
 													"_parent": {
 														"$ref": "AAAAAAGRGd63fcHmECU="
 													},
@@ -102651,7 +102675,7 @@
 												},
 												{
 													"_type": "UMLParameter",
-													"_id": "AAAAAAGRGd63fcHqfhQ=",
+													"_id": "AAAAAAGRPXamKZsAVN8=",
 													"_parent": {
 														"$ref": "AAAAAAGRGd63fcHmECU="
 													},
@@ -102693,12 +102717,21 @@
 													"_parent": {
 														"$ref": "AAAAAAGRGd63fcHtTE4="
 													},
+													"name": "idCuenta",
+													"type": "int"
+												},
+												{
+													"_type": "UMLParameter",
+													"_id": "AAAAAAGRGd63fcHvKFk=",
+													"_parent": {
+														"$ref": "AAAAAAGRGd63fcHtTE4="
+													},
 													"name": "concepto",
 													"type": "String"
 												},
 												{
 													"_type": "UMLParameter",
-													"_id": "AAAAAAGRGd63fcHvKFk=",
+													"_id": "AAAAAAGRGd63fcHwNeM=",
 													"_parent": {
 														"$ref": "AAAAAAGRGd63fcHtTE4="
 													},
@@ -102707,7 +102740,7 @@
 												},
 												{
 													"_type": "UMLParameter",
-													"_id": "AAAAAAGRGd63fcHwNeM=",
+													"_id": "AAAAAAGRGd63fcHxKnI=",
 													"_parent": {
 														"$ref": "AAAAAAGRGd63fcHtTE4="
 													},
@@ -102716,7 +102749,7 @@
 												},
 												{
 													"_type": "UMLParameter",
-													"_id": "AAAAAAGRGd63fcHxKnI=",
+													"_id": "AAAAAAGRPXat+psD/Ak=",
 													"_parent": {
 														"$ref": "AAAAAAGRGd63fcHtTE4="
 													},
@@ -102758,12 +102791,21 @@
 													"_parent": {
 														"$ref": "AAAAAAGRGd63fcH07l0="
 													},
+													"name": "idCuenta",
+													"type": "int"
+												},
+												{
+													"_type": "UMLParameter",
+													"_id": "AAAAAAGRGd63fcH2lFU=",
+													"_parent": {
+														"$ref": "AAAAAAGRGd63fcH07l0="
+													},
 													"name": "concepto",
 													"type": "String"
 												},
 												{
 													"_type": "UMLParameter",
-													"_id": "AAAAAAGRGd63fcH2lFU=",
+													"_id": "AAAAAAGRGd63fcH3pKo=",
 													"_parent": {
 														"$ref": "AAAAAAGRGd63fcH07l0="
 													},
@@ -102772,7 +102814,7 @@
 												},
 												{
 													"_type": "UMLParameter",
-													"_id": "AAAAAAGRGd63fcH3pKo=",
+													"_id": "AAAAAAGRGd63fcH4daE=",
 													"_parent": {
 														"$ref": "AAAAAAGRGd63fcH07l0="
 													},
@@ -102781,7 +102823,7 @@
 												},
 												{
 													"_type": "UMLParameter",
-													"_id": "AAAAAAGRGd63fcH4daE=",
+													"_id": "AAAAAAGRGd63fcH5zZw=",
 													"_parent": {
 														"$ref": "AAAAAAGRGd63fcH07l0="
 													},
@@ -102790,7 +102832,7 @@
 												},
 												{
 													"_type": "UMLParameter",
-													"_id": "AAAAAAGRGd63fcH5zZw=",
+													"_id": "AAAAAAGRPXbAYJsGaPA=",
 													"_parent": {
 														"$ref": "AAAAAAGRGd63fcH07l0="
 													},

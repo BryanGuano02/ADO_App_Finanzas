@@ -15,6 +15,8 @@
 9.  Registrar Ingreso: incompleto
      1.  Agregar cancelar()??
 11. Registrar Transferencia: por hacer
+    1.  Revisar el jpql de actualizarSalso de CuentaDAO y en CategoriaEgresoDAO
+
 
 # Pendientes en los diagramas
 

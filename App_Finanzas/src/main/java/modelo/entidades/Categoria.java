@@ -12,6 +12,7 @@ import java.util.List;
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @Table(name = "Categoria")
+@DiscriminatorColumn(name = "tipo_Categoria", discriminatorType = DiscriminatorType.STRING)
 public class Categoria implements Serializable {
 
     @Id
