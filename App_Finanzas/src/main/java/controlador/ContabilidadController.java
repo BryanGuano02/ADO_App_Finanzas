@@ -158,14 +158,53 @@ public class ContabilidadController extends HttpServlet {
     }
 
     private void verCategoria(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        int idCategoria = Integer.parseInt(req.getParameter("idCategoria"));
+
+        CategoriaDAO categoriaDao = new CategoriaDAO();
+        Categoria categoria = categoriaDao.obtenerCategoriaPorId(idCategoria);
+
+        MovimientoDAO movimientoDao = new MovimientoDAO();
+        //List<MovimientoDTO> movimientos = movimientoDao.obtenerMovimientosPorIdCategoria(idCategoria);
+
+        req.setAttribute("categoria", categoria);
+        //req.setAttribute("movimientos", movimientos);
+
+        // Llamar a la vista para mostrar la categoría y sus movimientos
+        req.getRequestDispatcher("jsp/VerCategoria.jsp").forward(req, resp);
     }
 
-    private void eliminarMovimiento(HttpServletRequest req, HttpServletResponse resp)
-            throws ServletException, IOException {
+    private void eliminarMovimiento(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        // Step 1: Retrieve the movement ID from the request parameters
+        int idMovimiento = Integer.parseInt(req.getParameter("idMovimiento"));
+
+        // Step 1.1: Fetch the movement details using MovimientoDAO
+        MovimientoDAO movimientoDao = new MovimientoDAO();
+        //Movimiento movimiento = movimientoDao.obtenerMovimientoPorIdMovimiento(idMovimiento);
+
+        // Step 1.2: Show a confirmation page to the user
+        // req.setAttribute("movimiento", movimiento);
+        req.getRequestDispatcher("jsp/verMovimientos.jsp").forward(req, resp);
     }
 
-    private void confirmarEliminacion(HttpServletRequest req, HttpServletResponse resp)
-            throws ServletException, IOException {
+
+    private void confirmarEliminacion(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        // Step 2: Retrieve confirmation status from the request parameters
+        boolean puedeEliminar = Boolean.parseBoolean(req.getParameter("puedeEliminar"));
+
+        if (puedeEliminar) {
+            // Retrieve the movement ID from the request parameters
+            int idMovimiento = Integer.parseInt(req.getParameter("idMovimiento"));
+
+            // Step 2.1: If confirmed, delete the movement using MovimientoDAO
+            MovimientoDAO movimientoDao = new MovimientoDAO();
+            //  movimientoDao.eliminarMovimiento(idMovimiento);
+
+            // Redirect to the movement list after deletion
+            resp.sendRedirect("VerMovimientosServlet");
+        } else {
+            // If not confirmed, redirect back to the movement list without deletion
+            resp.sendRedirect("VerMovimientosServlet");
+        }
     }
 
     private void actualizarMovimiento(HttpServletRequest req, HttpServletResponse resp)

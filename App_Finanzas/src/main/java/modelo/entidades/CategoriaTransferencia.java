@@ -11,4 +11,7 @@ public class CategoriaTransferencia extends Categoria{
     }
 
 
+    public CategoriaTransferencia() {
+
+    }
 }

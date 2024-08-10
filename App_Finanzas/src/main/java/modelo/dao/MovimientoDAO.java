@@ -5,9 +5,7 @@ import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 import jakarta.persistence.TypedQuery;
 import modelo.dto.MovimientoDTO;
-import modelo.entidades.CategoriaEgreso;
-import modelo.entidades.Cuenta;
-import modelo.entidades.Movimiento;
+import modelo.entidades.*;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -22,73 +20,22 @@ public class MovimientoDAO implements Serializable {
     public MovimientoDAO() {
         emf = Persistence.createEntityManagerFactory("chaucherita_PU");
     }
-
     public List<MovimientoDTO> obtenerTodo(LocalDate desde, LocalDate hasta) {
         EntityManager em = null;
-        List<MovimientoDTO> movimientoDTO = new ArrayList<>();
+        List<MovimientoDTO> movimientosDTO = null   ;
 
         try {
             em = emf.createEntityManager();
 
-            // Iniciar una transacción solo si vas a persistir nuevos datos
-            em.getTransaction().begin();
-
-            // Agregar un nuevo objeto Movimiento y persistirlo
-            Movimiento nuevoMovimiento = new Movimiento(
-                    10.9,
-                    1,
-                    LocalDate.of(2024, 1, 7),
-                    new Cuenta(1, "Billetera", 12.1),
-                    new Cuenta(4, "Bajo del colchón", 15.24),
-                    "hola",
-                    new CategoriaEgreso(LocalDate.of(2029, 1, 7), 4.4, "comida", 1)
-            );
-            em.persist(nuevoMovimiento);
-
-            // Confirmar la transacción
-            em.getTransaction().commit();
-
-            // Consulta para obtener los Movimientos
-            String jpql = "SELECT m FROM Movimiento m WHERE m.fecha BETWEEN :desde AND :hasta";
-            TypedQuery<Movimiento> query = em.createQuery(jpql, Movimiento.class);
+            // Consulta para obtener los movimientos entre dos fechas
+            String jpql = "SELECT m FROM Movimiento m WHERE m.Fecha BETWEEN :desde AND :hasta";
+            TypedQuery<MovimientoDTO> query = em.createQuery(jpql, MovimientoDTO.class);
             query.setParameter("desde", desde);
             query.setParameter("hasta", hasta);
 
-            List<Movimiento> movimientos = query.getResultList();
+           movimientosDTO = query.getResultList();
 
-            // Convertir la lista de Movimientos a MovimientoDTO
-            for (Movimiento movimiento : movimientos) {
-                String nombreCuentaOrigen;
-                if (movimiento.getCuenta_Origen() == null || movimiento.getCuenta_Origen().getNombre() == null) {
-                    nombreCuentaOrigen = movimiento.getCategoria().getNombre();
-                } else {
-                    nombreCuentaOrigen = movimiento.getCuenta_Origen().getNombre();
-                }
-
-                // Determinar el nombre de cuentaDestino. Si es null, usar el nombre de la categoría.
-                String nombreCuentaDestino;
-                if (movimiento.getCuenta_Destino() == null || movimiento.getCuenta_Destino().getNombre() == null) {
-                    nombreCuentaDestino = movimiento.getCategoria().getNombre();
-                } else {
-                    nombreCuentaDestino = movimiento.getCuenta_Destino().getNombre();
-                }
-
-                MovimientoDTO dto = new MovimientoDTO(
-                        movimiento.getId().toString(), // ID como String
-                        java.sql.Date.valueOf(movimiento.getFecha()), // Convertir LocalDate a Date
-                        movimiento.getConcepto(),
-                        movimiento.getValor(),
-                        nombreCuentaOrigen,
-                        nombreCuentaDestino
-                        // Tipo de Movimiento como nombre de la categoría
-                );
-                movimientoDTO.add(dto);
-            }
-        } catch (Exception e) {
-            e.printStackTrace(); // Manejo básico de excepciones
-            if (em != null && em.getTransaction().isActive()) {
-                em.getTransaction().rollback(); // Hacer rollback en caso de excepción
-            }
+            // Convertir cada Movimiento a MovimientoDTO
         } finally {
             if (em != null && em.isOpen()) {
                 em.close();
@@ -97,10 +44,36 @@ public class MovimientoDAO implements Serializable {
                 emf.close();
             }
         }
-        return movimientoDTO;
+
+        return movimientosDTO;
     }
+}
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    /*
     public List<MovimientoDTO> obtenerMovimientosPorIdCuenta(int idCuenta) {
         EntityManager em = null;
         List<MovimientoDTO> movimientoDTO = new ArrayList<>();
@@ -257,7 +230,7 @@ public class MovimientoDAO implements Serializable {
         }
     }
 
+*/
 
-}
 
 

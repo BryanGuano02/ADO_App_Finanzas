@@ -1,22 +1,30 @@
 package modelo.entidades;
 
+import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.ManyToOne;
 
 import java.io.Serializable;
 import java.time.LocalDate;
 
 
 @Entity
+@DiscriminatorValue("EGRESO")
 public class Egreso extends Movimiento implements Serializable {
 
 
-    @OneToOne
-    @JoinColumn(name = "id") // Esto define la columna de la clave foránea en la tabla "Ingreso"
-    private Cuenta cuentaOrigen;
+    private static final long serialVersionUID = 1L;
+    @ManyToOne
+    @JoinColumn(name = "CuentaOrigen_ID")
+    private Cuenta CuentaOrigen;
 
 
+    @ManyToOne
+    @JoinColumn(name = "Categoria_ID", insertable = false, updatable = false)
+    private CategoriaEgreso Categoria;
+
+    public Egreso() {}
 
     public Egreso( String concepto, LocalDate fecha, double valor, Cuenta cuentaOrigen, CategoriaEgreso categoria) {
         super( concepto, fecha, valor);

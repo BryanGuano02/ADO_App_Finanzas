@@ -9,113 +9,27 @@ import java.util.Date;
 
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "tipo_movimiento", discriminatorType = DiscriminatorType.STRING)
 public class Movimiento implements Serializable {
-
+    private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
-    @Column(name = "valor")
-    private Double valor;
-    @Column(name = "concepto")
-    private String concepto;
-    @Column(name = "fecha")
-    private LocalDate fecha;
+    private Integer Id;
 
-    @ManyToOne(cascade = CascadeType.REFRESH)
-    @JoinColumn(name = "id")
-    private Cuenta cuentaOrigenID;
+    private String Concepto;
+    @Column
+    private LocalDate Fecha;
 
-    @ManyToOne(cascade = CascadeType.REFRESH)
-    @JoinColumn(name = "id")
-    private Cuenta cuentaDestinoID;
-
-    @ManyToOne(cascade = CascadeType.REFRESH)
-    @JoinColumn(name = "id")
-    private Categoria categoria;
-
-    public Movimiento() {
-    }
-
-    public Movimiento(Double valor, Integer id, LocalDate fecha, Cuenta cuentaOrigen, Cuenta cuentaDestino, String concepto, Categoria categoria) {
-        this.valor = valor;
-        this.id = id;
-        this.fecha = fecha;
-        this.cuentaOrigenID = cuentaOrigen;
-        this.cuentaDestinoID = cuentaDestino;
-        this.concepto = concepto;
-        this.categoria = categoria;
-    }
-
-    public String getConcepto() {
-        return concepto;
-    }
+    @Column
+    private double Valor;
 
 
+    public Movimiento() {}
 
-    public void setConcepto(String concepto) {
-        this.concepto = concepto;
-    }
-
-    public double getValor() {
-        return valor;
-    }
-
-    public void setValor(double valor) {
-        this.valor = valor;
-    }
-
-    public LocalDate getFecha() {
-        return fecha;
-    }
-
-    public void setFecha(LocalDate fecha) {
-        this.fecha = fecha;
-    }
-
-    public List<Movimiento> movimientos(Date desde, Date hasta) {
-        return null;
-    }
-
-    public List<Movimiento> obtenerMovimientosPorIdCuenda(int idCuenta) {
-        return null;
-    }
-
-    public Movimiento obtenerMovimientoPorIdMovimiento(int idMovimiento) {
-        return null;
-
-    }
-
-    public void eliminarMovimiento(int i0dMovimiento) {
-
-    }
-
-    public void guardarMovimiento(Movimiento movimiento) {
-
-    }
-
-    public List<Movimiento> obtenerMovimientosPorIdCategoria(int idCategoria) {
-        return null;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public Cuenta getCuenta_Destino() {
-        return cuentaDestinoID;
-    }
-
-
-    public Categoria getCategoria() {
-        return  categoria;
-    }
-
-    public Cuenta getCuenta_Origen() {
-        return cuentaOrigenID;
+    public Movimiento(String concepto, LocalDate fecha, double valor) {
+        Concepto = concepto;
+        Fecha = fecha;
+        Valor = valor;
     }
 
     public Integer getId() {
