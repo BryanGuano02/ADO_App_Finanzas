@@ -14,9 +14,10 @@
    1. Cómo actualizar el saldo de cuenta y categoría?? Se le pasa el id o el objeto clase??
 9.  Registrar Ingreso: incompleto
      1.  Agregar cancelar()??
-11. Registrar Transferencia: por hacer
+11. Registrar Transferencia: incompleto
     1.  Revisar el jpql de actualizarSalso de CuentaDAO y en CategoriaEgresoDAO
 
+EL ACTUALIZAR SALDO DEBERÍA SER EN EL DTO O AL CONSULTAR, NO COMO ATRIBUTO EN LA ENTIDAD
 
 # Pendientes en los diagramas
 
