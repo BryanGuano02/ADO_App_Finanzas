@@ -61812,7 +61812,7 @@
 															"left": 8,
 															"top": 8,
 															"width": 1344,
-															"height": 696,
+															"height": 608,
 															"nameLabel": {
 																"$ref": "AAAAAAGRHcgmByku/uY="
 															},
@@ -61921,14 +61921,14 @@
 																	"left": 73,
 																	"top": 106,
 																	"width": 1,
-																	"height": 607
+																	"height": 436
 																}
 															],
 															"font": "Arial;13;0",
 															"left": 16,
 															"top": 40,
 															"width": 114.01904296875,
-															"height": 673,
+															"height": 502,
 															"stereotypeDisplay": "icon",
 															"nameCompartment": {
 																"$ref": "AAAAAAGRHch6qSpOhZ8="
@@ -62043,7 +62043,7 @@
 																	"left": 281,
 																	"top": 81,
 																	"width": 1,
-																	"height": 569
+																	"height": 137
 																}
 															],
 															"fillColor": "#A3FFA3",
@@ -62051,7 +62051,7 @@
 															"left": 184,
 															"top": 40,
 															"width": 194.83984375,
-															"height": 610,
+															"height": 178,
 															"nameCompartment": {
 																"$ref": "AAAAAAGRHci1VipvLbs="
 															},
@@ -62165,7 +62165,7 @@
 																	"left": 567,
 																	"top": 81,
 																	"width": 1,
-																	"height": 648
+																	"height": 519
 																}
 															],
 															"fillColor": "#FFADAD",
@@ -62173,7 +62173,7 @@
 															"left": 456,
 															"top": 40,
 															"width": 221.50634765625,
-															"height": 689,
+															"height": 560,
 															"nameCompartment": {
 																"$ref": "AAAAAAGRHcjItyqOAeg="
 															},
@@ -62287,7 +62287,7 @@
 																	"left": 845,
 																	"top": 81,
 																	"width": 1,
-																	"height": 505
+																	"height": 313
 																}
 															],
 															"fillColor": "#A3E0FF",
@@ -62295,7 +62295,7 @@
 															"left": 768,
 															"top": 40,
 															"width": 153.62451171875,
-															"height": 546,
+															"height": 354,
 															"nameCompartment": {
 																"$ref": "AAAAAAGRLVf7rygLHxI="
 															},
@@ -62409,7 +62409,7 @@
 																	"left": 1261,
 																	"top": 81,
 																	"width": 1,
-																	"height": 473
+																	"height": 287
 																}
 															],
 															"fillColor": "#A3E0FF",
@@ -62417,7 +62417,7 @@
 															"left": 1184,
 															"top": 40,
 															"width": 153.63720703125,
-															"height": 514,
+															"height": 328,
 															"nameCompartment": {
 																"$ref": "AAAAAAGRLVgRxyhJR6s="
 															},
@@ -63011,7 +63011,7 @@
 																		"$ref": "AAAAAAGRLVlN0SiBOek="
 																	},
 																	"edgePosition": 1,
-																	"text": "2.1 : obtenerCategoriaPorId(idCategoria: int):CategoriaDTO"
+																	"text": "2.1 : obtenerCategoriaPorId(idCategoria: int):Categoria"
 																},
 																{
 																	"_type": "EdgeLabelView",
@@ -63221,8 +63221,8 @@
 																		"$ref": "AAAAAAGRLWIVxSmI6Hk="
 																	},
 																	"font": "Arial;13;0",
-																	"left": 94.39453125,
-																	"top": 837,
+																	"left": 110.39453125,
+																	"top": 661,
 																	"width": 28.17724609375,
 																	"height": 13,
 																	"text": "Main"
@@ -63234,16 +63234,16 @@
 																		"$ref": "AAAAAAGRLWIVxSmI6Hk="
 																	},
 																	"font": "Arial;13;1",
-																	"left": 62,
-																	"top": 837,
+																	"left": 78,
+																	"top": 661,
 																	"width": 22.39453125,
 																	"height": 13,
 																	"text": "link"
 																}
 															],
 															"font": "Arial;13;0",
-															"left": 57,
-															"top": 832,
+															"left": 73,
+															"top": 656,
 															"width": 100,
 															"height": 23,
 															"nameLabel": {
@@ -63270,8 +63270,8 @@
 																		"$ref": "AAAAAAGRLWIqzimTQSQ="
 																	},
 																	"font": "Arial;13;0",
-																	"left": 93.39453125,
-																	"top": 869,
+																	"left": 109.39453125,
+																	"top": 693,
 																	"width": 173.3798828125,
 																	"height": 13,
 																	"text": "Análisis - CU. Registrar Gasto"
@@ -63283,16 +63283,16 @@
 																		"$ref": "AAAAAAGRLWIqzimTQSQ="
 																	},
 																	"font": "Arial;13;1",
-																	"left": 61,
-																	"top": 869,
+																	"left": 77,
+																	"top": 693,
 																	"width": 22.39453125,
 																	"height": 13,
 																	"text": "link"
 																}
 															],
 															"font": "Arial;13;0",
-															"left": 56,
-															"top": 864,
+															"left": 72,
+															"top": 688,
 															"width": 215.7744140625,
 															"height": 23,
 															"nameLabel": {
@@ -63319,8 +63319,8 @@
 																		"$ref": "AAAAAAGRLWI+hCmfMZI="
 																	},
 																	"font": "Arial;13;0",
-																	"left": 93.39453125,
-																	"top": 901,
+																	"left": 109.39453125,
+																	"top": 725,
 																	"width": 148.82080078125,
 																	"height": 13,
 																	"text": "DCD_CD_RegistrarGasto"
@@ -63332,16 +63332,16 @@
 																		"$ref": "AAAAAAGRLWI+hCmfMZI="
 																	},
 																	"font": "Arial;13;1",
-																	"left": 61,
-																	"top": 901,
+																	"left": 77,
+																	"top": 725,
 																	"width": 22.39453125,
 																	"height": 13,
 																	"text": "link"
 																}
 															],
 															"font": "Arial;13;0",
-															"left": 56,
-															"top": 896,
+															"left": 72,
+															"top": 720,
 															"width": 191.21533203125,
 															"height": 23,
 															"nameLabel": {
@@ -63457,7 +63457,7 @@
 																	"left": 1067,
 																	"top": 81,
 																	"width": 1,
-																	"height": 553
+																	"height": 383
 																}
 															],
 															"fillColor": "#A3E0FF",
@@ -63465,7 +63465,7 @@
 															"left": 960,
 															"top": 40,
 															"width": 213.59716796875,
-															"height": 594,
+															"height": 424,
 															"nameCompartment": {
 																"$ref": "AAAAAAGRM4kdQnWicds="
 															},
@@ -98925,7 +98925,9 @@
 																"$ref": "AAAAAAGRLMG1CP0w7Fw="
 															},
 															"name": "categoria",
-															"type": "CategoriaDTO",
+															"type": {
+																"$ref": "AAAAAAGQ5MQnnHIw70k="
+															},
 															"direction": "return"
 														}
 													]
@@ -100682,7 +100684,7 @@
 																	"top": 392,
 																	"width": 327.015625,
 																	"height": 13,
-																	"text": "+obtenerCategoriaPorId(idCategoria: int): CategoriaDTO",
+																	"text": "+obtenerCategoriaPorId(idCategoria: int): Categoria",
 																	"horizontalAlignment": 0
 																},
 																{
@@ -100906,7 +100908,7 @@
 																	"top": 440,
 																	"width": 257.65478515625,
 																	"height": 13,
-																	"text": "+obtenerTodo(): List<CuentaDTO>",
+																	"text": "+obtenerTodo(): List<Cuenta>",
 																	"horizontalAlignment": 0
 																},
 																{
@@ -100924,7 +100926,7 @@
 																	"top": 455,
 																	"width": 257.65478515625,
 																	"height": 13,
-																	"text": "+getCuentaPorId(idCuenta: int): CuentaDTO",
+																	"text": "+getCuentaPorId(idCuenta: int): Cuenta",
 																	"horizontalAlignment": 0
 																},
 																{
@@ -101296,7 +101298,7 @@
 																"$ref": "AAAAAAGRLMG1CP2qntw="
 															},
 															"name": "cuentas",
-															"type": "List<CuentaDTO>",
+															"type": "List<Cuenta>",
 															"direction": "return"
 														}
 													]
@@ -101325,7 +101327,9 @@
 																"$ref": "AAAAAAGRLMG1Cf2sEas="
 															},
 															"name": "cuenta",
-															"type": "CuentaDTO",
+															"type": {
+																"$ref": "AAAAAAGQ5MQnnHISgxA="
+															},
 															"direction": "return"
 														}
 													]

@@ -8,7 +8,6 @@ import java.util.Date;
 import java.util.List;
 
 
-
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public class Movimiento implements Serializable {
@@ -24,15 +23,12 @@ public class Movimiento implements Serializable {
     private LocalDate fecha;
 
     @ManyToOne(cascade = CascadeType.REFRESH)
-    @JoinColumn(name = "Cuenta_origen")
-    private Cuenta Cuenta_Origen;
-
+    @JoinColumn(name = "cuenta_origen")
+    private Cuenta cuentaOrigen;
 
     @ManyToOne(cascade = CascadeType.REFRESH)
     @JoinColumn(name = "cuenta_destino")
-    private Cuenta cuenta_Destino;
-
-
+    private Cuenta cuentaDestino;
 
     @ManyToOne(cascade = CascadeType.REFRESH)
     @JoinColumn(name = "categoria_id")
@@ -41,13 +37,12 @@ public class Movimiento implements Serializable {
     public Movimiento() {
     }
 
-
     public Movimiento(Double valor, Integer id, LocalDate fecha, Cuenta cuenta_Origen, Cuenta cuenta_Destino, String concepto, Categoria categoria) {
         this.valor = valor;
         this.id = id;
         this.fecha = fecha;
-        this.Cuenta_Origen = cuenta_Origen;
-        this.cuenta_Destino = cuenta_Destino;
+        this.cuentaOrigen = cuenta_Origen;
+        this.cuentaDestino = cuenta_Destino;
         this.concepto = concepto;
         this.categoria = categoria;
     }
@@ -55,6 +50,8 @@ public class Movimiento implements Serializable {
     public String getConcepto() {
         return concepto;
     }
+
+
 
     public void setConcepto(String concepto) {
         this.concepto = concepto;
@@ -76,28 +73,28 @@ public class Movimiento implements Serializable {
         this.fecha = fecha;
     }
 
-    public List<Movimiento> movimientos(Date desde, Date hasta){
+    public List<Movimiento> movimientos(Date desde, Date hasta) {
         return null;
     }
 
-    public List<Movimiento> obtenerMovimientosPorIdCuenda(int idCuenta){
+    public List<Movimiento> obtenerMovimientosPorIdCuenda(int idCuenta) {
         return null;
     }
 
-    public Movimiento obtenerMovimientoPorIdMovimiento(int idMovimiento){
+    public Movimiento obtenerMovimientoPorIdMovimiento(int idMovimiento) {
         return null;
 
     }
 
-    public void eliminarMovimiento(int i0dMovimiento){
+    public void eliminarMovimiento(int i0dMovimiento) {
 
     }
 
-    public void guardarMovimiento(Movimiento movimiento){
+    public void guardarMovimiento(Movimiento movimiento) {
 
     }
 
-    public List<Movimiento> obtenerMovimientosPorIdCategoria(int idCategoria){
+    public List<Movimiento> obtenerMovimientosPorIdCategoria(int idCategoria) {
         return null;
     }
 
@@ -107,5 +104,14 @@ public class Movimiento implements Serializable {
 
     public Integer getId() {
         return id;
+    }
+
+    public Cuenta getCuenta_Destino() {
+        return cuentaDestino;
+    }
+
+
+    public Categoria getCategoria() {
+        return  categoria;
     }
 }
