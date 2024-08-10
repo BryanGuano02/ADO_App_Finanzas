@@ -153,7 +153,7 @@ public class MovimientoDAO implements Serializable {
     }
 
     public List<MovimientoDTO> obtenerMovimientosPorIdCategoria(int idCategoria) {
-        /*EntityManager em = null;
+        EntityManager em = null;
         List<MovimientoDTO> movimientosDTO = new ArrayList<>();
 
         try {
@@ -169,12 +169,17 @@ public class MovimientoDAO implements Serializable {
 
             // Convertir cada Movimiento a MovimientoDTO
             for (Movimiento movimiento : movimientos) {
-                MovimientoDTO movimientoDTO = new MovimientoDTO();
-                movimientoDTO.setIdMovimiento(movimiento.getIdMovimiento());
-                movimientoDTO.setFecha(movimiento.getFecha());
-                movimientoDTO.setMonto(movimiento.getMonto());
-                // Establecer otros atributos según sea necesario
+                String cuentaOrigenNombre = (movimiento.getCuenta_Origen() != null) ? movimiento.getCuenta_Origen().getNombre() : "No especificado";
+                String cuentaDestinoNombre = (movimiento.getCuenta_Destino() != null) ? movimiento.getCuenta_Destino().getNombre() : "No especificado";
 
+                MovimientoDTO movimientoDTO = new MovimientoDTO(
+                        movimiento.getId().toString(), // Convertir el ID a String
+                        java.sql.Date.valueOf(movimiento.getFecha()), // Convertir LocalDate a Date
+                        movimiento.getConcepto(),
+                        movimiento.getValor(),
+                        cuentaOrigenNombre,
+                        cuentaDestinoNombre
+                );
                 movimientosDTO.add(movimientoDTO);
             }
 
@@ -189,7 +194,8 @@ public class MovimientoDAO implements Serializable {
             }
         }
 
-        return movimientosDTO;*/
+        return movimientosDTO;
+//        return null;
     }
 
 

@@ -48,6 +48,15 @@ public class ContabilidadController extends HttpServlet {
             case "verMovimientos":
                 this.verMovimientos(req, resp);
                 break;
+            case "registrarGasto":
+                this.registrarGasto(req, resp);
+                break;
+            case "ingresarInfoGasto":
+                this.ingresarInfoGasto(req, resp);
+                break;
+            case "verCategoria":
+                verCategoria(req, resp);
+                break;
         }
     }
 
@@ -79,21 +88,19 @@ public class ContabilidadController extends HttpServlet {
         }
 
 //        2. Hablar con el modelo
-        CuentaDAO cuentadao = new CuentaDAO();
-        List<Cuenta> cuentas = cuentadao.obtenerTodo(); //TODO: El saldo de la cuenta es también en base a las fechas
+        CuentaDAO cuentaDAO = new CuentaDAO();
+        List<Cuenta> cuentas = cuentaDAO.obtenerTodo(); //TODO: El saldo de la cuenta es también en base a las fechas
 
+        CategoriaEgresoDAO categoriaEgresoDAO = new CategoriaEgresoDAO();
+        List<CategoriaEgreso> categoriasEgreso = categoriaEgresoDAO.obtenerTodo();
 
         req.setAttribute("cuentas", cuentas);
+        req.setAttribute("categoriasEgreso", categoriasEgreso);
 
         //req.setAttribute("ingresos", ingresos);
         //TODO: Mandar los parámetros restantes  de mostrar()
         //		llamar a la vista - mostrar()
         req.getRequestDispatcher("jsp/VerDashboard.jsp").forward(req, resp);
-
-
-        System.out.print(session.getAttribute("fechaInicio"));
-        //System.out.println();
-
     }
 
     private void verCuenta(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -101,8 +108,8 @@ public class ContabilidadController extends HttpServlet {
         int idCuenta = Integer.parseInt(req.getParameter("idCuenta"));
 
 //        2.
-        CuentaDAO cuentaDao = new CuentaDAO();
-        Cuenta cuenta = cuentaDao.obtenerCuentaPorId(idCuenta);
+        CuentaDAO cuentaDAO = new CuentaDAO();
+        Cuenta cuenta = cuentaDAO.obtenerCuentaPorId(idCuenta);
 
         MovimientoDAO movimientoDao = new MovimientoDAO();
         List<MovimientoDTO> movimientos = movimientoDao.obtenerMovimientosPorIdCuenta(idCuenta);
@@ -112,7 +119,6 @@ public class ContabilidadController extends HttpServlet {
 
 //        3.
         req.getRequestDispatcher("jsp/VerCuenta.jsp").forward(req, resp);
-
     }
 
     private void verMovimientos(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -131,8 +137,6 @@ public class ContabilidadController extends HttpServlet {
 
         // Llamar a la vista para mostrar los movimientos
         req.getRequestDispatcher("jsp/VerMovimientos.jsp").forward(req, resp);
-
-
     }
 
     private void verCategoria(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -159,12 +163,58 @@ public class ContabilidadController extends HttpServlet {
     }
 
     private void registrarGasto(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+//        1.
+        int idCuenta = Integer.parseInt(req.getParameter("idCuenta"));
 
+//        2.
+        CuentaDAO cuentaDao = new CuentaDAO();
+        Cuenta cuenta = cuentaDao.obtenerCuentaPorId(idCuenta);
+
+        CategoriaEgresoDAO categoriaEgresoDAO = new CategoriaEgresoDAO();
+        List<CategoriaEgreso> categoriasEgresos = categoriaEgresoDAO.obtenerTodo();
+
+        req.setAttribute("saldoCuenta", cuenta.getTotal());
+        req.setAttribute("categoriasEgresos", categoriasEgresos);
+
+        actualizarIdCuenta(req, idCuenta);
+
+//        3.
+        req.getRequestDispatcher("jsp/VerRegistrarGasto.jsp").forward(req, resp);
     }
 
-    private void ingresarlnfoGasto(HttpServletRequest req, HttpServletResponse resp)
-            throws ServletException, IOException {
 
+    private void ingresarInfoGasto(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException {
+//        1.
+        String concepto = String.valueOf(Integer.parseInt(req.getParameter("concepto")));
+        LocalDate fecha = LocalDate.ofEpochDay(Integer.parseInt(req.getParameter("fecha")));
+        double valor = Double.parseDouble(req.getParameter("valor"));
+        int idCategoria = Integer.parseInt(req.getParameter("idCategoria"));
+
+//        2.
+        CategoriaEgresoDAO categoriaDao = new CategoriaEgresoDAO();
+        CategoriaEgreso categoriaEgreso = categoriaDao.obtenerCategoriaPorId(idCategoria);
+
+        Egreso egreso = new Egreso(12.2, 1, fecha, new Cuenta(1, "Billetera544", 192.1), new Cuenta(4, "Bajo del colchón", 15.24), concepto, categoriaEgreso);
+
+        EgresoDAO egresoDao = new EgresoDAO();
+        egresoDao.guardarEgreso(egreso);
+
+        HttpSession session = req.getSession();
+        int idCuenta = (int) session.getAttribute("idCuenta");
+
+        CuentaDAO cuentaDao = new CuentaDAO();
+        Cuenta cuenta = cuentaDao.obtenerCuentaPorId(idCuenta);
+
+
+//        actualizar categoria
+        cuentaDao.actualizarSaldo(idCuenta, valor);
+
+//        actualizar cuenta
+
+
+//        3.
+        verCuenta(req, resp);
     }
 
     private void registrarlngreso(HttpServletRequest req, HttpServletResponse resp)
@@ -182,6 +232,16 @@ public class ContabilidadController extends HttpServlet {
 
     private void ingresarlnfoTransferencia(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
+    }
+
+    private void actualizarIdCuenta(HttpServletRequest req, int nuevoIdCuenta) {
+        HttpSession session = req.getSession();
+        Integer idCuentaExistente = (Integer) session.getAttribute("idCuenta");
+
+        if (idCuentaExistente == null || idCuentaExistente != nuevoIdCuenta) {
+            // Si el idCuenta no está en la sesión o es diferente, actualiza la sesión
+            session.setAttribute("idCuenta", nuevoIdCuenta);
+        }
     }
 
 }

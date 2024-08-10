@@ -4,6 +4,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
 @Entity
@@ -21,5 +22,5 @@ public class Egreso extends Movimiento{
     }
 
     // Getters y Se;
-    }
+}
 

@@ -4,7 +4,13 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 
-public class Ingreso extends Movimiento{
+import java.io.Serializable;
+import java.time.LocalDate;
+import java.util.Date;
+
+
+@Entity
+public class Ingreso extends Movimiento implements Serializable {
     @OneToOne
     @JoinColumn(name = "id") // Esto define la columna de la clave foránea en la tabla "Ingreso"
     private Cuenta cuentaOrigen;
@@ -13,6 +19,7 @@ public class Ingreso extends Movimiento{
     public Cuenta getCuentaOrigen() {
         return cuentaOrigen;
     }
+
 
     public void setCuentaOrigen(Cuenta cuentaOrigen) {
         this.cuentaOrigen = cuentaOrigen;

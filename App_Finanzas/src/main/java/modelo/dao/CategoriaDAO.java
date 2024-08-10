@@ -44,7 +44,7 @@ public class CategoriaDAO {
     }
 
     public Categoria obtenerCategoriaPorId(int idCategoria) {
-        EntityManager em = null;
+        /*EntityManager em = null;
         Categoria categoria = null;
 
         try {
@@ -56,7 +56,8 @@ public class CategoriaDAO {
             }
         }
 
-        return categoria;
+        return categoria;*/
+        return null;
     }
 
 }
