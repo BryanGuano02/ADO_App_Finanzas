@@ -68,7 +68,7 @@ public class CuentaDAO implements Serializable {
             query.setParameter("valor", valor); // Asegúrate de que 'valor' esté definido en tu código
             query.setParameter("idCuenta", cuenta.getId());
 
-            int rowsUpdated = query.executeUpdate();
+            query.executeUpdate();
             em.getTransaction().commit();
         } catch (Exception e) {
             if (em.getTransaction().isActive()) {

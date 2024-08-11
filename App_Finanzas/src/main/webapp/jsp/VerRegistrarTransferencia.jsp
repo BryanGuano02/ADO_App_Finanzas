@@ -7,8 +7,9 @@
 <body>
 <h1>Registro de Transferencia</h1>
 <h3>${cuentaOrigen.nombre}</h3>
+<p>Saldo actual de la cuenta: <strong>${cuentaOrigen.total}</strong></p>
 
-<a href="ContabilidadController?ruta=verDashboard">Volver al dashboard</a>
+<a href="ContabilidadController?ruta=cancelar">Cancelar</a>
 
 <!-- Formulario para ingresar la información de la transferencia -->
 <form action="ContabilidadController?ruta=ingresarInfoTransferencia" method="post">

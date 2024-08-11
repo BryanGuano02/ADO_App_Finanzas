@@ -82,6 +82,9 @@ public class ContabilidadController extends HttpServlet {
             case "ingresarInfoTransferencia":
                 ingresarInfoTransferencia(req, resp);
                 break;
+            case "cancelar":
+                cancelar(req, resp);
+                break;
         }
     }
 
@@ -123,8 +126,6 @@ public class ContabilidadController extends HttpServlet {
             session.setAttribute("desde", desde);
             session.setAttribute("hasta", hasta);
         }
-
-        System.out.println("Después Fecha inicio: " + desde + " Fecha final: " + hasta);
 
 //        2. Hablar con el modelo
         CuentaDAO cuentaDAO = new CuentaDAO();
@@ -621,7 +622,7 @@ public class ContabilidadController extends HttpServlet {
 
     private void cancelar(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        resp.sendRedirect("ContabilidadController?ruta=registrarEgreso");
+        resp.sendRedirect("ContabilidadController?ruta=verDashboard");
 
     }
 

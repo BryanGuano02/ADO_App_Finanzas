@@ -8,11 +8,9 @@
 <body>
 <h1>Registro de Movimiento de Egreso</h1>
 <h3>${cuenta.nombre}</h3>
-
-<a href="ContabilidadController?ruta=verDashboard">Volver al dashboard</a>
-
-<!-- Muestra el saldo actual de la cuenta -->
 <p>Saldo actual de la cuenta: <strong>${cuenta.total}</strong></p>
+
+<a href="ContabilidadController?ruta=cancelar">Cancelar</a>
 
 <!-- Formulario para ingresar el movimiento de egreso -->
 <form action="ContabilidadController?ruta=ingresarInfoEgreso" method="post">

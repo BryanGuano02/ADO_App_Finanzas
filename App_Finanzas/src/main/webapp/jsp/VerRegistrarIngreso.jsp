@@ -8,7 +8,7 @@
 <h1>Registro de Movimiento de Ingreso</h1>
 <h3>${cuenta.nombre}</h3>
 
-<a href="ContabilidadController?ruta=verDashboard">Volver al dashboard</a>
+<a href="ContabilidadController?ruta=cancelar">Cancelar</a>
 
 <form action="ContabilidadController?ruta=ingresarInfoIngreso" method="post">
   <div>
