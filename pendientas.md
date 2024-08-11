@@ -1,27 +1,26 @@
 # Pendientes en el código
 
-1. Ver Dashboard: empezado
+1. Ver Dashboard: casi completo?
 2. Filtrar Fecha: incompleto
-   1. Hacer que se calcule el valor de cada cuenta dinámicamente consas fechas
+   1. hacer que se recalcule el valor de cada categoria
 3. Ver Cuenta: empezado
-4. Ver Movimientos: incompleto
-   1. Hacer que se presenten solo los movimientos dentro de las fechas
-5. Eliminar Movimientos: empezado
-6. Actualizar Movimientos: incompleto
-   1. Terminar la primera llamada según corrección de diagramas
+   1. Hacer que se muestre los movimientos según cuenta origgen o destino
+4. Ver Movimientos: ??
+   1. Hacer que se presenten solo los movimientos dentro de las fechas (Filtrar Fechas)
+5. Eliminar Movimientos: ??
+6. Actualizar Movimientos: ??
+   1. Quitar el required para que permita editar un solo campo y no todos
 7. Ver Categoria: empezado
-8. Registrar Gasto: empezado
-9.  Registrar Ingreso: incompleto
-     1.  Agregar cancelar()??
-10. Registrar Transferencia: incompleto
-    1.  Revisar el jpql de actualizarSalso de CuentaDAO y en CategoriaEgresoDAO
+   1. Actualizar saldo de acuerdo a la fecha
+   2. Mostrar los movimientos asociados a la categoria
+8. Registrar Gasto: casi completo
+9.  Registrar Ingreso: casi completo
+10. Registrar Transferencia: casi completo
 
+## GENERAL CÓDIGO
+Dejar quemados datos (cuentas, categorias, movimientos de muestra)
+Revisar si las categorías aparecen bien al registrar cualquir movimiento (No se repiten o se crean categorías extras)
 
-A donde mandar cuando se cancela un registro??
-ACTUALIZAR LO QUE SE MANDA A LA VISTA DE VER CUENTA CUANDO SE FINALIZA UN REGISTRO
-ACTUALIZAR SECUENCIA DE ACTUALIZAR MOVIMIENTO INCLUYENDO LAS LLAMADAS PARA OBTENER CATEGORIAS
-
-Corregir lo de verCuentas
 
 
 # Pendientes en los diagramas
@@ -32,9 +31,12 @@ Corregir lo de verCuentas
 4. Ver Movimientos: completo
 5. Eliminar Movimientos: completo
 6. Actualizar Movimientos: incompleto
-   1. Actualiza comunicación y secuencia con la obtención de todas las categorias de un tipo
+   1. Actualiza comunicación y secuencia con la obtención de todas las categorias de un tipo (Se puede hacer de otra manera??)
 7. Ver Categoria: completo
 8. Registrar Gasto: completo
-9.  Registrar Ingreso: incompleto?
-    1.  Agregar cancelar()??
+9.  Registrar Ingreso: completo
 10. Registrar Transferencia: completo
+
+
+## GENERAL DIAGRAMAS
+ACTUALIZAR SECUENCIA DE ACTUALIZAR Y ELIMINAR MOVIMIENTO INCLUYENDO LAS LLAMADAS PARA OBTENER CATEGORIAS (si es necesario considerando cambios en el código)
