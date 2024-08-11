@@ -233,7 +233,7 @@ public class ContabilidadController extends HttpServlet {
         Categoria categoria = categoriaDao.obtenerCategoriaPorId(idCategoria);
 
         MovimientoDAO movimientoDao = new MovimientoDAO();
-        List<MovimientoDTO> movimientos = movimientoDao.obtenerMovimientosPorIdCategoria(idCategoria);
+        List<Movimiento> movimientos = movimientoDao.obtenerMovimientosPorIdCategoria(idCategoria);
 
         req.setAttribute("categoria", categoria);
         req.setAttribute("movimientos", movimientos);
@@ -263,7 +263,7 @@ public class ContabilidadController extends HttpServlet {
 
         // Redirigir a la página JSP donde se muestra el pop-up de confirmación
         req.setAttribute("idMovimiento", idMovimiento);
-        req.getRequestDispatcher("jsp/verMovimientos.jsp").forward(req, resp);
+        req.getRequestDispatcher("jsp/VerMovimientos.jsp").forward(req, resp);
     }
 
 
@@ -323,43 +323,6 @@ public class ContabilidadController extends HttpServlet {
         httpSession.setAttribute("categorias", categorias);
         req.getRequestDispatcher("jsp/VerActualizarMovimiento.jsp").forward(req, resp);
     }
-
-/*
-
-    private void registrarInfoActualizacion(HttpServletRequest req, HttpServletResponse resp)
-            throws ServletException, IOException {
-/*
-            Movimiento movimiento =  null;
-        // Usar polimorfismo para manejar diferentes tipos de movimientos
-        if (movimiento = (Transferencia) req.getParameter("movimiento"); instanceof Transferencia) {
-            CategoriaTransferenciaDAO categoriaTransferenciaDao = new CategoriaTransferenciaDAO();
-            categorias.addAll(categoriaTransferenciaDao.obtenerTodo()); // Corregir la adición de categorías
-        } else if (movimiento instanceof Ingreso) {
-            CategoriaIngresoDAO categoriaIngresoDao = new CategoriaIngresoDAO();
-            categorias.addAll(categoriaIngresoDao.obtenerTodo()); // Corregir la adición de categorías
-        } else if (movimiento instanceof Egreso) {
-            CategoriaEgresoDAO categoriaEgresoDao = new CategoriaEgresoDAO();
-            categorias.addAll(categoriaEgresoDao.obtenerTodo()); // Corregir la adición de categorías
-        }
-//        1.
-        String concepto = req.getParameter("concepto");
-        LocalDate fecha = LocalDate.parse(req.getParameter("fecha"));
-        double valor = Double.parseDouble(req.getParameter("valor"));
-        int idCategoria = Integer.parseInt(req.getParameter("idCategoria"));
-        int idCuentaOrigen = Integer.parseInt(req.getParameter("idCuentaOrigen"));
-        int idCuentaDestino = Integer.parseInt(req.getParameter("idCuentaDestino"));
-
-//        2.
-        HttpSession session = req.getSession();
-        session.setAttribute("concepto", concepto);
-        session.setAttribute("fecha", fecha);
-        session.setAttribute("valor", valor);
-        session.setAttribute("idCategoria", idCategoria);
-        session.setAttribute("idCuentaOrigen", idCuentaOrigen);
-        session.setAttribute("idCuentaDestino", idCuentaDestino);
-
-
-    }*/
 
     private void registrarInfoActualizacion(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {

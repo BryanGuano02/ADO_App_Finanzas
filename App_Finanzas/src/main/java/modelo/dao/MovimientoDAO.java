@@ -223,7 +223,7 @@ public class MovimientoDAO implements Serializable {
         }
     }
 
-    public List<MovimientoDTO> obtenerMovimientosPorIdCategoria(int idCategoria) {
+    /*public List<MovimientoDTO> obtenerMovimientosPorIdCategoria(int idCategoria) {
         List<MovimientoDTO> movimientosDTO = new ArrayList<>();
 
         try {
@@ -286,6 +286,38 @@ public class MovimientoDAO implements Serializable {
 
         return movimientosDTO;
 //        return null;
+    }
+*/
+    public List<Movimiento> obtenerMovimientosPorIdCategoria(int idCategoria) {
+        List<Movimiento> movimientos = new ArrayList<>();
+        EntityManager em = null;
+
+        try {
+            em = emf.createEntityManager();
+
+            // Consulta JPQL con joins en las subclases para filtrar por categoría
+            String jpql = "SELECT m FROM Movimiento m " +
+                    "LEFT JOIN Ingreso i ON m = i " +
+                    "LEFT JOIN Egreso e ON m = e " +
+                    "LEFT JOIN Transferencia t ON m = t " +
+                    "WHERE (TYPE(m) = Ingreso AND i.categoria.id = :idCategoria) " +
+                    "OR (TYPE(m) = Egreso AND e.categoria.id = :idCategoria) " +
+                    "OR (TYPE(m) = Transferencia AND t.categoria.id = :idCategoria)";
+
+            TypedQuery<Movimiento> query = em.createQuery(jpql, Movimiento.class);
+            query.setParameter("idCategoria", idCategoria);
+
+            movimientos = query.getResultList();
+
+        } catch (Exception e) {
+            e.printStackTrace(); // Manejo básico de excepciones
+        } finally {
+            if (em != null && em.isOpen()) {
+                em.close();
+            }
+        }
+
+        return movimientos;
     }
 
   /*  public List<MovimientoDTO> obtenerMovimientosPorIdCuenta(int idCuenta) {
