@@ -22,14 +22,14 @@ public class Egreso extends Movimiento implements Serializable {
 
     @ManyToOne
     @JoinColumn(name = "Categoria_ID")
-    private CategoriaEgreso Categoria;
+    private CategoriaEgreso categoria;
 
     public Egreso() {}
 
     public Egreso( String concepto, LocalDate fecha, double valor, Cuenta cuentaOrigen, CategoriaEgreso categoria) {
         super( concepto, fecha, valor);
         CuentaOrigen = cuentaOrigen;
-        Categoria = categoria;
+        this.categoria = categoria;
     }
 
     public Cuenta getCuentaOrigen() {
@@ -41,11 +41,11 @@ public class Egreso extends Movimiento implements Serializable {
     }
 
     public CategoriaEgreso getCategoria() {
-        return Categoria;
+        return categoria;
     }
 
     public void setCategoria(CategoriaEgreso categoria) {
-        Categoria = categoria;
+        this.categoria = categoria;
     }
 
 

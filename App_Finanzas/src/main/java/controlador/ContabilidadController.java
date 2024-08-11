@@ -172,17 +172,17 @@ public class ContabilidadController extends HttpServlet {
 
     private void verCuenta(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 //        1.
-//        int idCuenta = Integer.parseInt(req.getParameter("idCuenta"));
-        int idCuenta = 1;
+        int idCuenta = Integer.parseInt(req.getParameter("idCuenta"));
+//        int idCuenta = 1;
 //        2.
         CuentaDAO cuentaDAO = new CuentaDAO();
         Cuenta cuenta = cuentaDAO.obtenerCuentaPorId(idCuenta);
 
         MovimientoDAO movimientoDao = new MovimientoDAO();
-        List<MovimientoDTO> movimientos = movimientoDao.obtenerMovimientosPorIdCuenta(idCuenta);
+        //List<MovimientoDTO> movimientos = movimientoDao.obtenerMovimientosPorIdCuenta(idCuenta);
 
         req.setAttribute("cuenta", cuenta);
-        req.setAttribute("movimientos", movimientos);
+        //req.setAttribute("movimientos", movimientos);
 
 //        3.
         req.getRequestDispatcher("jsp/VerCuenta.jsp").forward(req, resp);
@@ -218,7 +218,7 @@ public class ContabilidadController extends HttpServlet {
     }
 
     private void verCategoria(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        int idCategoria = Integer.parseInt(req.getParameter("idCategoria"));
+        /*int idCategoria = Integer.parseInt(req.getParameter("idCategoria"));
 
         CategoriaDAO categoriaDao = new CategoriaDAO();
         Categoria categoria = categoriaDao.obtenerCategoriaPorId(idCategoria);
@@ -227,10 +227,10 @@ public class ContabilidadController extends HttpServlet {
         List<MovimientoDTO> movimientos = movimientoDao.obtenerMovimientosPorIdCategoria(idCategoria);
 
         req.setAttribute("categoria", categoria);
-//        req.setAttribute("movimientos", movimientos);
+        req.setAttribute("movimientos", movimientos);
 
         // Llamar a la vista para mostrar la categoría y sus movimientos
-        req.getRequestDispatcher("jsp/VerCategoria.jsp").forward(req, resp);
+        req.getRequestDispatcher("jsp/VerCategoria.jsp").forward(req, resp);*/
     }
 
     /*

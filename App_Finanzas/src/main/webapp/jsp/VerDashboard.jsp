@@ -15,6 +15,11 @@
     <link rel="stylesheet"
           href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <title>Página de Inicio</title>
+    <style>
+        .categoriaIngreso, .categoriaEgreso, .nombre_cuenta {
+            cursor: pointer; /* Cambia el cursor a una mano apuntando */
+        }
+    </style>
 </head>
 
 <body>
@@ -28,7 +33,7 @@
             <li><a href="#">Categorías</a></li>
             <li><a href="#">Movimientos</a></li>
             <!-- Filtros por rango de fechas -->
-            <form action="ContabilidadController?ruta=filtrarPorFechas" method="post">
+            <form action="ContabilidadController?ruta=filtrarPorFechas" method="post" >
                 <label for="fechaRango"> <i class="fas fa-calendar-alt calendar-icon" id="openCalendar"></i></label>
                 <input type="text" id="fechaRango" name="fechaRango" placeholder="Selecciona el rango de fechas">
 
@@ -43,10 +48,14 @@
 
 <div class="cuentas" id="cuentas">
     <c:forEach items="${cuentas}" var="cuenta">
-        <div class="cuenta">
-            <h1 class="nombre_cuenta">${cuenta.nombre}</h1>
-            <h1 class="nombre_cuenta">${cuenta.total}</h1>
 
+
+        <div class="cuenta">
+            <form action="ContabilidadController?ruta=verCuenta" method="post">
+                <input type="hidden" name="idCuenta" value="${cuenta.id}">
+                <h1 class="nombre_cuenta" onclick="this.closest('form').submit()">${cuenta.nombre}</h1>
+                <h1 class="nombre_cuenta" onclick="this.closest('form').submit()">${cuenta.total}</h1>
+            </form>
             <!-- Ingreso -->
             <form action="ContabilidadController?ruta=registrarIngreso" method="POST" style="display:inline;">
                 <input type="hidden" name="idCuenta" value="${cuenta.id}">
@@ -76,13 +85,12 @@
             <div class="iconos">
                 <i class="fas fa-sync-alt"></i> Movimiento
             </div>
+
+
         </div>
 
     </c:forEach>
-
-
 </div>
-
 
 <div class="categorias" id="categorias">
     <h1>Categorias</h1>
@@ -98,13 +106,15 @@
     </c:forEach>
 
 
-
     <h2>Categorias Egreso</h2>
     <c:forEach items="${categoriasEgreso}" var="categoriaEgreso">
-        <div class="categoriaEgreso">
-            <h1 class="nombre_cuenta">${categoriaEgreso.nombre}</h1>
-                <%--            <h1 class="nombre_cuenta">${categoriaEgreso.total}</h1>--%>
-        </div>
+        <form action="ContabilidadController?ruta=verCategoria" method="post">
+            <input type="hidden" name="idCategoriaEgreso" value="${categoriaEgreso.ID}">
+            <div class="categoriaEgreso" onclick="this.closest('form').submit()">
+                <h1 class="categoriaNombre">${categoriaEgreso.nombre}</h1>
+                    <%--            <h1 class="nombre_cuenta">${categoriaEgreso.total}</h1>--%>
+            </div>
+        </form>
     </c:forEach>
 </div>
 

@@ -8,6 +8,7 @@ import modelo.dto.MovimientoDTO;
 import modelo.entidades.*;
 
 import java.io.Serializable;
+import java.sql.SQLOutput;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -140,26 +141,29 @@ public class MovimientoDAO implements Serializable {
         return movimientoDTO;
     }
 
-    public void eliminarMovimiento(int idMovimiento) {
-        Movimiento movimiento = null;
 
+
+    public void eliminarMovimiento(Integer idMovimiento) {
+        EntityManager em = null;
+        System.out.println("si entra a eliminar movimiento ");
         try {
             em = emf.createEntityManager();
 
-            // Consulta para obtener los movimientos entre dos fechas
-            String jpql = "DELETE FROM Movimiento m WHERE m.Id = :idMovimiento";
-            TypedQuery<Movimiento> query = em.createQuery(jpql, Movimiento.class);
-            query.setParameter("idMovimiento", idMovimiento);
-
-            query.executeUpdate();
+            // Crear y ejecutar la consulta para eliminar el movimiento por su ID
+            em.getTransaction().begin();
+            Movimiento movimiento = em.find(Movimiento.class, idMovimiento);
+            if (movimiento != null) {
+                em.remove(movimiento);
+            }
+            em.getTransaction().commit();
         } catch (Exception e) {
-            e.printStackTrace(); // Manejo básico de excepciones
+            if (em.getTransaction().isActive()) {
+                em.getTransaction().rollback();
+            }
+            e.printStackTrace();
         } finally {
             if (em != null && em.isOpen()) {
                 em.close();
-            }
-            if (emf != null && emf.isOpen()) {
-                emf.close();
             }
         }
     }
@@ -220,7 +224,7 @@ public class MovimientoDAO implements Serializable {
         }
     }
 
-    public List<MovimientoDTO> obtenerMovimientosPorIdCuenta(int idCuenta) {
+  /*  public List<MovimientoDTO> obtenerMovimientosPorIdCuenta(int idCuenta) {
         List<MovimientoDTO> movimientosDTO = new ArrayList<>();
 
         try {
@@ -228,6 +232,9 @@ public class MovimientoDAO implements Serializable {
 
             // Consulta para obtener los Movimientos
             String jpql = "SELECT m FROM Movimiento m WHERE m.Id = :idCuenta OR m.cuentaDestinoID.id = :idCuenta";
+
+
+
             TypedQuery<Movimiento> query = em.createQuery(jpql, Movimiento.class);
             query.setParameter("idCuenta", idCuenta);
 
@@ -277,18 +284,18 @@ public class MovimientoDAO implements Serializable {
         return movimientosDTO;
     }
 
-}
 
-/*
     public List<MovimientoDTO> obtenerMovimientosPorIdCategoria(int idCategoria) {
-        EntityManager em = null;
         List<MovimientoDTO> movimientosDTO = new ArrayList<>();
 
         try {
             em = emf.createEntityManager();
 
             // Consulta para obtener los movimientos por categoría
-            String jpql = "SELECT m FROM Movimiento m WHERE m.categoria.id = :idCategoria";
+            //todo: Arreglar este jpql y hay otro jpql por arreglar
+            String jpql = "SELECT m FROM Movimiento m WHERE m.idCategoria.ID = :idCategoria";
+
+
 
             TypedQuery<Movimiento> query = em.createQuery(jpql, Movimiento.class);
             query.setParameter("idCategoria", idCategoria);
@@ -297,18 +304,37 @@ public class MovimientoDAO implements Serializable {
 
             // Convertir cada Movimiento a MovimientoDTO
             for (Movimiento movimiento : movimientos) {
-                String cuentaOrigenNombre = (movimiento.getCuenta_Origen() != null) ? movimiento.getCuenta_Origen().getNombre() : "No especificado";
-                String cuentaDestinoNombre = (movimiento.getCuenta_Destino() != null) ? movimiento.getCuenta_Destino().getNombre() : "No especificado";
+                String cuentaOrigen = "null";
+                String cuentaDestino = "null";
 
-                MovimientoDTO movimientoDTO = new MovimientoDTO(
-                        movimiento.getId().toString(), // Convertir el ID a String
-                        java.sql.Date.valueOf(movimiento.getFecha()), // Convertir LocalDate a Date
+                if (movimiento instanceof Egreso) {
+                    Egreso egreso = (Egreso) movimiento;
+                    cuentaDestino = egreso.getCategoria().getNombre();
+                    cuentaOrigen = egreso.getCuentaOrigen().getNombre();
+                }
+
+                if (movimiento instanceof Ingreso) {
+                    Ingreso ingreso = (Ingreso) movimiento;
+                    cuentaOrigen = ingreso.getCategoria().getNombre();
+                    cuentaDestino = ingreso.getCuentaDestino().getNombre();
+                }
+
+                if (movimiento instanceof Transferencia) {
+                    Transferencia transferencia = (Transferencia) movimiento;
+                    cuentaOrigen = transferencia.getCuentaOrigen().getNombre();
+                    cuentaDestino = transferencia.getCuentaDestino().getNombre();
+                }
+
+
+                MovimientoDTO dto = new MovimientoDTO(
+                        movimiento.getId().toString(),
+                        java.sql.Date.valueOf(movimiento.getFecha()),
                         movimiento.getConcepto(),
                         movimiento.getValor(),
-                        cuentaOrigenNombre,
-                        cuentaDestinoNombre
+                        cuentaOrigen,
+                        cuentaDestino
                 );
-                movimientosDTO.add(movimientoDTO);
+                movimientosDTO.add(dto);
             }
 
         } catch (Exception e) {
@@ -324,4 +350,7 @@ public class MovimientoDAO implements Serializable {
 
         return movimientosDTO;
 //        return null;
-    }*/
+    }
+*/
+}
+
