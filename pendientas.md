@@ -1,25 +1,24 @@
 # Pendientes en el código
 
 1. Ver Dashboard: empezado
-2. Filtrar Fecha: completado
+2. Filtrar Fecha: incompleto
+   1. Hacer que se calcule el valor de cada cuenta dinámicamente consas fechas
 3. Ver Cuenta: empezado
-4. Ver Movimientos: empezado
+4. Ver Movimientos: incompleto
+   1. Hacer que se presenten solo los movimientos dentro de las fechas
 5. Eliminar Movimientos: empezado
-   1. Cómo funciona el 1.2 mostrarConfirmación??
-   2. Al eliminar o hacer cualquiera de esas acciones, DAO devuelve un boolean para confirmar que la acción se pudo realizar
 6. Actualizar Movimientos: incompleto
    1. Terminar la primera llamada según corrección de diagramas
 7. Ver Categoria: empezado
 8. Registrar Gasto: empezado
-   1. Cómo actualizar el saldo de cuenta y categoría?? Se le pasa el id o el objeto clase??
 9.  Registrar Ingreso: incompleto
      1.  Agregar cancelar()??
-11. Registrar Transferencia: incompleto
+10. Registrar Transferencia: incompleto
     1.  Revisar el jpql de actualizarSalso de CuentaDAO y en CategoriaEgresoDAO
 
-EL ACTUALIZAR SALDO DEBERÍA SER EN EL DTO O AL CONSULTAR, NO COMO ATRIBUTO EN LA ENTIDAD
+
+A donde mandar cuando se cancela un registro??
 ACTUALIZAR LO QUE SE MANDA A LA VISTA DE VER CUENTA CUANDO SE FINALIZA UN REGISTRO
-En registrarTransferencia seguna llamada debería poder haber un seleccionar para seleccionar categorías
 ACTUALIZAR SECUENCIA DE ACTUALIZAR MOVIMIENTO INCLUYENDO LAS LLAMADAS PARA OBTENER CATEGORIAS
 
 # Pendientes en los diagramas
