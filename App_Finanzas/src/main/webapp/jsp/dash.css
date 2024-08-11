@@ -1,0 +1,101 @@
+* {
+    border: 1px solid red;
+}
+
+nav {
+    background-color: #001d7f;
+    /* Color morado */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+}
+
+nav .titulo {
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+nav .barraNavegacion {
+    flex-grow: 1;
+    text-align: center;
+}
+
+nav .barraNavegacion ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+}
+
+nav .barraNavegacion ul li {
+    margin: 0 15px;
+}
+
+nav .barraNavegacion ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+nav .barraNavegacion ul li a:hover {
+    text-decoration: underline;
+}
+
+.calendar-icon {
+    color: #f0f0f0;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+#fechaRango {
+    display: none;
+}
+
+
+
+
+/*--------------------------*/
+
+.cuentas {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.cuenta {
+    background-color: #f0f0f0;
+    margin: 10px;
+    padding: 20px;
+    border-radius: 8px;
+    width: 200px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.iconos {
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    font-size: 18px;
+}
+
+.iconos i {
+    margin-right: 8px;
+}
+
+
+/*--------------------------*/
+.categorias {
+    width: auto;
+    background-color: #0040b1;
+    padding: 20px;
+}
+
+/*--------------------------*/
+.movimientos {
+    width: auto;
+    background-color: #0040b1;
+    padding: 20px;
+}
