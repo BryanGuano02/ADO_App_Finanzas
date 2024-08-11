@@ -91,7 +91,7 @@
 
     </c:forEach>
 </div>
-
+<%--fd--%>
 <div class="categorias" id="categorias">
     <h1>Categorias</h1>
     <h2>Categorias Ingreso</h2>
