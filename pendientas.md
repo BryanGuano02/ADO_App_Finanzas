@@ -21,6 +21,9 @@ A donde mandar cuando se cancela un registro??
 ACTUALIZAR LO QUE SE MANDA A LA VISTA DE VER CUENTA CUANDO SE FINALIZA UN REGISTRO
 ACTUALIZAR SECUENCIA DE ACTUALIZAR MOVIMIENTO INCLUYENDO LAS LLAMADAS PARA OBTENER CATEGORIAS
 
+Corregir lo de verCuentas
+
+
 # Pendientes en los diagramas
 
 1. Ver Dashboard: completo

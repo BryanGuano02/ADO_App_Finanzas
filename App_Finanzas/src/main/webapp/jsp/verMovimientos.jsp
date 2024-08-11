@@ -48,21 +48,13 @@
         }
     </style>
     <script>
-        function confirmarEliminacion(idMovimiento) {
-            // Mostrar el pop-up
-            document.getElementById('deleteModal').style.display = 'block';
-            // Guardar el ID del movimiento a eliminar
-            document.getElementById('deleteId').value = idMovimiento;
-        }
-
         function cancelarEliminacion() {
             // Ocultar el pop-up sin eliminar
             document.getElementById('deleteModal').style.display = 'none';
         }
 
-        function submitEliminarForm(puedeEliminar) {
-            // Enviar el formulario al servlet para confirmar la eliminación
-            document.getElementById('puedeEliminar').value = puedeEliminar;
+        function submitEliminarForm() {
+            // Enviar el formulario para confirmar la eliminación
             document.getElementById('deleteForm').submit();
         }
     </script>
@@ -98,7 +90,10 @@
                         <input type="hidden" name="id" value="${movimiento.id}">
                         <button type="submit" class="btn btn-update">Actualizar</button>
                     </form>
-                    <button class="btn btn-danger" onclick="confirmarEliminacion('${movimiento.id}')">Eliminar</button>
+                    <form action="ContabilidadController?ruta=eliminarMovimiento" method="POST" style="display:inline;">
+                        <input type="hidden" name="id" value="${movimiento.id}">
+                        <button type="submit" class="btn btn-danger">Eliminar</button>
+                    </form>
                 </td>
             </tr>
         </c:forEach>
@@ -107,7 +102,7 @@
 </div>
 
 <!-- Modal de confirmación -->
-<div id="deleteModal" class="modal">
+<div id="deleteModal" class="modal" style="display: ${idMovimiento != null ? 'block' : 'none'};">
     <div class="modal-content">
         <div class="modal-header">
             ¿Estás seguro de que deseas eliminar este movimiento?
@@ -115,9 +110,9 @@
         <div class="modal-footer">
             <button class="btn btn-cancel" onclick="cancelarEliminacion()">Cancelar</button>
             <form id="deleteForm" action="ContabilidadController?ruta=confirmarEliminacion" method="POST">
-                <input type="hidden" name="id" id="deleteId">
-                <input type="hidden" name="puedeEliminar" id="puedeEliminar">
-                <button type="button" class="btn btn-danger" onclick="submitEliminarForm(true)">Confirmar</button>
+                <input type="hidden" name="id" value="${idMovimiento}">
+                <input type="hidden" name="puedeEliminar" value="true">
+                <button type="button" class="btn btn-danger" onclick="submitEliminarForm()">Confirmar</button>
             </form>
         </div>
     </div>
