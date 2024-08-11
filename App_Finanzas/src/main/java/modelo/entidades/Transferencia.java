@@ -10,7 +10,7 @@ import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
-@DiscriminatorValue("INGRESO")
+@DiscriminatorValue("Transferencia")
 public class Transferencia extends Movimiento implements Serializable {
     private static final long serialVersionUID = 1L;
     @ManyToOne
@@ -20,7 +20,7 @@ public class Transferencia extends Movimiento implements Serializable {
     private Cuenta CuentaOrigen;
 
     @ManyToOne
-    @JoinColumn(name = "Categoria_ID", insertable = false, updatable = false)
+    @JoinColumn(name = "Categoria_ID")
     private CategoriaTransferencia categoria;
 
     public Transferencia() {}
@@ -55,5 +55,10 @@ public class Transferencia extends Movimiento implements Serializable {
 
     public void setCategoria(CategoriaTransferencia categoria) {
         this.categoria = categoria;
+    }
+
+    @Override
+    public String toString() {
+        return "Transferencia";
     }
 }

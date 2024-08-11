@@ -1,9 +1,6 @@
 package modelo.dao;
 
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityManagerFactory;
-import jakarta.persistence.Persistence;
-import jakarta.persistence.TypedQuery;
+import jakarta.persistence.*;
 import modelo.entidades.CategoriaEgreso;
 import modelo.entidades.CategoriaIngreso;
 
@@ -11,7 +8,7 @@ import java.io.Serializable;
 import java.util.List;
 
 
-public class CategoriaIngresoDAO extends CategoriaDAO implements Serializable{
+public class CategoriaIngresoDAO extends CategoriaDAO implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private EntityManagerFactory emf = null;
@@ -70,19 +67,18 @@ public class CategoriaIngresoDAO extends CategoriaDAO implements Serializable{
     }
 
     public CategoriaIngreso obtenerCategoriaPorId(int idCategoria) {
-        CategoriaIngreso categoriasIngreso = null;
+        CategoriaIngreso categoriaIngreso = null;
 
         try {
             em = emf.createEntityManager();
 
             // Consulta para obtener los Movimientos
-            String jpql = "SELECT ci FROM CategoriaIngreso ci WHERE ce.id = :idCategoria ";
+            String jpql = "SELECT ci FROM CategoriaIngreso ci WHERE ci.ID = :idCategoria ";
 
             TypedQuery<CategoriaIngreso> query = em.createQuery(jpql, CategoriaIngreso.class);
             query.setParameter("idCategoria", idCategoria);
 
-            categoriasIngreso = (CategoriaIngreso) query.getResultList();
-
+            categoriaIngreso =  query.getSingleResult();
         } catch (Exception e) {
             e.printStackTrace(); // Manejo básico de excepciones
         } finally {
@@ -94,32 +90,31 @@ public class CategoriaIngresoDAO extends CategoriaDAO implements Serializable{
             }
         }
 
-        return categoriasIngreso;
+        return categoriaIngreso;
     }
 
-    public void actualizarSaldo(CategoriaIngreso categoriaIngreso, double valor) {
-        EntityManager em = emf.createEntityManager();
-
-        try {
-            em = emf.createEntityManager();
-
-            // Consulta para obtener los movimientos entre dos fechas
-            String jpql = "UPDATE CategoriaIngreso ci SET ci.total = ci.total + :valor WHERE ci.id = :idCategoria";
-            TypedQuery query = (TypedQuery) em.createQuery(jpql);
-            query.setParameter("valor", valor); // Asegúrate de que 'valor' esté definido en tu código
-            query.setParameter("idCategoria", categoriaIngreso.getID());
-
-            query.executeUpdate();
-            em.getTransaction().commit();
-        } catch (Exception e) {
-            if (em.getTransaction().isActive()) {
-                em.getTransaction().rollback();
-            }
-            e.printStackTrace();
-        } finally {
-            if (em != null) {
-                em.close();
-            }
-        }
-    }
+//    public void actualizarSaldo(CategoriaIngreso categoriaIngreso, double valor) {
+//
+//        try {
+//            em = emf.createEntityManager();
+//            em.getTransaction().begin();
+//            // Consulta para obtener los movimientos entre dos fechas
+//            String jpql = "UPDATE CategoriaIngreso ci SET WHERE ci.ID = :idCategoria";
+//            Query query = em.createQuery(jpql);
+//            query.setParameter("valor", valor); // Asegúrate de que 'valor' esté definido en tu código
+//            query.setParameter("idCategoria", categoriaIngreso.getID());
+//
+//            query.executeUpdate();
+//            em.getTransaction().commit();
+//        } catch (Exception e) {
+//            if (em.getTransaction().isActive()) {
+//                em.getTransaction().rollback();
+//            }
+//            e.printStackTrace();
+//        } finally {
+//            if (em != null) {
+//                em.close();
+//            }
+//        }
 }
+

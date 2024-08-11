@@ -47,5 +47,12 @@ public class Egreso extends Movimiento implements Serializable {
     public void setCategoria(CategoriaEgreso categoria) {
         Categoria = categoria;
     }
+
+
+
+    @Override
+    public String toString() {
+        return "Egreso";
+    }
 }
 

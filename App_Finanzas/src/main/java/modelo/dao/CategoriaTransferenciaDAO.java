@@ -22,8 +22,6 @@ public class CategoriaTransferenciaDAO {
     public List<CategoriaTransferencia> obtenerTodo() {
         List<CategoriaTransferencia> categoriasTransferencia = null;
         try {
-            em = emf.createEntityManager();
-
             // Consulta para obtener los Movimientos
             String jpql = "SELECT ct FROM CategoriaTransferencia ct";
             TypedQuery<CategoriaTransferencia> query = em.createQuery(jpql, CategoriaTransferencia.class);
@@ -53,7 +51,7 @@ public class CategoriaTransferenciaDAO {
             em = emf.createEntityManager();
 
             // Consulta para obtener los Movimientos
-            String jpql = "SELECT ct FROM CategoriaTransferencia ct WHERE ct.id = :idCategoria ";
+            String jpql = "SELECT ct FROM CategoriaTransferencia ct WHERE ct.ID = :idCategoria ";
 
             TypedQuery<CategoriaTransferencia> query = em.createQuery(jpql, CategoriaTransferencia.class);
             query.setParameter("idCategoria", idCategoria);
@@ -74,6 +72,27 @@ public class CategoriaTransferenciaDAO {
         return categoriasTransferencia;
     }
 
+    public void ingresar(CategoriaTransferencia categoriaTrans) {
+        EntityManager em = null;
+        try {
+            em = emf.createEntityManager();
+            em.getTransaction().begin();  // Inicia la transacción
+
+            em.persist(categoriaTrans); // Persiste la entidad en la base de datos
+
+            em.getTransaction().commit(); // Finaliza la transacción (commit)
+        } catch (Exception e) {
+            if (em != null && em.getTransaction().isActive()) {
+                em.getTransaction().rollback(); // Hace rollback si ocurre una excepción
+            }
+            e.printStackTrace();
+        } finally {
+            if (em != null) {
+                em.close(); // Cierra el EntityManager
+            }
+        }
+    }
+/*
     public void actualizarSaldo(CategoriaTransferencia categoriaTransferencia, double valor) {
         EntityManager em = emf.createEntityManager();
 
@@ -81,7 +100,7 @@ public class CategoriaTransferenciaDAO {
             em = emf.createEntityManager();
 
             // Consulta para obtener los movimientos entre dos fechas
-            String jpql = "UPDATE CategoriaTransferencia ct SET ct.total = ct.total + :valor WHERE ct.id = :idCategoria";
+            String jpql = "UPDATE CategoriaTransferencia ct  WHERE ct.id = :idCategoria";
             TypedQuery query = (TypedQuery) em.createQuery(jpql);
             query.setParameter("valor", valor); // Asegúrate de que 'valor' esté definido en tu código
             query.setParameter("idCategoria", categoriaTransferencia.getID());
@@ -97,5 +116,5 @@ public class CategoriaTransferenciaDAO {
                 em.close();
             }
         }
-    }
+    }*/
 }

@@ -21,7 +21,6 @@ public class Categoria implements Serializable {
 
 
     private String nombre;
-    private Double total;
 
 
     public Categoria() {
@@ -31,15 +30,6 @@ public class Categoria implements Serializable {
     public Categoria(String nombre, Integer ID) {
         this.ID = ID;
         this.nombre = nombre;
-    }
-
-
-    public Double getValue() {
-        return total;
-    }
-
-    public void setValue(Double total) {
-        this.total = total;
     }
 
     public String getNombre() {

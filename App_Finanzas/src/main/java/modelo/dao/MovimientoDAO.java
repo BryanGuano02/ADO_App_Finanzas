@@ -51,10 +51,15 @@ public class MovimientoDAO implements Serializable {
                 if (movimiento instanceof Ingreso) {
                     Ingreso ingreso = (Ingreso) movimiento;
                     cuentaOrigen = ingreso.getCategoria().getNombre();
-                    System.out.println(cuentaDestino);
                     cuentaDestino = ingreso.getCuentaDestino().getNombre();
-
                 }
+
+                if (movimiento instanceof Transferencia) {
+                    Transferencia transferencia  = (Transferencia) movimiento;
+                    cuentaOrigen = transferencia.getCuentaOrigen().getNombre();
+                    cuentaDestino = transferencia.getCuentaDestino().getNombre();
+                }
+
 
 
                 MovimientoDTO dto = new MovimientoDTO(
@@ -163,6 +168,63 @@ public class MovimientoDAO implements Serializable {
         }
         return respuesta;
     }
+
+    public Movimiento obtenerMovimientoPorIdMovimiento1(int idMovimiento) {
+        EntityManager em = null;
+        Movimiento movimiento = null;
+
+        try {
+            em = emf.createEntityManager();
+
+            // Consulta para obtener el movimiento por id
+            String jpql = "SELECT m FROM Movimiento m WHERE m.Id = :idMovimiento";
+            TypedQuery<Movimiento> query = em.createQuery(jpql, Movimiento.class);
+            query.setParameter("idMovimiento", idMovimiento);
+
+            // Como esperamos un único resultado, usamos getSingleResult
+            movimiento = query.getSingleResult();
+
+        } catch (Exception e) {
+            e.printStackTrace(); // Manejo básico de excepciones
+        } finally {
+            if (em != null && em.isOpen()) {
+                em.close();
+            }
+            if (emf != null && emf.isOpen()) {
+                emf.close();
+            }
+        }
+
+        return movimiento;
+    }
+
+
+    public void actualizarMovimiento(Movimiento movimiento) {
+        EntityManager em = null;
+
+        try {
+            em = emf.createEntityManager();
+            em.getTransaction().begin();
+
+            // Actualizar el movimiento en la base de datos
+            em.merge(movimiento);
+
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            if (em != null && em.getTransaction().isActive()) {
+                em.getTransaction().rollback(); // Deshacer los cambios en caso de error
+            }
+            e.printStackTrace(); // Manejo básico de excepciones
+        } finally {
+            if (em != null && em.isOpen()) {
+                em.close();
+            }
+            if (emf != null && emf.isOpen()) {
+                emf.close();
+            }
+        }
+    }
+
 }
 
 /*

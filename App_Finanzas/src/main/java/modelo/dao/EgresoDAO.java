@@ -17,6 +17,7 @@ public class EgresoDAO implements Serializable {
 
     public void guardarEgreso(Egreso egreso) {
         EntityManager em = emf.createEntityManager();
+
         try {
             em.getTransaction().begin();
             em.persist(egreso);

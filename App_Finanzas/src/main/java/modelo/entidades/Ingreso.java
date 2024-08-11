@@ -45,4 +45,9 @@ public class Ingreso extends Movimiento implements Serializable {
     public void setCategoria(CategoriaIngreso categoria) {
         this.categoria = categoria;
     }
+
+    @Override
+    public String toString() {
+        return "Ingreso";
+    }
 }

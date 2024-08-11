@@ -1,9 +1,6 @@
 package modelo.dao;
 
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityManagerFactory;
-import jakarta.persistence.Persistence;
-import jakarta.persistence.TypedQuery;
+import jakarta.persistence.*;
 import modelo.entidades.Cuenta;
 import modelo.entidades.Movimiento;
 
@@ -13,7 +10,8 @@ import java.util.List;
 public class CuentaDAO implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    private EntityManagerFactory emf;
+    private EntityManagerFactory emf = null;
+    private EntityManager em = null;
 
     public CuentaDAO() {
         emf = Persistence.createEntityManagerFactory("chaucherita_PU");
@@ -61,18 +59,16 @@ public class CuentaDAO implements Serializable {
     }
 
     public void actualizarSaldo(Cuenta cuenta, double valor) {
-        EntityManager em = emf.createEntityManager();
-
         try {
             em = emf.createEntityManager();
-
+            em.getTransaction().begin();
             // Consulta para obtener los movimientos entre dos fechas
             String jpql = "UPDATE Cuenta c SET c.total = c.total + :valor WHERE c.id = :idCuenta";
-            TypedQuery query = (TypedQuery) em.createQuery(jpql);
+            Query query = em.createQuery(jpql);
             query.setParameter("valor", valor); // Asegúrate de que 'valor' esté definido en tu código
             query.setParameter("idCuenta", cuenta.getId());
 
-            query.executeUpdate();
+            int rowsUpdated = query.executeUpdate();
             em.getTransaction().commit();
         } catch (Exception e) {
             if (em.getTransaction().isActive()) {

@@ -65,9 +65,12 @@
 
 
             <!-- Transferencia -->
-            <div class="iconos">
-                <i class="fas fa-exchange-alt"></i> Transferencia
-            </div>
+            <form action="ContabilidadController?ruta=registrarTransferencia" method="POST" style="display:inline;">
+                <input type="hidden" name="idCuenta" value="${cuenta.id}">
+                <button type="submit" class="iconos">
+                    <i class="fas fa-arrow-up"></i> Transferencia
+                </button>
+            </form>
 
             <!-- Movimiento -->
             <div class="iconos">
@@ -85,6 +88,35 @@
 </div>
 
 <div class="movimientos">
+
+    <div class="container">
+        <h1>Movimientos</h1>
+
+        <table>
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Fecha</th>
+                <th>Concepto</th>
+                <th>Valor</th>
+                <th>Cuenta Origen</th>
+                <th>Cuenta Destino</th>
+            </tr>
+            </thead>
+            <tbody>
+            <c:forEach var="movimiento" items="${movimientos}">
+                <tr>
+                    <td>${movimiento.id != null ? movimiento.id : 'N/A'}</td>
+                    <td>${movimiento.fecha != null ? movimiento.fecha : 'N/A'}</td>
+                    <td>${movimiento.concepto != null ? movimiento.concepto : 'N/A'}</td>
+                    <td>${movimiento.valor != null ? movimiento.valor : 'N/A'}</td>
+                    <td>${movimiento.cuentaOrigen != null ? movimiento.cuentaOrigen : 'N/A'}</td>
+                    <td>${movimiento.cuentaDestino != null ? movimiento.cuentaDestino : 'N/A'}</td>
+                </tr>
+            </c:forEach>
+            </tbody>
+        </table>
+    </div>
 
 </div>
 

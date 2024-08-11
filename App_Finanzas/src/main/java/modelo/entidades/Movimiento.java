@@ -63,4 +63,5 @@ public class Movimiento implements Serializable {
     public void setValor(double valor) {
         Valor = valor;
     }
+
 }

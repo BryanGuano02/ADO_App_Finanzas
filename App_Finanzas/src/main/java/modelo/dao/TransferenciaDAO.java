@@ -5,28 +5,21 @@ import modelo.entidades.Cuenta;
 import modelo.entidades.Egreso;
 import modelo.entidades.Transferencia;
 
-public class TransferenciaDAO extends CuentaDAO {
-    @OneToOne
-    @JoinColumn(name = "cuenta_origen_id")
-    private Cuenta cuentaOrigen;
+import java.io.Serializable;
 
-    @ManyToOne
-    @JoinColumn(name = "cuenta_destino_id")
-    private Cuenta cuentaDestino;
-
+public class TransferenciaDAO implements Serializable {
     private static final long serialVersionUID = 1L;
-    private EntityManagerFactory emf;
+    private EntityManagerFactory emf = null;
+    private EntityManager em = null;
 
-    public Cuenta getCuentaOrigen() {
-        return cuentaOrigen;
-    }
-
-    public Cuenta getCuentaDestino() {
-        return cuentaDestino;
+    public TransferenciaDAO() {
+        emf = Persistence.createEntityManagerFactory("chaucherita_PU");
+        em = emf.createEntityManager();
     }
 
     public void guardarTransferencia(Transferencia transferencia) {
         EntityManager em = emf.createEntityManager();
+
         try {
             em.getTransaction().begin();
             em.persist(transferencia);

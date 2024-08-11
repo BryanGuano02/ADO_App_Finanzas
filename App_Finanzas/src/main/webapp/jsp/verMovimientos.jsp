@@ -7,57 +7,65 @@
     <meta charset="UTF-8">
     <title>Ver Movimientos</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            color: #333;
-            margin: 0;
+        /* Estilos existentes aquí */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto;
             padding: 20px;
-        }
-
-        h1 {
+            border: 1px solid #888;
+            width: 30%;
             text-align: center;
-            color: #007BFF;
         }
 
-        table {
-            width: 80%;
-            margin: 20px auto;
-            border-collapse: collapse;
-            background-color: #fff;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        .modal-header {
+            font-size: 18px;
+            margin-bottom: 20px;
         }
 
-        th, td {
-            padding: 12px;
-            text-align: left;
-            border-bottom: 1px solid #ddd;
+        .modal-footer {
+            display: flex;
+            justify-content: space-around;
         }
 
-        th {
-            background-color: #007BFF;
-            color: #fff;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
+        .btn-cancel {
+            background-color: grey;
         }
 
-        tr:nth-child(even) {
-            background-color: #f9f9f9;
-        }
-
-        tr:hover {
-            background-color: #f1f1f1;
-        }
-
-        td {
-            font-size: 14px;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: auto;
+        .btn-cancel:hover {
+            background-color: darkgrey;
         }
     </style>
+    <script>
+        function confirmarEliminacion(idMovimiento) {
+            // Mostrar el pop-up
+            document.getElementById('deleteModal').style.display = 'block';
+            // Guardar el ID del movimiento a eliminar
+            document.getElementById('deleteId').value = idMovimiento;
+        }
+
+        function cancelarEliminacion() {
+            // Ocultar el pop-up sin eliminar
+            document.getElementById('deleteModal').style.display = 'none';
+        }
+
+        function submitEliminarForm(puedeEliminar) {
+            // Enviar el formulario al servlet para confirmar la eliminación
+            document.getElementById('puedeEliminar').value = puedeEliminar;
+            document.getElementById('deleteForm').submit();
+        }
+    </script>
 </head>
 <body>
 
@@ -73,6 +81,7 @@
             <th>Valor</th>
             <th>Cuenta Origen</th>
             <th>Cuenta Destino</th>
+            <th>Acciones</th>
         </tr>
         </thead>
         <tbody>
@@ -84,10 +93,34 @@
                 <td>${movimiento.valor != null ? movimiento.valor : 'N/A'}</td>
                 <td>${movimiento.cuentaOrigen != null ? movimiento.cuentaOrigen : 'N/A'}</td>
                 <td>${movimiento.cuentaDestino != null ? movimiento.cuentaDestino : 'N/A'}</td>
+                <td class="btn-group">
+                    <form name="actualizar" action="ContabilidadController?ruta=actualizarMovimiento" method="POST">
+                        <input type="hidden" name="id" value="${movimiento.id}">
+                        <button type="submit" class="btn btn-update">Actualizar</button>
+                    </form>
+                    <button class="btn btn-danger" onclick="confirmarEliminacion('${movimiento.id}')">Eliminar</button>
+                </td>
             </tr>
         </c:forEach>
         </tbody>
     </table>
+</div>
+
+<!-- Modal de confirmación -->
+<div id="deleteModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            ¿Estás seguro de que deseas eliminar este movimiento?
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-cancel" onclick="cancelarEliminacion()">Cancelar</button>
+            <form id="deleteForm" action="ContabilidadController?ruta=confirmarEliminacion" method="POST">
+                <input type="hidden" name="id" id="deleteId">
+                <input type="hidden" name="puedeEliminar" id="puedeEliminar">
+                <button type="button" class="btn btn-danger" onclick="submitEliminarForm(true)">Confirmar</button>
+            </form>
+        </div>
+    </div>
 </div>
 
 </body>
