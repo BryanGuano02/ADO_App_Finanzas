@@ -8,9 +8,10 @@
 </head>
 <body>
 <h1> ${cuenta.nombre}</h1>
-
-<p>${cuenta.nombre}</p>
 <p>${cuenta.total}</p>
+
+<a href="ContabilidadController?ruta=verDashboard">Volver al dashboard</a>
+
 <table>
     <thead>
     <tr>

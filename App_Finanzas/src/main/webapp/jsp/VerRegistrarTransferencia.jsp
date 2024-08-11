@@ -8,6 +8,8 @@
 <h1>Registro de Transferencia</h1>
 <h3>${cuentaOrigen.nombre}</h3>
 
+<a href="ContabilidadController?ruta=verDashboard">Volver al dashboard</a>
+
 <!-- Formulario para ingresar la información de la transferencia -->
 <form action="ContabilidadController?ruta=ingresarInfoTransferencia" method="post">
     <label for="concepto">Concepto:</label><br>
@@ -28,7 +30,7 @@
         </c:forEach>
     </select>
 
-    <label >Categoría del gasto:</label><br>
+    <label >Categoría del egreso:</label><br>
         <!-- Mostrar las opciones dinámicamente -->
         <c:forEach var="categoria" items="${categoriasTransferencia}">
             <label value="${categoria.ID}">${categoria.nombre}</label><br>

@@ -48,8 +48,6 @@
 
 <div class="cuentas" id="cuentas">
     <c:forEach items="${cuentas}" var="cuenta">
-
-
         <div class="cuenta">
             <form action="ContabilidadController?ruta=verCuenta" method="post">
                 <input type="hidden" name="idCuenta" value="${cuenta.id}">
@@ -65,7 +63,7 @@
             </form>
 
             <!-- Egreso -->
-            <form action="ContabilidadController?ruta=registrarGasto" method="POST" style="display:inline;">
+            <form action="ContabilidadController?ruta=registrarEgreso" method="POST" style="display:inline;">
                 <input type="hidden" name="idCuenta" value="${cuenta.id}">
                 <button type="submit" class="iconos">
                     <i class="fas fa-arrow-up"></i> Egreso
@@ -91,29 +89,30 @@
 
     </c:forEach>
 </div>
-<%--fd--%>
+
 <div class="categorias" id="categorias">
     <h1>Categorias</h1>
     <h2>Categorias Ingreso</h2>
+
     <c:forEach items="${categoriasIngreso}" var="categoriaIngreso">
+
         <form action="ContabilidadController?ruta=verCategoria" method="post">
-            <input type="hidden" name="idCategoriaIngreso" value="${categoriaIngreso.ID}">
-            <div class="categoriaIngreso" onclick="this.closest('form').submit()">
-                <h1 class="categoriaNombre">${categoriaIngreso.nombre}</h1>
-                    <%--            <h1 class="nombre_cuenta">${categoriaIngreso.total}</h1>--%>
-            </div>
+            <input type="hidden" name="idCategoria" value="${categoriaIngreso.ID}">
+            <h1 class="categoriaIngreso" onclick="this.closest('form').submit()">${categoriaIngreso.nombre}</h1>
+<%--            <h1 class="categoriaIngreso" onclick="this.closest('form').submit()">${cuenta.total}</h1>--%>
         </form>
+
+
+
     </c:forEach>
 
 
     <h2>Categorias Egreso</h2>
     <c:forEach items="${categoriasEgreso}" var="categoriaEgreso">
         <form action="ContabilidadController?ruta=verCategoria" method="post">
-            <input type="hidden" name="idCategoriaEgreso" value="${categoriaEgreso.ID}">
-            <div class="categoriaEgreso" onclick="this.closest('form').submit()">
-                <h1 class="categoriaNombre">${categoriaEgreso.nombre}</h1>
-                    <%--            <h1 class="nombre_cuenta">${categoriaEgreso.total}</h1>--%>
-            </div>
+            <input type="hidden" name="idCategoria" value="${categoriaIngreso.ID}">
+            <h1 class="categoriaEgreso" onclick="this.closest('form').submit()">${categoriaEgreso.nombre}</h1>
+                <%--            <h1 class="categoriaIngreso" onclick="this.closest('form').submit()">${cuenta.total}</h1>--%>
         </form>
     </c:forEach>
 </div>

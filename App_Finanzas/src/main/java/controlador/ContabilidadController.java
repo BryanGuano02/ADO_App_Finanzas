@@ -5,8 +5,6 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.mysql.cj.x.protobuf.MysqlxCrud;
-import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -51,11 +49,11 @@ public class ContabilidadController extends HttpServlet {
             case "verMovimientos":
                 this.verMovimientos(req, resp);
                 break;
-            case "registrarGasto":
-                this.registrarGasto(req, resp);
+            case "registrarEgreso":
+                this.registrarEgreso(req, resp);
                 break;
-            case "ingresarInfoGasto":
-                this.ingresarInfoGasto(req, resp);
+            case "ingresarInfoEgreso":
+                this.ingresarInfoEgreso(req, resp);
                 break;
             case "verCategoria":
                 verCategoria(req, resp);
@@ -222,12 +220,14 @@ public class ContabilidadController extends HttpServlet {
         req.setAttribute("movimientos", movimientos);
 
         // Llamar a la vista para mostrar los movimientos
-        req.getRequestDispatcher("jsp/verMovimientos.jsp").forward(req, resp);
+        req.getRequestDispatcher("jsp/VerMovimientos.jsp").forward(req, resp);
     }
 
     private void verCategoria(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        /*int idCategoria = Integer.parseInt(req.getParameter("idCategoria"));
+        int idCategoria = Integer.parseInt(req.getParameter("idCategoria"));
 
+//        TODO: Las categorías deben tener identificadores por CATEGORÍA padre
+//        no por cada hijo
         CategoriaDAO categoriaDao = new CategoriaDAO();
         Categoria categoria = categoriaDao.obtenerCategoriaPorId(idCategoria);
 
@@ -238,7 +238,7 @@ public class ContabilidadController extends HttpServlet {
         req.setAttribute("movimientos", movimientos);
 
         // Llamar a la vista para mostrar la categoría y sus movimientos
-        req.getRequestDispatcher("jsp/VerCategoria.jsp").forward(req, resp);*/
+        req.getRequestDispatcher("jsp/VerCategoria.jsp").forward(req, resp);
     }
 
     /*
@@ -441,7 +441,7 @@ public class ContabilidadController extends HttpServlet {
     }
 
 
-    private void registrarGasto(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    private void registrarEgreso(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 //        1.
         int idCuenta = Integer.parseInt(req.getParameter("idCuenta"));
 
@@ -457,11 +457,11 @@ public class ContabilidadController extends HttpServlet {
         actualizarIdCuenta(req, cuenta);
 
 //        3.
-        req.getRequestDispatcher("jsp/VerRegistrarGasto.jsp").forward(req, resp);
+        req.getRequestDispatcher("jsp/VerRegistrarEgreso.jsp").forward(req, resp);
     }
 
 
-    private void ingresarInfoGasto(HttpServletRequest req, HttpServletResponse resp)
+    private void ingresarInfoEgreso(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
 //        1.
         HttpSession session = req.getSession();
@@ -617,6 +617,12 @@ public class ContabilidadController extends HttpServlet {
 
 //        3.
         resp.sendRedirect("ContabilidadController?ruta=verDashboard");
+    }
+
+    private void cancelar(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+        resp.sendRedirect("ContabilidadController?ruta=registrarEgreso");
+
     }
 
     private void actualizarIdCuenta(HttpServletRequest req, Cuenta nuevaCuenta) {

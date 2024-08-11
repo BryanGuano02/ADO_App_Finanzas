@@ -142,7 +142,6 @@ public class MovimientoDAO implements Serializable {
     }
 
 
-
     public void eliminarMovimiento(Integer idMovimiento) {
         EntityManager em = null;
         System.out.println("si entra a eliminar movimiento ");
@@ -224,6 +223,71 @@ public class MovimientoDAO implements Serializable {
         }
     }
 
+    public List<MovimientoDTO> obtenerMovimientosPorIdCategoria(int idCategoria) {
+        List<MovimientoDTO> movimientosDTO = new ArrayList<>();
+
+        try {
+            em = emf.createEntityManager();
+
+            // Consulta para obtener los movimientos por categoría
+            //todo: Arreglar este jpql y hay otro jpql por arreglar
+            String jpql = "SELECT m FROM Movimiento m WHERE m.Id = :idCategoria";
+
+            TypedQuery<Movimiento> query = em.createQuery(jpql, Movimiento.class);
+            query.setParameter("idCategoria", idCategoria);
+
+            List<Movimiento> movimientos = query.getResultList();
+
+            // Convertir cada Movimiento a MovimientoDTO
+            for (Movimiento movimiento : movimientos) {
+                String cuentaOrigen = "null";
+                String cuentaDestino = "null";
+
+                if (movimiento instanceof Egreso) {
+                    Egreso egreso = (Egreso) movimiento;
+                    cuentaDestino = egreso.getCategoria().getNombre();
+                    cuentaOrigen = egreso.getCuentaOrigen().getNombre();
+                }
+
+                if (movimiento instanceof Ingreso) {
+                    Ingreso ingreso = (Ingreso) movimiento;
+                    cuentaOrigen = ingreso.getCategoria().getNombre();
+                    cuentaDestino = ingreso.getCuentaDestino().getNombre();
+                }
+
+                if (movimiento instanceof Transferencia) {
+                    Transferencia transferencia = (Transferencia) movimiento;
+                    cuentaOrigen = transferencia.getCuentaOrigen().getNombre();
+                    cuentaDestino = transferencia.getCuentaDestino().getNombre();
+                }
+
+
+                MovimientoDTO dto = new MovimientoDTO(
+                        movimiento.getId().toString(),
+                        java.sql.Date.valueOf(movimiento.getFecha()),
+                        movimiento.getConcepto(),
+                        movimiento.getValor(),
+                        cuentaOrigen,
+                        cuentaDestino
+                );
+                movimientosDTO.add(dto);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace(); // Manejo básico de excepciones
+        } finally {
+            if (em != null && em.isOpen()) {
+                em.close();
+            }
+            if (emf != null && emf.isOpen()) {
+                emf.close();
+            }
+        }
+
+        return movimientosDTO;
+//        return null;
+    }
+
   /*  public List<MovimientoDTO> obtenerMovimientosPorIdCuenta(int idCuenta) {
         List<MovimientoDTO> movimientosDTO = new ArrayList<>();
 
@@ -285,72 +349,7 @@ public class MovimientoDAO implements Serializable {
     }
 
 
-    public List<MovimientoDTO> obtenerMovimientosPorIdCategoria(int idCategoria) {
-        List<MovimientoDTO> movimientosDTO = new ArrayList<>();
 
-        try {
-            em = emf.createEntityManager();
-
-            // Consulta para obtener los movimientos por categoría
-            //todo: Arreglar este jpql y hay otro jpql por arreglar
-            String jpql = "SELECT m FROM Movimiento m WHERE m.idCategoria.ID = :idCategoria";
-
-
-
-            TypedQuery<Movimiento> query = em.createQuery(jpql, Movimiento.class);
-            query.setParameter("idCategoria", idCategoria);
-
-            List<Movimiento> movimientos = query.getResultList();
-
-            // Convertir cada Movimiento a MovimientoDTO
-            for (Movimiento movimiento : movimientos) {
-                String cuentaOrigen = "null";
-                String cuentaDestino = "null";
-
-                if (movimiento instanceof Egreso) {
-                    Egreso egreso = (Egreso) movimiento;
-                    cuentaDestino = egreso.getCategoria().getNombre();
-                    cuentaOrigen = egreso.getCuentaOrigen().getNombre();
-                }
-
-                if (movimiento instanceof Ingreso) {
-                    Ingreso ingreso = (Ingreso) movimiento;
-                    cuentaOrigen = ingreso.getCategoria().getNombre();
-                    cuentaDestino = ingreso.getCuentaDestino().getNombre();
-                }
-
-                if (movimiento instanceof Transferencia) {
-                    Transferencia transferencia = (Transferencia) movimiento;
-                    cuentaOrigen = transferencia.getCuentaOrigen().getNombre();
-                    cuentaDestino = transferencia.getCuentaDestino().getNombre();
-                }
-
-
-                MovimientoDTO dto = new MovimientoDTO(
-                        movimiento.getId().toString(),
-                        java.sql.Date.valueOf(movimiento.getFecha()),
-                        movimiento.getConcepto(),
-                        movimiento.getValor(),
-                        cuentaOrigen,
-                        cuentaDestino
-                );
-                movimientosDTO.add(dto);
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace(); // Manejo básico de excepciones
-        } finally {
-            if (em != null && em.isOpen()) {
-                em.close();
-            }
-            if (emf != null && emf.isOpen()) {
-                emf.close();
-            }
-        }
-
-        return movimientosDTO;
-//        return null;
-    }
 */
 }
 

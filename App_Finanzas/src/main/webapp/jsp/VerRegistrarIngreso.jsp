@@ -8,6 +8,8 @@
 <h1>Registro de Movimiento de Ingreso</h1>
 <h3>${cuenta.nombre}</h3>
 
+<a href="ContabilidadController?ruta=verDashboard">Volver al dashboard</a>
+
 <form action="ContabilidadController?ruta=ingresarInfoIngreso" method="post">
   <div>
     <label for="concepto">Concepto:</label>
