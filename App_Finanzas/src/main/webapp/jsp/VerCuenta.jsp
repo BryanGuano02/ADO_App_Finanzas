@@ -9,6 +9,8 @@
 <body>
 <h1> ${cuenta.nombre}</h1>
 
+<p>${cuenta.nombre}</p>
+<p>${cuenta.total}</p>
 <table>
     <thead>
     <tr>

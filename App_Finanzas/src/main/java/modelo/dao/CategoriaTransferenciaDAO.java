@@ -45,7 +45,7 @@ public class CategoriaTransferenciaDAO {
     }
 
     public CategoriaTransferencia obtenerCategoriaPorId(int idCategoria) {
-        CategoriaTransferencia categoriasTransferencia = null;
+        CategoriaTransferencia categoriaTransferencia = null;
 
         try {
             em = emf.createEntityManager();
@@ -56,7 +56,7 @@ public class CategoriaTransferenciaDAO {
             TypedQuery<CategoriaTransferencia> query = em.createQuery(jpql, CategoriaTransferencia.class);
             query.setParameter("idCategoria", idCategoria);
 
-            categoriasTransferencia = (CategoriaTransferencia) query.getResultList();
+            categoriaTransferencia =  query.getSingleResult();
 
         } catch (Exception e) {
             e.printStackTrace(); // Manejo básico de excepciones
@@ -69,7 +69,7 @@ public class CategoriaTransferenciaDAO {
             }
         }
 
-        return categoriasTransferencia;
+        return categoriaTransferencia;
     }
 
     public void ingresar(CategoriaTransferencia categoriaTrans) {

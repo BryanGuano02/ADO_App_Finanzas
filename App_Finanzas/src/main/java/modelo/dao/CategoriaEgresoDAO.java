@@ -4,8 +4,7 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 import jakarta.persistence.TypedQuery;
-import modelo.dto.CategoriaEgresoDTO;
-import modelo.dto.MovimientoDTO;
+
 import modelo.entidades.CategoriaEgreso;
 import modelo.entidades.CategoriaIngreso;
 import modelo.entidades.Cuenta;

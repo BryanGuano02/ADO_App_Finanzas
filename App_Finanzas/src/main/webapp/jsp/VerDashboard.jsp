@@ -32,8 +32,8 @@
                 <label for="fechaRango"> <i class="fas fa-calendar-alt calendar-icon" id="openCalendar"></i></label>
                 <input type="text" id="fechaRango" name="fechaRango" placeholder="Selecciona el rango de fechas">
 
-                <input type="hidden" id="fechaInicio" name="fechaInicio">
-                <input type="hidden" id="fechaFin" name="fechaFin">
+                <input type="hidden" id="desde" name="desde">
+                <input type="hidden" id="hasta" name="hasta">
 
                 <button type="submit">Filtrar</button>
             </form>
@@ -83,8 +83,29 @@
 
 </div>
 
-<div class="categorias">
 
+<div class="categorias" id="categorias">
+    <h1>Categorias</h1>
+    <h2>Categorias Ingreso</h2>
+    <c:forEach items="${categoriasIngreso}" var="categoriaIngreso">
+        <form action="ContabilidadController?ruta=verCategoria" method="post">
+            <input type="hidden" name="idCategoriaIngreso" value="${categoriaIngreso.ID}">
+            <div class="categoriaIngreso" onclick="this.closest('form').submit()">
+                <h1 class="categoriaNombre">${categoriaIngreso.nombre}</h1>
+                    <%--            <h1 class="nombre_cuenta">${categoriaIngreso.total}</h1>--%>
+            </div>
+        </form>
+    </c:forEach>
+
+
+
+    <h2>Categorias Egreso</h2>
+    <c:forEach items="${categoriasEgreso}" var="categoriaEgreso">
+        <div class="categoriaEgreso">
+            <h1 class="nombre_cuenta">${categoriaEgreso.nombre}</h1>
+                <%--            <h1 class="nombre_cuenta">${categoriaEgreso.total}</h1>--%>
+        </div>
+    </c:forEach>
 </div>
 
 <div class="movimientos">
@@ -126,10 +147,10 @@
     flatpickr("#fechaRango", {
         mode: "range",
         dateFormat: "Y-m-d",
-        onChange: function(selectedDates, dateStr, instance) {
+        onChange: function (selectedDates, dateStr, instance) {
             if (selectedDates.length === 2) {
-                document.getElementById("fechaInicio").value = instance.formatDate(selectedDates[0], "Y-m-d");
-                document.getElementById("fechaFin").value = instance.formatDate(selectedDates[1], "Y-m-d");
+                document.getElementById("desde").value = instance.formatDate(selectedDates[0], "Y-m-d");
+                document.getElementById("hasta").value = instance.formatDate(selectedDates[1], "Y-m-d");
             }
         }
     });

@@ -89,12 +89,24 @@ public class ContabilidadController extends HttpServlet {
 
     private void filtrarPorFechas(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-        LocalDate fechaInicio = LocalDate.parse(req.getParameter("fechaInicio"));
-        LocalDate fechaActual = LocalDate.parse(req.getParameter("fechaFin"));
+        String desdeStr = req.getParameter("desde");
+        String hastaStr = req.getParameter("hasta");
+
+        LocalDate desde = null;
+        LocalDate hasta = null;
+
+        // Solo intenta parsear si los parámetros no son null
+        if (desdeStr != null && !desdeStr.isEmpty()) {
+            desde = LocalDate.parse(desdeStr);
+        }
+
+        if (hastaStr != null && !hastaStr.isEmpty()) {
+            hasta = LocalDate.parse(hastaStr);
+        }
 
         HttpSession session = req.getSession();
-        session.setAttribute("fechaInicio", fechaInicio);
-        session.setAttribute("fechaActual", fechaActual);
+        session.setAttribute("desde", desde);
+        session.setAttribute("hasta", hasta);
 
         resp.sendRedirect("ContabilidadController?ruta=verDashboard");
     }
@@ -103,31 +115,37 @@ public class ContabilidadController extends HttpServlet {
 //        1. Obtener parámetros
         HttpSession session = req.getSession();
 
-        LocalDate fechaInicio = null;
-        LocalDate fechaActual = null;
+        LocalDate desde = (LocalDate) session.getAttribute("desde");
+        LocalDate hasta = (LocalDate) session.getAttribute("hasta");
 
-        if (session.getAttribute("fechaInicio") == null && session.getAttribute("fechaActual") == null) {
-            fechaInicio = LocalDate.now().withDayOfMonth(1);
-            fechaActual = LocalDate.now().plusDays(1);
+        if (desde == null && hasta == null) {
+            desde = LocalDate.now().withDayOfMonth(1);
+            hasta = LocalDate.now().plusDays(1);
 
-            session.setAttribute("fechaInicio", fechaInicio);
-            session.setAttribute("fechaActual", fechaActual);
+            session.setAttribute("desde", desde);
+            session.setAttribute("hasta", hasta);
         }
+
+        System.out.println("Después Fecha inicio: " + desde + " Fecha final: " + hasta);
 
 //        2. Hablar con el modelo
         CuentaDAO cuentaDAO = new CuentaDAO();
         List<Cuenta> cuentas = cuentaDAO.obtenerTodo(); //TODO: El saldo de la cuenta es también en base a las fechas
 
-     //   CategoriaEgresoDAO categoriaEgresoDAO = new CategoriaEgresoDAO();
-       // List<CategoriaEgreso> categoriasEgreso = categoriaEgresoDAO.obtenerTodo();
+        CategoriaIngresoDAO categoriaIngresoDAO = new CategoriaIngresoDAO();
+        List<CategoriaIngreso> categoriasIngreso = categoriaIngresoDAO.obtenerTodo();
 
-        req.setAttribute("cuentas", cuentas);
-      //  req.setAttribute("categoriasEgreso", categoriasEgreso);
+        CategoriaEgresoDAO categoriaEgresoDAO = new CategoriaEgresoDAO();
+        List<CategoriaEgreso> categoriasEgreso = categoriaEgresoDAO.obtenerTodo();
 
         MovimientoDAO movimientoDAO = new MovimientoDAO();
-        List<MovimientoDTO> movimientos = movimientoDAO.obtenerTodo(fechaInicio,fechaActual);
+        List<MovimientoDTO> movimientos = movimientoDAO.obtenerTodo(desde, hasta);
 
+        req.setAttribute("cuentas", cuentas);
+        req.setAttribute("categoriasIngreso", categoriasIngreso);
+        req.setAttribute("categoriasEgreso", categoriasEgreso);
         req.setAttribute("movimientos", movimientos);
+
 /*         CategoriaIngreso categoria = new CategoriaIngreso("CHAUCHAS PEQUEÑAS", 1);
          CategoriaIngresoDAO categoriaIngresoDAO = new CategoriaIngresoDAO();
          categoriaIngresoDAO.ingresar(categoria);
@@ -149,9 +167,6 @@ public class ContabilidadController extends HttpServlet {
         TransferenciaDAO transDAO = new TransferenciaDAO();
         transDAO.guardarTransferencia(trans);*/
 
-        //req.setAttribute("ingresos", ingresos);
-        //TODO: Mandar los parámetros restantes  de mostrar()
-        //		llamar a la vista - mostrar()
         req.getRequestDispatcher("jsp/VerDashboard.jsp").forward(req, resp);
     }
 
@@ -164,10 +179,10 @@ public class ContabilidadController extends HttpServlet {
         Cuenta cuenta = cuentaDAO.obtenerCuentaPorId(idCuenta);
 
         MovimientoDAO movimientoDao = new MovimientoDAO();
-        //List<MovimientoDTO> movimientos = movimientoDao.obtenerMovimientosPorIdCuenta(idCuenta);
+        List<MovimientoDTO> movimientos = movimientoDao.obtenerMovimientosPorIdCuenta(idCuenta);
 
         req.setAttribute("cuenta", cuenta);
-        //req.setAttribute("movimientos", movimientos);
+        req.setAttribute("movimientos", movimientos);
 
 //        3.
         req.getRequestDispatcher("jsp/VerCuenta.jsp").forward(req, resp);
@@ -179,16 +194,16 @@ public class ContabilidadController extends HttpServlet {
         HttpSession session = req.getSession();
 
         // Obtener las fechas desde la solicitud
-        LocalDate desde = (LocalDate) session.getAttribute("fechaInicio");
-        LocalDate hasta = (LocalDate) session.getAttribute("fechaActual");
+        LocalDate desde = (LocalDate) session.getAttribute("desde");
+        LocalDate hasta = (LocalDate) session.getAttribute("hasta");
 
         // Verificar si alguna de las fechas es nula y establecer valores predeterminados si es necesario
         if (desde == null && hasta == null) {
             desde = LocalDate.now().withDayOfMonth(1);
-            session.setAttribute("fechaInicio", desde);
+            session.setAttribute("desde", desde);
 
             hasta = LocalDate.now().plusDays(1);
-            session.setAttribute("fechaActual", hasta);
+            session.setAttribute("hasta", hasta);
         }
 
         MovimientoDAO movimientoDAO = new MovimientoDAO();
@@ -209,7 +224,7 @@ public class ContabilidadController extends HttpServlet {
         Categoria categoria = categoriaDao.obtenerCategoriaPorId(idCategoria);
 
         MovimientoDAO movimientoDao = new MovimientoDAO();
-//        List<MovimientoDTO> movimientos = movimientoDao.obtenerMovimientosPorIdCategoria(idCategoria);
+        List<MovimientoDTO> movimientos = movimientoDao.obtenerMovimientosPorIdCategoria(idCategoria);
 
         req.setAttribute("categoria", categoria);
 //        req.setAttribute("movimientos", movimientos);
@@ -217,29 +232,30 @@ public class ContabilidadController extends HttpServlet {
         // Llamar a la vista para mostrar la categoría y sus movimientos
         req.getRequestDispatcher("jsp/VerCategoria.jsp").forward(req, resp);
     }
-/*
-    private void eliminarMovimiento(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        // Step 1: Retrieve the movement ID from the request parameters
-        int idMovimiento = Integer.parseInt(req.getParameter("idMovimiento"));
 
-        // Step 1.1: Fetch the movement details using MovimientoDAO
-        MovimientoDAO movimientoDao = new MovimientoDAO();
-        MovimientoDTO movimiento = movimientoDao.obtenerMovimientoPorIdMovimiento(idMovimiento);
+    /*
+        private void eliminarMovimiento(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+            // Step 1: Retrieve the movement ID from the request parameters
+            int idMovimiento = Integer.parseInt(req.getParameter("idMovimiento"));
 
-        // Step 1.2: Show a confirmation page to the user
-        req.setAttribute("movimiento", movimiento);
+            // Step 1.1: Fetch the movement details using MovimientoDAO
+            MovimientoDAO movimientoDao = new MovimientoDAO();
+            MovimientoDTO movimiento = movimientoDao.obtenerMovimientoPorIdMovimiento(idMovimiento);
+
+            // Step 1.2: Show a confirmation page to the user
+            req.setAttribute("movimiento", movimiento);
+            req.getRequestDispatcher("jsp/VerMovimientos.jsp").forward(req, resp);
+        }
+    */
+    private void eliminarMovimiento(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException {
+        // Esta función ahora solo muestra la página de confirmación (con el pop-up)
+        int idMovimiento = Integer.parseInt(req.getParameter("id"));
+
+        // Redirigir a la página JSP donde se muestra el pop-up de confirmación
+        req.setAttribute("idMovimiento", idMovimiento);
         req.getRequestDispatcher("jsp/VerMovimientos.jsp").forward(req, resp);
     }
-*/
-private void eliminarMovimiento(HttpServletRequest req, HttpServletResponse resp)
-        throws ServletException, IOException {
-    // Esta función ahora solo muestra la página de confirmación (con el pop-up)
-    int idMovimiento = Integer.parseInt(req.getParameter("id"));
-
-    // Redirigir a la página JSP donde se muestra el pop-up de confirmación
-    req.setAttribute("idMovimiento", idMovimiento);
-    req.getRequestDispatcher("jsp/VerMovimientos.jsp").forward(req, resp);
-}
 
 
     private void confirmarEliminacion(HttpServletRequest req, HttpServletResponse resp)
@@ -347,7 +363,7 @@ private void eliminarMovimiento(HttpServletRequest req, HttpServletResponse resp
         LocalDate fecha = LocalDate.parse(req.getParameter("fecha"));
         double valor = Double.parseDouble(req.getParameter("valor"));
 
-        System.out.println("SI LLEGO PERO NOSE: "+req.getParameter("id"));
+        System.out.println("SI LLEGO PERO NOSE: " + req.getParameter("id"));
         // Obtener el ID del movimiento desde la solicitud
         int idMovimiento = Integer.parseInt(req.getParameter("id"));
         System.out.println("paso 1 ");
@@ -448,6 +464,13 @@ private void eliminarMovimiento(HttpServletRequest req, HttpServletResponse resp
         double valor = Double.parseDouble(req.getParameter("valor"));
         int idCategoria = Integer.parseInt(req.getParameter("idCategoria"));
 
+        if (valor > cuenta.getTotal()) {
+            // Redirigir o enviar un mensaje de error
+            req.setAttribute("error", "El valor del egreso no puede ser mayor que el saldo disponible.");
+            req.getRequestDispatcher("jsp/Error.jsp").forward(req, resp);
+            return;
+        }
+
 //        2.
         CategoriaEgresoDAO categoriaEgresoDao = new CategoriaEgresoDAO();
         CategoriaEgreso categoriaEgreso = categoriaEgresoDao.obtenerCategoriaPorId(idCategoria);
@@ -463,7 +486,7 @@ private void eliminarMovimiento(HttpServletRequest req, HttpServletResponse resp
 //        actualizar categoria
         //categoriaEgresoDao.actualizarSaldo(categoriaEgreso, valor);
         //CategoriaIngreso categoria = new CategoriaIngreso("Prueba", 1);
-       // Ingreso ingreso = new Ingreso("prueba", LocalDate.now(), 12, cuenta, categoria);
+        // Ingreso ingreso = new Ingreso("prueba", LocalDate.now(), 12, cuenta, categoria);
 
 //        3.
 
@@ -555,12 +578,19 @@ private void eliminarMovimiento(HttpServletRequest req, HttpServletResponse resp
         HttpSession session = req.getSession();
 
         Cuenta cuentaOrigen = (Cuenta) session.getAttribute("cuenta");
-        int idCuentaDestino = Integer.parseInt(req.getParameter("cuentaDestino"));
+        int idCuentaDestino = Integer.parseInt(req.getParameter("idCuentaDestino"));
 
         String concepto = String.valueOf(req.getParameter("concepto"));
         LocalDate fecha = LocalDate.parse((req.getParameter("fecha")));
         double valor = Double.parseDouble(req.getParameter("valor"));
-        int idCategoria = Integer.parseInt(req.getParameter("idCategoria"));
+        int idCategoria = 1;
+
+        if (valor > cuentaOrigen.getTotal()) {
+            // Redirigir o enviar un mensaje de error
+            req.setAttribute("error", "El valor de la transferencia no puede ser mayor que el saldo disponible.");
+            req.getRequestDispatcher("jsp/Error.jsp").forward(req, resp);
+            return;
+        }
 
 //        2.
         CuentaDAO cuentaDao = new CuentaDAO();
@@ -574,15 +604,11 @@ private void eliminarMovimiento(HttpServletRequest req, HttpServletResponse resp
         TransferenciaDAO transferenciaDao = new TransferenciaDAO();
         transferenciaDao.guardarTransferencia(transferencia);
 
-        //TODO: cranear como mostrar la lista de cuentas
-
-//        actualizar cuenta
-
         cuentaDao.actualizarSaldo(cuentaOrigen, -valor);
         cuentaDao.actualizarSaldo(cuentaDestino, valor);
 
 //        3.
-        resp.sendRedirect("/ContabilidadController?ruta=verDashboard");
+        resp.sendRedirect("ContabilidadController?ruta=verDashboard");
     }
 
     private void actualizarIdCuenta(HttpServletRequest req, Cuenta nuevaCuenta) {
