@@ -18,6 +18,9 @@
     1.  Revisar el jpql de actualizarSalso de CuentaDAO y en CategoriaEgresoDAO
 
 EL ACTUALIZAR SALDO DEBERÍA SER EN EL DTO O AL CONSULTAR, NO COMO ATRIBUTO EN LA ENTIDAD
+ACTUALIZAR LO QUE SE MANDA A LA VISTA DE VER CUENTA CUANDO SE FINALIZA UN REGISTRO
+En registrarTransferencia seguna llamada debería poder haber un seleccionar para seleccionar categorías
+ACTUALIZAR SECUENCIA DE ACTUALIZAR MOVIMIENTO INCLUYENDO LAS LLAMADAS PARA OBTENER CATEGORIAS
 
 # Pendientes en los diagramas
 
