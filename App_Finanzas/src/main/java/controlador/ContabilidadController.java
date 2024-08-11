@@ -214,7 +214,7 @@ public class ContabilidadController extends HttpServlet {
         req.setAttribute("movimientos", movimientos);
 
         // Llamar a la vista para mostrar los movimientos
-        req.getRequestDispatcher("jsp/VerMovimientos.jsp").forward(req, resp);
+        req.getRequestDispatcher("jsp/verMovimientos.jsp").forward(req, resp);
     }
 
     private void verCategoria(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -254,7 +254,7 @@ public class ContabilidadController extends HttpServlet {
 
         // Redirigir a la página JSP donde se muestra el pop-up de confirmación
         req.setAttribute("idMovimiento", idMovimiento);
-        req.getRequestDispatcher("jsp/VerMovimientos.jsp").forward(req, resp);
+        req.getRequestDispatcher("jsp/verMovimientos.jsp").forward(req, resp);
     }
 
 
@@ -267,25 +267,19 @@ public class ContabilidadController extends HttpServlet {
         boolean puedeEliminar = Boolean.parseBoolean(puedeEliminarStr);
 
         if (puedeEliminar) {
-            try {
-                // Convertir el ID del movimiento a un número entero
-                int idMovimiento = Integer.parseInt(idStr);
+            // Convertir el ID del movimiento a un número entero
+            int idMovimiento = Integer.parseInt(idStr);
 
-                // Crear instancia del DAO para realizar la eliminación
-                MovimientoDAO movimientoDao = new MovimientoDAO();
-                movimientoDao.eliminarMovimiento(idMovimiento);
+            // Crear instancia del DAO para realizar la eliminación
+            MovimientoDAO movimientoDao = new MovimientoDAO();
+            movimientoDao.eliminarMovimiento(idMovimiento);
 
-                // Opcional: agregar un mensaje de éxito si lo deseas
-                req.setAttribute("mensaje", "El movimiento ha sido eliminado.");
-            } catch (NumberFormatException e) {
-                // Opcional: manejar el error si el ID no es válido
-                req.setAttribute("error", "El ID del movimiento no es válido.");
-                e.printStackTrace();
-            }
+            // Opcional: agregar un mensaje de éxito si lo deseas
+            req.setAttribute("mensaje", "El movimiento ha sido eliminado.");
         }
 
         // Redirigir nuevamente a la vista de movimientos
-        req.getRequestDispatcher("jsp/VerMovimientos.jsp").forward(req, resp);
+        resp.sendRedirect("ContabilidadController?ruta=verMovimientos");
     }
 
     private void actualizarMovimiento(HttpServletRequest req, HttpServletResponse resp)
