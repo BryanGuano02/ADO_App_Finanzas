@@ -166,6 +166,14 @@ public class ContabilidadController extends HttpServlet {
         Transferencia trans = new Transferencia("PAPAS CON TU ÑAÑA",LocalDate.now(),12.2,cuentas.get(1), cuentas.get(2),categoriaTrans);
         TransferenciaDAO transDAO = new TransferenciaDAO();
         transDAO.guardarTransferencia(trans);*/
+/*
+        CategoriaTransferencia categoriaTrans = new CategoriaTransferencia("Transferencia entre bancos", 1);
+        CategoriaTransferenciaDAO categoriaTransDAO = new CategoriaTransferenciaDAO();
+        categoriaTransDAO.ingresar(categoriaTrans);
+        Transferencia trans = new Transferencia("TRANSFERENCIA ACTUALIZAR",LocalDate.now(),12.2,cuentas.get(1), cuentas.get(2),categoriaTrans);
+        TransferenciaDAO transDAO = new TransferenciaDAO();
+        transDAO.guardarTransferencia(trans);
+*/
 
         req.getRequestDispatcher("jsp/VerDashboard.jsp").forward(req, resp);
     }
@@ -305,10 +313,13 @@ public class ContabilidadController extends HttpServlet {
             CategoriaEgresoDAO categoriaEgresoDao = new CategoriaEgresoDAO();
             categorias.addAll(categoriaEgresoDao.obtenerTodo()); // Corregir la adición de categorías
         }
+        HttpSession httpSession = req.getSession();
 
+        httpSession.setAttribute("movimiento", movimiento);
         // Enviar el movimiento y las categorías como atributos a la vista
-        req.setAttribute("movimiento", movimiento);
-        req.setAttribute("categorias", categorias);
+       // req.setAttribute("movimiento", movimiento);
+        //req.setAttribute("categorias", categorias);
+        httpSession.setAttribute("categorias", categorias);
         req.getRequestDispatcher("jsp/VerActualizarMovimiento.jsp").forward(req, resp);
     }
 
@@ -351,27 +362,30 @@ public class ContabilidadController extends HttpServlet {
 
     private void registrarInfoActualizacion(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
+        HttpSession session = req.getSession();
+        MovimientoDAO  movimientoDAO = new MovimientoDAO();
 
-        // Obtener los parámetros comunes
+        System.out.println("LLEGO AQUI");
+        Movimiento movimiento  = (Movimiento) session.getAttribute("movimiento");
+
         String concepto = req.getParameter("concepto");
+        System.out.println("LLEGO AQUI 1 ");
         LocalDate fecha = LocalDate.parse(req.getParameter("fecha"));
+        System.out.println("LLEGO AQUI 2 ");
         double valor = Double.parseDouble(req.getParameter("valor"));
-
-        System.out.println("SI LLEGO PERO NOSE: " + req.getParameter("id"));
-        // Obtener el ID del movimiento desde la solicitud
-        int idMovimiento = Integer.parseInt(req.getParameter("id"));
-        System.out.println("paso 1 ");
-        MovimientoDAO movimientoDao = new MovimientoDAO();
-        Movimiento movimiento = movimientoDao.obtenerMovimientoPorIdMovimiento1(idMovimiento);
-        System.out.println("paso 2 ");
-
-        // Usar polimorfismo para actualizar el movimiento según su tipo
+        System.out.println("LLEGO AQUI3");
         if (movimiento instanceof Transferencia) {
-            // Obtener parámetros específicos de Transferencia
-            int idCuentaOrigen = Integer.parseInt(req.getParameter("idCuentaOrigen"));
-            int idCuentaDestino = Integer.parseInt(req.getParameter("idCuentaDestino"));
-            int idCategoria = Integer.parseInt(req.getParameter("categoria"));
+            System.out.println("SI entro");
 
+            // Obtener parámetros específicos de Transferencia
+            int idCuentaOrigen = ((Transferencia) movimiento).getCuentaOrigen().getId();
+            System.out.println("SI entro idCuentaOrigen");
+
+            int idCuentaDestino = ((Transferencia) movimiento).getCuentaDestino().getId();
+            System.out.println("SI entro idCuentaDestino");
+
+            int idCategoria = Integer.parseInt(req.getParameter("categoria"));
+            System.out.println("ya va a mandar");
             // Actualizar el movimiento Transferencia
             Transferencia transferencia = (Transferencia) movimiento;
             transferencia.setConcepto(concepto);
@@ -380,13 +394,14 @@ public class ContabilidadController extends HttpServlet {
             transferencia.setCuentaOrigen(new CuentaDAO().obtenerCuentaPorId(idCuentaOrigen));
             transferencia.setCuentaDestino(new CuentaDAO().obtenerCuentaPorId(idCuentaDestino));
             transferencia.setCategoria(new CategoriaTransferenciaDAO().obtenerCategoriaPorId(idCategoria));
-
+            System.out.println("MANDO");
             // Guardar los cambios
-            movimientoDao.actualizarMovimiento(transferencia);
+            movimientoDAO.actualizarMovimiento(transferencia);
+            System.out.println("se guardo");
 
         } else if (movimiento instanceof Ingreso) {
             // Obtener parámetros específicos de Ingreso
-            int idCuentaDestino = Integer.parseInt(req.getParameter("idCuentaDestino"));
+            int idCuentaDestino =  ((Ingreso) movimiento).getCuentaDestino().getId();
             int idCategoria = Integer.parseInt(req.getParameter("categoria"));
 
             // Actualizar el movimiento Ingreso
@@ -398,13 +413,12 @@ public class ContabilidadController extends HttpServlet {
             ingreso.setCategoria(new CategoriaIngresoDAO().obtenerCategoriaPorId(idCategoria));
 
             // Guardar los cambios
-            movimientoDao.actualizarMovimiento(ingreso);
+            movimientoDAO.actualizarMovimiento(ingreso);
 
         } else if (movimiento instanceof Egreso) {
             // Obtener parámetros específicos de Egreso
-            int idCuentaOrigen = Integer.parseInt(req.getParameter("idCuentaOrigen"));
+            int idCuentaOrigen = ((Egreso) movimiento).getCuentaOrigen().getId();
             int idCategoria = Integer.parseInt(req.getParameter("categoria"));
-
             // Actualizar el movimiento Egreso
             Egreso egreso = (Egreso) movimiento;
             egreso.setConcepto(concepto);
@@ -414,11 +428,11 @@ public class ContabilidadController extends HttpServlet {
             egreso.setCategoria(new CategoriaEgresoDAO().obtenerCategoriaPorId(idCategoria));
 
             // Guardar los cambios
-            movimientoDao.actualizarMovimiento(egreso);
+            movimientoDAO.actualizarMovimiento(egreso);
         }
 
         // Redirigir a una página de éxito o mostrar un mensaje de éxito
-        resp.sendRedirect("rutaExito.jsp");
+        resp.sendRedirect("ContabilidadController?ruta=verMovimientos");
     }
 
 

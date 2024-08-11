@@ -20,19 +20,15 @@
     <label for="valor">Valor del movimiento:</label><br>
     <input type="number" id="valor" name="valor" step="0.01" required><br><br>
 
-    <c:choose>
-        <c:when test="${movimiento != 'Transferencia'}">
-            <label for="categoria">Categoría:</label><br>
-            <select id="categoria" name="categoria" required>
-                <option value="" disabled selected>Selecciona una categoría</option>
-                <!-- Mostrar las opciones dinámicamente -->
-                <c:forEach var="categoria" items="${categorias}">
-                    <option value="${categoria.ID}">${categoria.nombre}</option>
-                </c:forEach>
-            </select>
-        </c:when>
+   <label for="categoria">Categoría:</label><br>
+    <select id="categoria" name="categoria" required>
+        <option value="" disabled selected>Selecciona una categoría</option>
+        <!-- Mostrar las opciones dinámicamente -->
+        <c:forEach var="categoria" items="${categorias}">
+            <option value="${categoria.ID}">${categoria.nombre}</option>
+        </c:forEach>
+    </select>
 
-    </c:choose>
 
     <button type="submit">Actualizar Movimiento</button>
 </form>
