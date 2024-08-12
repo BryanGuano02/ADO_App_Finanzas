@@ -164,7 +164,7 @@
 
     <div class="container">
         <h1>Movimientos</h1>
-        <a href="ContabilidadController?ruta=verDashboard">Volver al dashboard</a>
+        <a href="ContabilidadController?ruta=verMovimientos">Ver todos los movimientos</a>
 
         <table>
             <thead>
