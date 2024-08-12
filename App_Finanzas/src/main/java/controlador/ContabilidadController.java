@@ -74,9 +74,6 @@ public class ContabilidadController extends HttpServlet {
             case "registrarTransferencia":
                 registrarTransferencia(req, resp);
                 break;
-            case "confirmarEliminacion":
-//                confirmarEliminacion(req, resp);
-                break;
             case "registrarIngreso":
                 registrarIngreso(req, resp);
                 break;
@@ -285,10 +282,14 @@ public class ContabilidadController extends HttpServlet {
         CuentaDAO cuentaDAO  = new CuentaDAO();
         Cuenta cuentaOrigen = (Cuenta) session.getAttribute("cuenta");
         double valor = movimientoDao.obtenerMovimientoPorIdMovimiento1(idMovimiento).getValor();
+        System.out.println(valor);
         movimientoDao.eliminarMovimiento(idMovimiento);
         cuentaDAO.actualizarSaldo(cuentaOrigen, -valor);
         // Redirigir a la página JSP donde se muestra el pop-up de confirmación
         req.getRequestDispatcher("ContabilidadController?ruta=verDashboard").forward(req, resp);
+
+
+
     }
 /*
     private void eliminarMovimiento(HttpServletRequest req, HttpServletResponse resp)

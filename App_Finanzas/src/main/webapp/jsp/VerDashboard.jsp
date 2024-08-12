@@ -35,20 +35,27 @@
             <li><a href="#Inicio">Cuentas</a></li>
             <li><a href="#">Categorías</a></li>
             <li><a href="#">Movimientos</a></li>
-            <!-- Filtros por rango de fechas -->
-            <form action="ContabilidadController?ruta=filtrarPorFechas" method="post">
-                <label for="fechaRango"> <i class="fas fa-calendar-alt calendar-icon" id="openCalendar"></i></label>
-                <input type="text" id="fechaRango" name="fechaRango" placeholder="Selecciona el rango de fechas">
 
-                <input type="hidden" id="desde" name="desde">
-                <input type="hidden" id="hasta" name="hasta">
+            <li>
+                <!-- Filtros por rango de fechas -->
+                <form
+                        action="ContabilidadController?ruta=filtrarPorFechas"
+                        method="post">
+                    <div class="input-icon-wrapper">
+                        <input type="text" id="fechaRango"
+                               name="fechaRango"
+                               placeholder="&#xf073;‎ ▼" class="with-icon">
+                    </div>
 
-                <button type="submit">Filtrar</button>
-            </form>
+                    <input type="hidden" id="desde" name="desde">
+                    <input type="hidden" id="hasta" name="hasta">
+
+                    <button type="submit">Filtrar</button>
+                </form>
+            </li>
         </ul>
     </div>
 </nav>
-
 <div class="cuentas" id="cuentas">
     <c:forEach items="${cuentas}" var="cuenta">
         <div class="cuenta">
@@ -195,9 +202,9 @@
             </tbody>
         </table>
     </div>
+</div>
 
-
-    <script>
+<script>
         function confirmarEliminacion(form) {
             // Puedes personalizar el mensaje de confirmación aquí
             var confirmacion = confirm("¿Estás seguro de que deseas eliminar este movimiento?");
@@ -226,6 +233,4 @@
     });
 </script>
 </body>
-
-
 </html>

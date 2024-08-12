@@ -8,76 +8,82 @@ import modelo.entidades.CategoriaEgreso;
 import jakarta.persistence.EntityManager;
 import modelo.entidades.CategoriaIngreso;
 
-
 import java.io.Serializable;
 import java.util.List;
 
 public class CategoriaDAO implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    private EntityManagerFactory emf = null;
-    private EntityManager em = null;
+    private EntityManagerFactory emf;
 
-    /**
-     * Default constructor
-     */
     public CategoriaDAO() {
         emf = Persistence.createEntityManagerFactory("chaucherita_PU");
-        em = emf.createEntityManager();
     }
 
-    /**
-     *
-     */
+    private EntityManager getEntityManager() {
+        return emf.createEntityManager();
+    }
+
     public void getName() {
-        // TODO implement here
+        // Implementación futura
     }
 
-    /**
-     *
-     */
     public List<CategoriaEgreso> getExpenseCategories() {
-        // TODO implement here
-        return null;
+        EntityManager em = getEntityManager();
+        List<CategoriaEgreso> categorias = null;
+        try {
+            // Implementación futura
+        } finally {
+            if (em != null && em.isOpen()) {
+                em.close();
+            }
+        }
+        return categorias;
     }
 
-    /**
-     *
-     */
-    public void getIncomeCategories() {
-        // TODO implement here
+    public List<CategoriaIngreso> getIncomeCategories() {
+        EntityManager em = getEntityManager();
+        List<CategoriaIngreso> categorias = null;
+        try {
+            // Implementación futura
+        } finally {
+            if (em != null && em.isOpen()) {
+                em.close();
+            }
+        }
+        return categorias;
     }
 
     public void updateBalance(double value) {
-        // TODO Auto-generated method stub
-
+        EntityManager em = getEntityManager();
+        try {
+            // Implementación futura
+        } finally {
+            if (em != null && em.isOpen()) {
+                em.close();
+            }
+        }
     }
 
     public Categoria obtenerCategoriaPorId(int idCategoria) {
+        EntityManager em = getEntityManager();
         Categoria categoria = null;
 
         try {
-            em = emf.createEntityManager();
-
-            // Consulta para obtener los Movimientos
-            String jpql = "SELECT c FROM Categoria c WHERE c.ID = :idCategoria ";
-
+            // Consulta para obtener la Categoría por ID
+            String jpql = "SELECT c FROM Categoria c WHERE c.ID = :idCategoria";
             TypedQuery<Categoria> query = em.createQuery(jpql, Categoria.class);
             query.setParameter("idCategoria", idCategoria);
 
-            categoria =  query.getSingleResult();
+            categoria = query.getSingleResult();
         } catch (Exception e) {
             e.printStackTrace(); // Manejo básico de excepciones
         } finally {
             if (em != null && em.isOpen()) {
                 em.close();
             }
-            if (emf != null && emf.isOpen()) {
-                emf.close();
-            }
         }
 
         return categoria;
     }
-
 }

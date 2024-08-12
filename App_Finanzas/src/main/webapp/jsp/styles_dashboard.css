@@ -1,3 +1,5 @@
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css');
+
 /* Estilos generales */
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -59,21 +61,28 @@ nav .barraNavegacion ul li a:hover {
 nav form {
     display: flex;
     align-items: center;
-    margin-left: 20px;
+    margin-right: 20px;
 }
 
-nav form input[type="text"] {
+/* Wrapper para el input con icono */
+.input-icon-wrapper {
+    position: relative;
+    display: inline-block;
+}
+
+.with-icon {
+    padding-left: 25px;
+    /* Espacio para el icono */
+    font-family: 'FontAwesome', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     padding: 8px;
-    font-size: 14px;
+    font-size: 16px;
     border: 1px solid #ccc;
-    border-radius: 5px 0 0 5px;
-    margin-right: -1px;
-    width: 200px;
+    width: 40px;
 }
 
 nav form button {
     padding: 8px 12px;
-    background-color: #3498db;
+    background-color: #0c0b10;
     color: #fff;
     border: none;
     border-radius: 0 5px 5px 0;
@@ -82,8 +91,9 @@ nav form button {
 }
 
 nav form button:hover {
-    background-color: #2980b9;
+    background-color: #425968;
 }
+
 
 /* Estilos de las cuentas */
 .cuentas {
@@ -139,7 +149,8 @@ nav form button:hover {
     padding: 20px;
 }
 
-.categorias h1, .categorias h2 {
+.categorias h1,
+.categorias h2 {
     color: #2c3e50;
     margin-bottom: 10px;
 }
@@ -152,13 +163,15 @@ nav form button:hover {
     font-size: 20px;
 }
 
-.categoriaIngreso, .categoriaEgreso {
+.categoriaIngreso,
+.categoriaEgreso {
     cursor: pointer;
     color: #3498db;
     margin: 10px 0;
 }
 
-.categoriaIngreso:hover, .categoriaEgreso:hover {
+.categoriaIngreso:hover,
+.categoriaEgreso:hover {
     color: #2980b9;
 }
 
@@ -185,7 +198,8 @@ nav form button:hover {
     border-collapse: collapse;
 }
 
-.movimientos table th, .movimientos table td {
+.movimientos table th,
+.movimientos table td {
     padding: 10px;
     text-align: left;
     border-bottom: 1px solid #ddd;
@@ -199,13 +213,15 @@ nav form button:hover {
 .movimientos table td {
     color: #34495e;
 }
+
 .movimientos table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 20px;
 }
 
-.movimientos table th, .movimientos table td {
+.movimientos table th,
+.movimientos table td {
     padding: 12px;
     text-align: left;
     border-bottom: 1px solid #ddd;
