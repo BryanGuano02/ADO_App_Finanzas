@@ -8,19 +8,16 @@
 4. Ver Movimientos: ??
    1. Hacer que se presenten solo los movimientos dentro de las fechas (Filtrar Fechas)
 5. Eliminar Movimientos: completo
-6. Actualizar Movimientos: casi completo
-   1. Quitar el required para que permita editar un solo campo y no todos
-   2. CORREGIR LA ACTUALIZACIÓN DE VALORES
+6. Actualizar Movimientos: completo
 7. Ver Categoria: empezado
    1. Actualizar saldo de acuerdo a la fecha
    2. Mostrar los movimientos asociados a la categoria
-8. Registrar Gasto: casi completo
-9.  Registrar Ingreso: casi completo
-10. Registrar Transferencia: casi completo
+8. Registrar Gasto:  completo
+9.  Registrar Ingreso:  completo
+10. Registrar Transferencia:  completo
 
 ## GENERAL CÓDIGO
-Dejar quemados datos (cuentas, categorias, movimientos de muestra)
-Revisar si las categorías aparecen bien al registrar cualquir movimiento (No se repiten o se crean categorías extras)
+
 
 
 
