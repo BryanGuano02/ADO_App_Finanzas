@@ -1,0 +1,260 @@
+/* Estilos generales */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #eef2f7;
+    color: #34495e;
+    margin: 0;
+    padding: 0;
+}
+
+/* Estilo del encabezado */
+nav {
+    background-color: #2c3e50;
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #ecf0f1;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.titulo {
+    font-size: 24px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+}
+
+.titulo i {
+    margin-right: 10px;
+}
+
+nav .barraNavegacion {
+    display: flex;
+    align-items: center;
+}
+
+nav .barraNavegacion ul {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+}
+
+nav .barraNavegacion ul li {
+    margin-left: 20px;
+}
+
+nav .barraNavegacion ul li a {
+    color: #ecf0f1;
+    text-decoration: none;
+    font-size: 16px;
+    transition: color 0.3s ease;
+}
+
+nav .barraNavegacion ul li a:hover {
+    color: #3498db;
+}
+
+nav form {
+    display: flex;
+    align-items: center;
+    margin-left: 20px;
+}
+
+nav form input[type="text"] {
+    padding: 8px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 5px 0 0 5px;
+    margin-right: -1px;
+    width: 200px;
+}
+
+nav form button {
+    padding: 8px 12px;
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+    border-radius: 0 5px 5px 0;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+nav form button:hover {
+    background-color: #2980b9;
+}
+
+/* Estilos de las cuentas */
+.cuentas {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 20px;
+}
+
+.cuenta {
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    margin: 10px;
+    padding: 20px;
+    width: 250px;
+    text-align: center;
+}
+
+.cuenta h1 {
+    font-size: 18px;
+    margin: 10px 0;
+    color: #2c3e50;
+}
+
+/* Estilo de iconos y botones */
+.iconos {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 15px;
+    font-size: 16px;
+}
+
+.iconos i {
+    margin-right: 5px;
+}
+
+.iconos button {
+    background: none;
+    border: none;
+    color: #3498db;
+    cursor: pointer;
+    font-size: 16px;
+    transition: color 0.3s ease;
+}
+
+.iconos button:hover {
+    color: #2980b9;
+}
+
+/* Estilos de las categorías */
+.categorias {
+    padding: 20px;
+}
+
+.categorias h1, .categorias h2 {
+    color: #2c3e50;
+    margin-bottom: 10px;
+}
+
+.categorias h1 {
+    font-size: 22px;
+}
+
+.categorias h2 {
+    font-size: 20px;
+}
+
+.categoriaIngreso, .categoriaEgreso {
+    cursor: pointer;
+    color: #3498db;
+    margin: 10px 0;
+}
+
+.categoriaIngreso:hover, .categoriaEgreso:hover {
+    color: #2980b9;
+}
+
+/* Estilos de los movimientos */
+.movimientos {
+    padding: 20px;
+}
+
+.movimientos .container {
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+}
+
+.movimientos h1 {
+    font-size: 22px;
+    color: #2c3e50;
+    margin-bottom: 20px;
+}
+
+.movimientos table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.movimientos table th, .movimientos table td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.movimientos table th {
+    background-color: #2c3e50;
+    color: #ecf0f1;
+}
+
+.movimientos table td {
+    color: #34495e;
+}
+.movimientos table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.movimientos table th, .movimientos table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+    transition: background-color 0.3s ease;
+}
+
+.movimientos table th {
+    background-color: #2c3e50;
+    color: #ecf0f1;
+    font-weight: bold;
+}
+
+.movimientos table td {
+    background-color: #ffffff;
+    color: #34495e;
+}
+
+.movimientos table tr:hover td {
+    background-color: #f1f1f1;
+}
+
+.movimientos .btn-group {
+    display: flex;
+    gap: 10px;
+}
+
+.movimientos .btn-group button {
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.movimientos .btn-group .btn-update {
+    background-color: #3498db;
+    color: #fff;
+}
+
+.movimientos .btn-group .btn-update:hover {
+    background-color: #2980b9;
+}
+
+.movimientos .btn-group .btn-danger {
+    background-color: #e74c3c;
+    color: #fff;
+}
+
+.movimientos .btn-group .btn-danger:hover {
+    background-color: #c0392b;
+}
