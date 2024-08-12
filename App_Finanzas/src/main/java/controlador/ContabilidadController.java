@@ -283,13 +283,11 @@ public class ContabilidadController extends HttpServlet {
         Cuenta cuentaOrigen = (Cuenta) session.getAttribute("cuenta");
         double valor = movimientoDao.obtenerMovimientoPorIdMovimiento1(idMovimiento).getValor();
         System.out.println(valor);
-        movimientoDao.eliminarMovimiento(idMovimiento);
         cuentaDAO.actualizarSaldo(cuentaOrigen, -valor);
+        movimientoDao.eliminarMovimiento(idMovimiento);
+
         // Redirigir a la página JSP donde se muestra el pop-up de confirmación
         req.getRequestDispatcher("ContabilidadController?ruta=verDashboard").forward(req, resp);
-
-
-
     }
 /*
     private void eliminarMovimiento(HttpServletRequest req, HttpServletResponse resp)
@@ -447,23 +445,28 @@ private void registrarInfoActualizacion(HttpServletRequest req, HttpServletRespo
         transferencia.setCategoria(new CategoriaTransferenciaDAO().obtenerCategoriaPorId(idCategoria));
 //            System.out.println("MANDO");
         // Guardar los cambios
+
+        // Guardar los cambios en la base de datos
         movimientoDAO.actualizarMovimiento(transferencia);
 
-
-//Bryan
-        double valorDiferencia = Math.abs(valorAntiguo - valor);
+        // Calcular la diferencia en valor
+        double valorDiferencia = valor - valorAntiguo;
 
         CuentaDAO cuentaDAO = new CuentaDAO();
         Cuenta cuentaOrigen = cuentaDAO.obtenerCuentaPorId(idCuentaOrigen);
         Cuenta cuentaDestino = cuentaDAO.obtenerCuentaPorId(idCuentaDestino);
 
-        double ajusteOrigen = valorAntiguo > valor ? -valorDiferencia : valorDiferencia;
-
-        double ajusteDestino = valorAntiguo < valor ? valorDiferencia : -valorDiferencia;
-
-        cuentaDAO.actualizarSaldo(cuentaOrigen, ajusteOrigen);
-        cuentaDAO.actualizarSaldo(cuentaDestino, ajusteDestino);
-
+        // Ajuste en las cuentas
+        // Ajustar las cuentas en base al valor de la diferencia
+        if (valorDiferencia > 0) {
+            // El nuevo valor es mayor, restar de la cuenta de origen y sumar a la cuenta de destino
+            cuentaDAO.actualizarSaldo(cuentaOrigen, -valorDiferencia); // Reducir saldo cuenta origen
+            cuentaDAO.actualizarSaldo(cuentaDestino, valorDiferencia); // Aumentar saldo cuenta destino
+        } else if (valorDiferencia < 0) {
+            // El nuevo valor es menor, sumar a la cuenta de origen y restar de la cuenta de destino
+            cuentaDAO.actualizarSaldo(cuentaOrigen, -valorDiferencia); // Aumentar saldo cuenta origen
+            cuentaDAO.actualizarSaldo(cuentaDestino, valorDiferencia); // Reducir saldo cuenta destino
+        }
 
 //            System.out.println("se guardo");
 
