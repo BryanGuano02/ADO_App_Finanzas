@@ -17,6 +17,7 @@ public class Movimiento implements Serializable {
     private Integer Id;
 
     private String Concepto;
+
     @Column
     private LocalDate Fecha;
 
