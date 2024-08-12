@@ -23,7 +23,6 @@
         <th>Valor</th>
         <th>Cuenta Origen</th>
         <th>Cuenta Destino</th>
-        <th>Acciones</th>
     </tr>
     </thead>
     <tbody>
@@ -35,16 +34,6 @@
             <td>${movimiento.valor != null ? movimiento.valor : 'N/A'}</td>
             <td>${movimiento.cuentaOrigen != null ? movimiento.cuentaOrigen : 'N/A'}</td>
             <td>${movimiento.cuentaDestino != null ? movimiento.cuentaDestino : 'N/A'}</td>
-            <td class="btn-group">
-                <form name="actualizar" action="ContabilidadController?ruta=actualizarMovimiento" method="POST">
-                    <input type="hidden" name="id" value="${movimiento.id}">
-                    <button type="submit" class="btn btn-update">Actualizar</button>
-                </form>
-                <form action="ContabilidadController?ruta=eliminarMovimiento" method="POST" style="display:inline;">
-                    <input type="hidden" name="id" value="${movimiento.id}">
-                    <button type="submit" class="btn btn-danger">Eliminar</button>
-                </form>
-            </td>
         </tr>
     </c:forEach>
     </tbody>

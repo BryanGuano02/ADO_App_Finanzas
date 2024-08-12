@@ -8,18 +8,21 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/jsp/dash.css">
-    <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <title>Página de Inicio</title>
-    <link rel="stylesheet"
-          href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
-    <title>Página de Inicio</title>
-    <style>
-        .categoriaIngreso, .categoriaEgreso, .nombre_cuenta {
-            cursor: pointer; /* Cambia el cursor a una mano apuntando */
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/jsp/styles_dashboard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <title>Dashboard</title>
+    <script>
+        function cancelarEliminacion() {
+            // Ocultar el pop-up sin eliminar
+            document.getElementById('deleteModal').style.display = 'none';
         }
-    </style>
+
+        function submitEliminarForm() {
+            // Enviar el formulario para confirmar la eliminación
+            document.getElementById('deleteForm').submit();
+        }
+    </script>
 </head>
 
 <body>
@@ -33,7 +36,7 @@
             <li><a href="#">Categorías</a></li>
             <li><a href="#">Movimientos</a></li>
             <!-- Filtros por rango de fechas -->
-            <form action="ContabilidadController?ruta=filtrarPorFechas" method="post" >
+            <form action="ContabilidadController?ruta=filtrarPorFechas" method="post">
                 <label for="fechaRango"> <i class="fas fa-calendar-alt calendar-icon" id="openCalendar"></i></label>
                 <input type="text" id="fechaRango" name="fechaRango" placeholder="Selecciona el rango de fechas">
 
@@ -79,10 +82,6 @@
                 </button>
             </form>
 
-            <!-- Movimiento -->
-            <div class="iconos">
-                <i class="fas fa-sync-alt"></i> Movimiento
-            </div>
 
 
         </div>
@@ -92,35 +91,73 @@
 
 <div class="categorias" id="categorias">
     <h1>Categorias</h1>
+
     <h2>Categorias Ingreso</h2>
 
     <c:forEach items="${categoriasIngreso}" var="categoriaIngreso">
-
         <form action="ContabilidadController?ruta=verCategoria" method="post">
             <input type="hidden" name="idCategoria" value="${categoriaIngreso.ID}">
             <h1 class="categoriaIngreso" onclick="this.closest('form').submit()">${categoriaIngreso.nombre}</h1>
-<%--            <h1 class="categoriaIngreso" onclick="this.closest('form').submit()">${cuenta.total}</h1>--%>
+                <%--            <h1 class="categoriaIngreso" onclick="this.closest('form').submit()">${cuenta.total}</h1>--%>
         </form>
-
-
-
     </c:forEach>
 
 
     <h2>Categorias Egreso</h2>
+
     <c:forEach items="${categoriasEgreso}" var="categoriaEgreso">
         <form action="ContabilidadController?ruta=verCategoria" method="post">
-            <input type="hidden" name="idCategoria" value="${categoriaIngreso.ID}">
+            <input type="hidden" name="idCategoria" value="${categoriaEgreso.ID}">
             <h1 class="categoriaEgreso" onclick="this.closest('form').submit()">${categoriaEgreso.nombre}</h1>
                 <%--            <h1 class="categoriaIngreso" onclick="this.closest('form').submit()">${cuenta.total}</h1>--%>
         </form>
     </c:forEach>
 </div>
 
+<%--<div class="container">
+    <h1>Movimientos</h1>
+
+    <table>
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Fecha</th>
+            <th>Concepto</th>
+            <th>Valor</th>
+            <th>Cuenta Origen</th>
+            <th>Cuenta Destino</th>
+            <th>Acciones</th>
+        </tr>
+        </thead>
+        <tbody>
+        <c:forEach var="movimiento" items="${movimientos}">
+            <tr>
+                <td>${movimiento.id != null ? movimiento.id : 'N/A'}</td>
+                <td>${movimiento.fecha != null ? movimiento.fecha : 'N/A'}</td>
+                <td>${movimiento.concepto != null ? movimiento.concepto : 'N/A'}</td>
+                <td>${movimiento.valor != null ? movimiento.valor : 'N/A'}</td>
+                <td>${movimiento.cuentaOrigen != null ? movimiento.cuentaOrigen : 'N/A'}</td>
+                <td>${movimiento.cuentaDestino != null ? movimiento.cuentaDestino : 'N/A'}</td>
+                <td class="btn-group">
+                    <form name="actualizar" action="ContabilidadController?ruta=actualizarMovimiento" method="POST">
+                        <input type="hidden" name="id" value="${movimiento.id}">
+                        <button type="submit" class="btn btn-update">Actualizar</button>
+                    </form>
+                    <form action="ContabilidadController?ruta=eliminarMovimiento" method="POST" style="display:inline;">
+                        <input type="hidden" name="id" value="${movimiento.id}">
+                        <button type="submit" class="btn btn-danger">Eliminar</button>
+                    </form>
+                </td>
+            </tr>
+        </c:forEach>
+        </tbody>
+    </table>
+</div>--%>
 <div class="movimientos">
 
     <div class="container">
         <h1>Movimientos</h1>
+        <a href="ContabilidadController?ruta=verDashboard">Volver al dashboard</a>
 
         <table>
             <thead>
@@ -131,6 +168,7 @@
                 <th>Valor</th>
                 <th>Cuenta Origen</th>
                 <th>Cuenta Destino</th>
+                <th>Acciones</th>
             </tr>
             </thead>
             <tbody>
@@ -142,15 +180,38 @@
                     <td>${movimiento.valor != null ? movimiento.valor : 'N/A'}</td>
                     <td>${movimiento.cuentaOrigen != null ? movimiento.cuentaOrigen : 'N/A'}</td>
                     <td>${movimiento.cuentaDestino != null ? movimiento.cuentaDestino : 'N/A'}</td>
+                    <td class="btn-group">
+                        <form name="actualizar" action="ContabilidadController?ruta=actualizarMovimiento" method="POST">
+                            <input type="hidden" name="id" value="${movimiento.id}">
+                            <button type="submit" class="btn btn-update">Actualizar</button>
+                        </form>
+                        <form action="ContabilidadController?ruta=eliminarMovimiento" method="POST" style="display:inline;" onsubmit="return confirmarEliminacion(this);">
+                            <input type="hidden" name="id" value="${movimiento.id}">
+                            <button type="submit" class="btn btn-danger">Eliminar</button>
+                        </form>
+                    </td>
                 </tr>
             </c:forEach>
             </tbody>
         </table>
     </div>
 
-</div>
 
-<!-- Incluir Flatpickr JS -->
+    <script>
+        function confirmarEliminacion(form) {
+            // Puedes personalizar el mensaje de confirmación aquí
+            var confirmacion = confirm("¿Estás seguro de que deseas eliminar este movimiento?");
+            if (confirmacion) {
+                // Si el usuario confirma, el formulario se enviará
+                return true;
+            } else {
+                // Si el usuario cancela, se evitará el envío del formulario
+                return false;
+            }
+        }
+    </script>
+
+    <!-- Incluir Flatpickr JS -->
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 <script>
     flatpickr("#fechaRango", {

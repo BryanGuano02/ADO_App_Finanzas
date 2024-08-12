@@ -16,7 +16,7 @@ import java.util.List;
 public class Categoria implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Integer ID;
 
 
@@ -27,8 +27,7 @@ public class Categoria implements Serializable {
 
     }
 
-    public Categoria(String nombre, Integer ID) {
-        this.ID = ID;
+    public Categoria(String nombre) {
         this.nombre = nombre;
     }
 

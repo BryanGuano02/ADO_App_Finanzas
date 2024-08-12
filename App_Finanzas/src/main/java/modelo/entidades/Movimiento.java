@@ -13,7 +13,7 @@ import java.util.Date;
 public class Movimiento implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Integer Id;
 
     private String Concepto;

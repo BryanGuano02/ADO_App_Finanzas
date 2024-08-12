@@ -63,6 +63,7 @@
 
 <div class="container">
     <h1>Movimientos</h1>
+    <a href="ContabilidadController?ruta=verDashboard">Volver al dashboard</a>
 
     <table>
         <thead>
@@ -108,7 +109,10 @@
             ¿Estás seguro de que deseas eliminar este movimiento?
         </div>
         <div class="modal-footer">
-            <button class="btn btn-cancel" onclick="cancelarEliminacion()">Cancelar</button>
+            <form id="cancelForm" action="ContabilidadController?ruta=c" method="POST">
+                <input type="hidden" name="ruta" value="cancelar">
+                <button type="submit" class="btn btn-cancel">Cancelar</button>
+            </form>
             <form id="deleteForm" action="ContabilidadController?ruta=confirmarEliminacion" method="POST">
                 <input type="hidden" name="id" value="${idMovimiento}">
                 <input type="hidden" name="puedeEliminar" value="true">

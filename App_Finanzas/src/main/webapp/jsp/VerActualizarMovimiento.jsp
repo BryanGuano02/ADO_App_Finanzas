@@ -2,13 +2,15 @@
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <html>
 <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/jsp/styles_actualizarmovimeinto.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <title>Ver Actualizar Movimiento</title>
 </head>
 <body>
-<h1>Actualización de: ${movimiento}</h1>
-<h3>${cuenta.nombre}</h3>
-
-<p>Saldo actual de la cuenta: <strong>${cuenta.total}</strong></p>
+<%--<h1>Actualización de: ${movimiento}</h1>
 
 <form action="ContabilidadController?ruta=registrarInfoActualizacion" method="post">
     <label for="concepto">Concepto:</label>
@@ -31,6 +33,39 @@
 
 
     <button type="submit">Actualizar Movimiento</button>
-</form>
+</form>--%>
+
+<nav>
+    <div class="titulo"><i class="fas fa-piggy-bank"></i> Chaucherita</div>
+    <a href="ContabilidadController?ruta=verDashboard">Volver al dashboard</a>
+</nav>
+
+<div class="container">
+    <div class="form-container">
+        <h1>Actualización de: ${movimiento}</h1>
+
+        <form action="ContabilidadController?ruta=registrarInfoActualizacion" method="post">
+            <label for="concepto">Concepto:</label>
+            <input type="text" id="concepto" name="concepto" required>
+
+            <label for="fecha">Fecha del movimiento:</label>
+            <input type="date" id="fecha" name="fecha" required>
+
+            <label for="valor">Valor del movimiento:</label>
+            <input type="number" id="valor" name="valor" step="0.01" required>
+
+            <label for="categoria">Categoría:</label>
+            <select id="categoria" name="categoria" required>
+                <option value="" disabled selected>Selecciona una categoría</option>
+                <!-- Mostrar las opciones dinámicamente -->
+                <c:forEach var="categoria" items="${categorias}">
+                    <option value="${categoria.ID}">${categoria.nombre}</option>
+                </c:forEach>
+            </select>
+
+            <button type="submit">Actualizar Movimiento</button>
+        </form>
+    </div>
+</div>
 </body>
 </html>

@@ -8,8 +8,8 @@ import java.time.LocalDate;
 public class CategoriaTransferencia extends Categoria implements Serializable {
 
 
-    public CategoriaTransferencia(  String nombre, Integer ID) {
-        super( nombre, ID);
+    public CategoriaTransferencia(  String nombre) {
+        super( nombre);
     }
 
 

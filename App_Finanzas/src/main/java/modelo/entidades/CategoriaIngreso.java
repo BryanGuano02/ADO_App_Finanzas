@@ -20,8 +20,8 @@ public class CategoriaIngreso extends Categoria implements Serializable {
     public CategoriaIngreso() {
     }
 
-    public CategoriaIngreso( String nombre, Integer ID) {
-        super(nombre, ID);
+    public CategoriaIngreso( String nombre) {
+        super(nombre);
     }
 
 }

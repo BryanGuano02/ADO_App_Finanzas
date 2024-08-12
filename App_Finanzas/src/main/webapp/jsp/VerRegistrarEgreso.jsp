@@ -21,7 +21,7 @@
     <input type="date" id="fecha" name="fecha" required><br><br>
 
     <label for="valor">Valor del Egreso:</label><br>
-    <input type="number" id="valor" name="valor" required><br><br>
+    <input type="number" id="valor" name="valor" required min="-1000000" step="-0.01" oninput="validateNegative(this)"><br><br>
 
     <label for="idCategoria">Categoría del egreso:</label><br>
     <select id="idCategoria" name="idCategoria" required>
