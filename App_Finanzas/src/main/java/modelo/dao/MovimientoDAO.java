@@ -56,7 +56,7 @@ public class MovimientoDAO implements Serializable {
 
 
     public void eliminarMovimiento(Integer idMovimiento) {
-//        Delete a movement by its ID
+//        Delete a transaction by its ID
         EntityManager em = getEntityManager();
 
         try {
@@ -99,7 +99,7 @@ public class MovimientoDAO implements Serializable {
 
     public void actualizarMovimiento(Movimiento movimiento) {
 
-//        Update the attributes of a movement
+//        Update the attributes of a transaction
         EntityManager em = getEntityManager();
         try {
             em.getTransaction().begin();

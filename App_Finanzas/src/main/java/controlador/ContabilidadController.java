@@ -111,7 +111,7 @@ public class ContabilidadController extends HttpServlet {
         Map<Integer, Double> valorCategoriasIngreso = calcularValorCategorias(categoriasIngreso, movimientoDAO, desde, hasta);
         Map<Integer, Double> valorCategoriasEgreso = calcularValorCategorias(categoriasEgreso, movimientoDAO, desde, hasta);
 
-       // inicializarCategorias(cuentas);
+        // inicializarCategorias(cuentas);
         // 3. Send to the corresponding view
         req.setAttribute("cuentas", cuentas);
         req.setAttribute("categoriasIngreso", categoriasIngreso);
@@ -193,10 +193,10 @@ public class ContabilidadController extends HttpServlet {
 
         double valor = movimiento.getValor();
 
-        // Detele the movement
+        // Detele the transaction
         movimientoDao.eliminarMovimiento(idMovimiento);
 
-        // Update the balances according to the type of movements
+        // Update the balances according to the type of transactions
         CuentaDAO cuentaDAO = new CuentaDAO();
         actualizarSaldoCuenta(movimiento, cuentaDAO, valor);
 
@@ -213,7 +213,7 @@ public class ContabilidadController extends HttpServlet {
         MovimientoDAO movimientoDao = new MovimientoDAO();
         Movimiento movimiento = movimientoDao.obtenerMovimientoPorIdMovimiento(idMovimiento);
 
-        // Get all categories for the type of movements
+        // Get all categories for the type of transactions
         List<Categoria> categoriasPorTipoMovimiento = obtenerCategoriasSegunTipoMovimiento(movimiento);
 
 //        3.
@@ -244,9 +244,9 @@ public class ContabilidadController extends HttpServlet {
 
             actualizarTransferencia(req, resp, movimientoDAO, (Transferencia) movimiento, concepto, fecha, valor, cuentaDAO, idCategoria);
         } else if (movimiento instanceof Ingreso) {
-            actualizarIngreso(req,resp, movimientoDAO, (Ingreso) movimiento, concepto, fecha, valor, cuentaDAO, idCategoria);
+            actualizarIngreso(req, resp, movimientoDAO, (Ingreso) movimiento, concepto, fecha, valor, cuentaDAO, idCategoria);
         } else if (movimiento instanceof Egreso) {
-            actualizarEgreso(req,resp, movimientoDAO, (Egreso) movimiento, concepto, fecha, valor, cuentaDAO, idCategoria);
+            actualizarEgreso(req, resp, movimientoDAO, (Egreso) movimiento, concepto, fecha, valor, cuentaDAO, idCategoria);
         }
 
 //        3.
@@ -270,7 +270,7 @@ public class ContabilidadController extends HttpServlet {
 
         double valor = 0.0;
 
-//        Sum all the values of the movements
+//        Sum all the values of the transactions
         if (!movimientos.isEmpty()) {
             for (MovimientoDTO movimiento : movimientos) {
                 valor += movimiento.getValor();
@@ -306,7 +306,6 @@ public class ContabilidadController extends HttpServlet {
         req.getRequestDispatcher("jsp/VerRegistrarEgreso.jsp").forward(req, resp);
     }
 
-
     private void ingresarInfoEgreso(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
 //        1.
@@ -339,7 +338,6 @@ public class ContabilidadController extends HttpServlet {
         resp.sendRedirect("ContabilidadController?ruta=verDashboard");
     }
 
-
     private void registrarIngreso(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
 //        1.
@@ -353,9 +351,7 @@ public class ContabilidadController extends HttpServlet {
         List<CategoriaIngreso> categoriasIngreso = categoriaIngresoDAO.obtenerTodo();
 
         actualizarIdCuenta(req, cuenta);
-//        req.setAttribute("saldoCuenta", cuenta.getTotal());
         req.setAttribute("categoriasIngreso", categoriasIngreso);
-        // req.setAttribute("idCuenta", cuenta.getId());
 
 //        3.
         req.getRequestDispatcher("jsp/VerRegistrarIngreso.jsp").forward(req, resp);
@@ -418,10 +414,10 @@ public class ContabilidadController extends HttpServlet {
         HttpSession session = req.getSession();
 
         Cuenta cuentaOrigen = (Cuenta) session.getAttribute("cuenta");
-        int idCuentaDestino = Integer.parseInt(req.getParameter("idCuentaDestino"));
         String concepto = String.valueOf(req.getParameter("concepto"));
         LocalDate fecha = LocalDate.parse((req.getParameter("fecha")));
         double valor = Double.parseDouble(req.getParameter("valor"));
+        int idCuentaDestino = Integer.parseInt(req.getParameter("idCuentaDestino"));
 
         int idCategoria = 1;
 
@@ -529,7 +525,6 @@ public class ContabilidadController extends HttpServlet {
     }
 
 
-
     private void actualizarTransferencia(HttpServletRequest req, HttpServletResponse resp, MovimientoDAO movimientoDAO, Transferencia transferencia,
                                          String concepto, LocalDate fecha, double valor, CuentaDAO cuentaDAO, int idCategoria) throws ServletException, IOException {
         int idCuentaOrigen = transferencia.getCuentaOrigen().getId();
@@ -559,7 +554,7 @@ public class ContabilidadController extends HttpServlet {
     }
 
 
-    private void actualizarIngreso(HttpServletRequest req, HttpServletResponse resp,  MovimientoDAO movimientoDAO, Ingreso ingreso,
+    private void actualizarIngreso(HttpServletRequest req, HttpServletResponse resp, MovimientoDAO movimientoDAO, Ingreso ingreso,
                                    String concepto, LocalDate fecha, double valor, CuentaDAO cuentaDAO, int idCategoria) {
         int idCuentaDestino = ingreso.getCuentaDestino().getId();
         double valorAntiguo = ingreso.getValor();
@@ -594,7 +589,7 @@ public class ContabilidadController extends HttpServlet {
         //10
         // / 6 - 7   = -1
         // / 8 - 7   = 1
-        double valorDiferencia =   valor - valorAntiguo;
+        double valorDiferencia = valor - valorAntiguo;
         valorDiferencia = valorDiferencia * (-1);
 
         egreso.setConcepto(concepto);
