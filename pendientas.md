@@ -4,7 +4,6 @@
 2. Filtrar Fecha: incompleto
    1. hacer que se recalcule el valor de cada categoria
 3. Ver Cuenta: empezado
-   1. Hacer que se muestre los movimientos según cuenta origen o destino
 4. Ver Movimientos: ??
    1. Hacer que se presenten solo los movimientos dentro de las fechas (Filtrar Fechas)
 5. Eliminar Movimientos: completo
