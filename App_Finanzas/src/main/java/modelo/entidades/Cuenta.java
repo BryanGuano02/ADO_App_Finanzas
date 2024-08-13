@@ -3,16 +3,15 @@ package modelo.entidades;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @Table(name="Cuenta")
 public class Cuenta implements Serializable {
 
 	private static final long serialVersionUID = 1L;
+
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	private String nombre;
 	private double total;
@@ -49,18 +48,4 @@ public class Cuenta implements Serializable {
 	public void setTotal(double total) {
 		this.total = total;
 	}
-
-//	MÈTODOS DE NEGOCI87
-
-//	public static List<Cuenta> obtenerTodo() {
-//		if (cuentas == null) {
-//			cuentas = new ArrayList<Cuenta>();
-//
-//			cuentas.add(new Cuenta(1, "Banco", 1.5));
-//			cuentas.add(new Cuenta(2, "Chanchito", 10.5));
-//
-//		}
-//		return cuentas;
-//
-
 }

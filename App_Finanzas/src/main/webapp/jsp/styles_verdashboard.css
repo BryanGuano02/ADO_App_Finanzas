@@ -1,6 +1,7 @@
 @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css');
 
 /* Estilos generales */
+/* Estilo del encabezado */
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color: #eef2f7;
@@ -8,32 +9,37 @@ body {
     margin: 0;
     padding: 0;
 }
-
-/* Estilo del encabezado */
 nav {
-    background-color: #2c3e50;
+    position: -webkit-sticky; /* Para Safari */
+    position: fixed;
+    position: sticky;
+    top: 0; /* Fija la barra de navegación en la parte superior */
+    width: 100%;
+    background-color: #2c3e50; /* Color de fondo */
     padding: 15px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     color: #ecf0f1;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000; /* Asegura que la barra de navegación esté por encima del contenido */
 }
 
-.titulo {
+nav .titulo {
     font-size: 24px;
     font-weight: bold;
     display: flex;
     align-items: center;
 }
 
-.titulo i {
+nav .titulo i {
     margin-right: 10px;
 }
 
 nav .barraNavegacion {
     display: flex;
     align-items: center;
+    background-color: #2c3e50;
 }
 
 nav .barraNavegacion ul {
@@ -64,15 +70,13 @@ nav form {
     margin-right: 20px;
 }
 
-/* Wrapper para el input con icono */
 .input-icon-wrapper {
     position: relative;
     display: inline-block;
 }
 
 .with-icon {
-    padding-left: 25px;
-    /* Espacio para el icono */
+    padding-left: 25px; /* Espacio para el icono */
     font-family: 'FontAwesome', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     padding: 8px;
     font-size: 16px;
@@ -93,7 +97,6 @@ nav form button {
 nav form button:hover {
     background-color: #425968;
 }
-
 
 /* Estilos de las cuentas */
 .cuentas {
@@ -147,33 +150,75 @@ nav form button:hover {
 /* Estilos de las categorías */
 .categorias {
     padding: 20px;
+    max-width: 800px;
+    margin: auto;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+}
+.categoria-contenedor {
+    display: flex;
 }
 
-.categorias h1,
-.categorias h2 {
-    color: #2c3e50;
-    margin-bottom: 10px;
+.categoria-item {
+    margin-right: 10px; /* Espacio entre los elementos, opcional */
 }
 
 .categorias h1 {
-    font-size: 22px;
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #2c3e50;
 }
 
 .categorias h2 {
     font-size: 20px;
+    margin-top: 20px;
+    border-bottom: 2px solid #ddd;
+    padding-bottom: 10px;
+    color: #2c3e50;
 }
 
-.categoriaIngreso,
-.categoriaEgreso {
+.categoria-item {
+    display: inline-block;
+    background-color: #f5f5f5;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 15px;
+    margin: 10px;
+    width: 150px;
+    text-align: center;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     cursor: pointer;
-    color: #3498db;
-    margin: 10px 0;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+
 }
 
-.categoriaIngreso:hover,
-.categoriaEgreso:hover {
-    color: #2980b9;
+.categoria-item:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
 }
+
+.categoria-item span {
+    font-size: 14px;
+    color: #555;
+}
+.categoria-item h2 {
+    font-size: 16px;
+    margin-bottom: 10px;
+    color: #2c3e50;
+}
+
+.categoria-item .valoregreso {
+    font-size: 18px;
+    color: #e74c3c; /* Color rojo para valores negativos */
+    font-weight: bold;
+}
+.categoria-item .valoringreso {
+    font-size: 18px;
+    color: #0eb13c; /* Color rojo para valores negativos */
+    font-weight: bold;
+}
+
 
 /* Estilos de los movimientos */
 .movimientos {
@@ -191,27 +236,6 @@ nav form button:hover {
     font-size: 22px;
     color: #2c3e50;
     margin-bottom: 20px;
-}
-
-.movimientos table {
-    width: 100%;
-    border-collapse: collapse;
-}
-
-.movimientos table th,
-.movimientos table td {
-    padding: 10px;
-    text-align: left;
-    border-bottom: 1px solid #ddd;
-}
-
-.movimientos table th {
-    background-color: #2c3e50;
-    color: #ecf0f1;
-}
-
-.movimientos table td {
-    color: #34495e;
 }
 
 .movimientos table {
@@ -274,3 +298,5 @@ nav form button:hover {
 .movimientos .btn-group .btn-danger:hover {
     background-color: #c0392b;
 }
+
+

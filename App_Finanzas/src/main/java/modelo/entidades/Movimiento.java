@@ -4,8 +4,6 @@ import jakarta.persistence.*;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.Date;
-
 
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
@@ -13,7 +11,7 @@ import java.util.Date;
 public class Movimiento implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer Id;
 
     private String Concepto;
@@ -24,8 +22,8 @@ public class Movimiento implements Serializable {
     @Column
     private double Valor;
 
-
-    public Movimiento() {}
+    public Movimiento() {
+    }
 
     public Movimiento(String concepto, LocalDate fecha, double valor) {
         Concepto = concepto;
@@ -64,5 +62,4 @@ public class Movimiento implements Serializable {
     public void setValor(double valor) {
         Valor = valor;
     }
-
 }

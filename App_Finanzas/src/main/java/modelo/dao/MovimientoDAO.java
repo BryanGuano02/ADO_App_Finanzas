@@ -4,10 +4,12 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 import jakarta.persistence.TypedQuery;
+import jakarta.servlet.http.HttpSession;
 import modelo.dto.MovimientoDTO;
 import modelo.entidades.*;
 
 import java.io.Serializable;
+import java.sql.Date;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -25,12 +27,13 @@ public class MovimientoDAO implements Serializable {
         return emf.createEntityManager();
     }
 
+
     public List<MovimientoDTO> obtenerTodo(LocalDate desde, LocalDate hasta) {
         EntityManager em = getEntityManager();
         List<MovimientoDTO> movimientosDTO = new ArrayList<>();
 
         try {
-            // Consulta para obtener los movimientos entre dos fechas
+            // Query to get transactions between two dates
             String jpql = "SELECT m FROM Movimiento m WHERE m.Fecha BETWEEN :desde AND :hasta";
             TypedQuery<Movimiento> query = em.createQuery(jpql, Movimiento.class);
             query.setParameter("desde", desde);
@@ -38,38 +41,8 @@ public class MovimientoDAO implements Serializable {
 
             List<Movimiento> movimientos = query.getResultList();
 
-            // Convertir cada Movimiento a MovimientoDTO
             for (Movimiento movimiento : movimientos) {
-                String cuentaOrigen = "null";
-                String cuentaDestino = "null";
-
-                if (movimiento instanceof Egreso) {
-                    Egreso egreso = (Egreso) movimiento;
-                    cuentaDestino = egreso.getCategoria().getNombre();
-                    cuentaOrigen = egreso.getCuentaOrigen().getNombre();
-                }
-
-                if (movimiento instanceof Ingreso) {
-                    Ingreso ingreso = (Ingreso) movimiento;
-                    cuentaOrigen = ingreso.getCategoria().getNombre();
-                    cuentaDestino = ingreso.getCuentaDestino().getNombre();
-                }
-
-                if (movimiento instanceof Transferencia) {
-                    Transferencia transferencia = (Transferencia) movimiento;
-                    cuentaOrigen = transferencia.getCuentaOrigen().getNombre();
-                    cuentaDestino = transferencia.getCuentaDestino().getNombre();
-                }
-
-                MovimientoDTO dto = new MovimientoDTO(
-                        movimiento.getId().toString(),
-                        java.sql.Date.valueOf(movimiento.getFecha()),
-                        movimiento.getConcepto(),
-                        movimiento.getValor(),
-                        cuentaOrigen,
-                        cuentaDestino
-                );
-                movimientosDTO.add(dto);
+                movimientosDTO.add(convertirMovimientoADTO(movimiento));
             }
 
         } finally {
@@ -81,53 +54,11 @@ public class MovimientoDAO implements Serializable {
         return movimientosDTO;
     }
 
-    public MovimientoDTO obtenerMovimientoPorIdMovimiento(int idMovimiento) {
-        EntityManager em = getEntityManager();
-        MovimientoDTO movimientoDTO = null;
-
-        try {
-            // Consulta para obtener los movimientos entre dos fechas
-            String jpql = "SELECT m FROM Movimiento m WHERE m.Id = :idMovimiento";
-            TypedQuery<Movimiento> query = em.createQuery(jpql, Movimiento.class);
-            query.setParameter("idMovimiento", idMovimiento);
-
-            Movimiento movimiento = query.getSingleResult();
-
-            String cuentaOrigen = "null";
-            String cuentaDestino = "null";
-
-            if (movimiento instanceof Egreso) {
-                Egreso egreso = (Egreso) movimiento;
-                cuentaDestino = egreso.getCategoria().getNombre();
-                cuentaOrigen = egreso.getCuentaOrigen().getNombre();
-            }
-
-            if (movimiento instanceof Ingreso) {
-                Ingreso ingreso = (Ingreso) movimiento;
-                cuentaOrigen = ingreso.getCategoria().getNombre();
-                cuentaDestino = ingreso.getCuentaDestino().getNombre();
-            }
-
-            movimientoDTO = new MovimientoDTO(
-                    movimiento.getId().toString(),
-                    java.sql.Date.valueOf(movimiento.getFecha()),
-                    movimiento.getConcepto(),
-                    movimiento.getValor(),
-                    cuentaOrigen,
-                    cuentaDestino
-            );
-
-        } finally {
-            if (em != null && em.isOpen()) {
-                em.close();
-            }
-        }
-
-        return movimientoDTO;
-    }
 
     public void eliminarMovimiento(Integer idMovimiento) {
+//        Delete a movement by its ID
         EntityManager em = getEntityManager();
+
         try {
             em.getTransaction().begin();
             Movimiento movimiento = em.find(Movimiento.class, idMovimiento);
@@ -147,18 +78,16 @@ public class MovimientoDAO implements Serializable {
         }
     }
 
-    public Movimiento obtenerMovimientoPorIdMovimiento1(int idMovimiento) {
+    public Movimiento obtenerMovimientoPorIdMovimiento(int idMovimiento) {
         EntityManager em = getEntityManager();
         Movimiento movimiento = null;
 
         try {
-            // Consulta para obtener el movimiento por id
             String jpql = "SELECT m FROM Movimiento m WHERE m.Id = :idMovimiento";
             TypedQuery<Movimiento> query = em.createQuery(jpql, Movimiento.class);
             query.setParameter("idMovimiento", idMovimiento);
 
             movimiento = query.getSingleResult();
-
         } finally {
             if (em != null && em.isOpen()) {
                 em.close();
@@ -169,6 +98,8 @@ public class MovimientoDAO implements Serializable {
     }
 
     public void actualizarMovimiento(Movimiento movimiento) {
+
+//        Update the attributes of a movement
         EntityManager em = getEntityManager();
         try {
             em.getTransaction().begin();
@@ -186,64 +117,31 @@ public class MovimientoDAO implements Serializable {
         }
     }
 
-    public List<MovimientoDTO> obtenerMovimientosPorIdCategoria(int idCategoria) {
+    public List<MovimientoDTO> obtenerMovimientosPorIdCategoria(int idCategoria, LocalDate desde, LocalDate hasta) {
         EntityManager em = getEntityManager();
         List<MovimientoDTO> movimientosDTO = new ArrayList<>();
 
         try {
-            // Consulta para obtener todos los Egresos asociados a la categoría
-            String jpql1 = "SELECT e FROM Egreso e WHERE e.categoria.ID = :idCategoria";
-            TypedQuery<Egreso> query1 = em.createQuery(jpql1, Egreso.class);
-            query1.setParameter("idCategoria", idCategoria);
-            List<Egreso> egresos = query1.getResultList();
+            // Query to get all Expenses associated with the category
+            List<Egreso> egresos = obtenerEgresosPorIdCategoria(em, idCategoria, desde, hasta);
 
-            // Consulta para obtener todos los Ingresos asociados a la categoría
-            String jpql2 = "SELECT i FROM Ingreso i WHERE i.categoria.ID = :idCategoria";
-            TypedQuery<Ingreso> query2 = em.createQuery(jpql2, Ingreso.class);
-            query2.setParameter("idCategoria", idCategoria);
-            List<Ingreso> ingresos = query2.getResultList();
+            // Query to get all Income associated with the category
+            List<Ingreso> ingresos = obtenerIngresosPorIdCategoria(em, idCategoria, desde, hasta);
 
-            // Consulta para obtener todas las Transferencias asociadas a la categoría
-            String jpql3 = "SELECT t FROM Transferencia t WHERE t.categoria.ID = :idCategoria";
-            TypedQuery<Transferencia> query3 = em.createQuery(jpql3, Transferencia.class);
-            query3.setParameter("idCategoria", idCategoria);
-            List<Transferencia> transferencias = query3.getResultList();
+            // Query to get all Transfers associated with the category
+            List<Transferencia> transferencias = obtenerTransferenciasPorIdCategoria(em, idCategoria, desde, hasta);
 
             // Combinar todos los resultados en la lista de DTOs
             for (Egreso egreso : egresos) {
-                MovimientoDTO dto = new MovimientoDTO(
-                        egreso.getId().toString(),
-                        java.sql.Date.valueOf(egreso.getFecha()),
-                        egreso.getConcepto(),
-                        egreso.getValor(),
-                        egreso.getCuentaOrigen().getNombre(),
-                        egreso.getCategoria().getNombre()
-                );
-                movimientosDTO.add(dto);
+                movimientosDTO.add(convertirMovimientoADTO(egreso));
             }
 
             for (Ingreso ingreso : ingresos) {
-                MovimientoDTO dto = new MovimientoDTO(
-                        ingreso.getId().toString(),
-                        java.sql.Date.valueOf(ingreso.getFecha()),
-                        ingreso.getConcepto(),
-                        ingreso.getValor(),
-                        ingreso.getCategoria().getNombre(),
-                        ingreso.getCuentaDestino().getNombre()
-                );
-                movimientosDTO.add(dto);
+                movimientosDTO.add(convertirMovimientoADTO(ingreso));
             }
 
             for (Transferencia transferencia : transferencias) {
-                MovimientoDTO dto = new MovimientoDTO(
-                        transferencia.getId().toString(),
-                        java.sql.Date.valueOf(transferencia.getFecha()),
-                        transferencia.getConcepto(),
-                        transferencia.getValor(),
-                        transferencia.getCuentaOrigen().getNombre(),
-                        transferencia.getCuentaDestino().getNombre()
-                );
-                movimientosDTO.add(dto);
+                movimientosDTO.add(convertirMovimientoADTO(transferencia));
             }
 
         } finally {
@@ -260,59 +158,26 @@ public class MovimientoDAO implements Serializable {
         List<MovimientoDTO> movimientosDTO = new ArrayList<>();
 
         try {
-            // Consulta para obtener todos los Egresos asociados a la categoría
-            String jpql1 = "SELECT e FROM Egreso e WHERE e.CuentaOrigen.id = :idCuenta";
-            TypedQuery<Egreso> query1 = em.createQuery(jpql1, Egreso.class);
-            query1.setParameter("idCuenta", idCuenta);
-            List<Egreso> egresos = query1.getResultList();
+            // Consulta para obtener todos los Egresos asociados a la cuenta
+            List<Egreso> egresos = obtenerEgresosPorIdCuenta(em, idCuenta);
 
-            // Consulta para obtener todos los Ingresos asociados a la categoría
-            String jpql2 = "SELECT i FROM Ingreso i WHERE i.CuentaDestino.id = :idCuenta";
-            TypedQuery<Ingreso> query2 = em.createQuery(jpql2, Ingreso.class);
-            query2.setParameter("idCuenta", idCuenta);
-            List<Ingreso> ingresos = query2.getResultList();
+            // Consulta para obtener todos los Ingresos asociados a la cuenta
+            List<Ingreso> ingresos = obtenerIngresosPorIdCuenta(em, idCuenta);
 
-            // Consulta para obtener todas las Transferencias asociadas a la categoría
-            String jpql3 = "SELECT t FROM Transferencia t WHERE t.CuentaDestino.id = :idCuenta";
-            TypedQuery<Transferencia> query3 = em.createQuery(jpql3, Transferencia.class);
-            query3.setParameter("idCuenta", idCuenta);
-            List<Transferencia> transferencias = query3.getResultList();
+            // Consulta para obtener todas las Transferencias asociadas a la cuenta
+            List<Transferencia> transferencias = obtenerTransferenciasPorIdCuenta(em, idCuenta);
 
             // Combinar todos los resultados en la lista de DTOs
             for (Egreso egreso : egresos) {
-                MovimientoDTO dto = new MovimientoDTO(
-                        egreso.getId().toString(),
-                        java.sql.Date.valueOf(egreso.getFecha()),
-                        egreso.getConcepto(),
-                        egreso.getValor(),
-                        egreso.getCuentaOrigen().getNombre(),
-                        egreso.getCategoria().getNombre()
-                );
-                movimientosDTO.add(dto);
+                movimientosDTO.add(convertirMovimientoADTO(egreso));
             }
 
             for (Ingreso ingreso : ingresos) {
-                MovimientoDTO dto = new MovimientoDTO(
-                        ingreso.getId().toString(),
-                        java.sql.Date.valueOf(ingreso.getFecha()),
-                        ingreso.getConcepto(),
-                        ingreso.getValor(),
-                        ingreso.getCategoria().getNombre(),
-                        ingreso.getCuentaDestino().getNombre()
-                );
-                movimientosDTO.add(dto);
+                movimientosDTO.add(convertirMovimientoADTO(ingreso));
             }
 
             for (Transferencia transferencia : transferencias) {
-                MovimientoDTO dto = new MovimientoDTO(
-                        transferencia.getId().toString(),
-                        java.sql.Date.valueOf(transferencia.getFecha()),
-                        transferencia.getConcepto(),
-                        transferencia.getValor(),
-                        transferencia.getCuentaOrigen().getNombre(),
-                        transferencia.getCuentaDestino().getNombre()
-                );
-                movimientosDTO.add(dto);
+                movimientosDTO.add(convertirMovimientoADTO(transferencia));
             }
 
         } finally {
@@ -323,4 +188,85 @@ public class MovimientoDAO implements Serializable {
 
         return movimientosDTO;
     }
+
+//    Support methods
+
+    private MovimientoDTO convertirMovimientoADTO(Movimiento movimiento) {
+        String cuentaOrigen = null;
+        String cuentaDestino = null;
+
+        if (movimiento instanceof Egreso) {
+            Egreso egreso = (Egreso) movimiento;
+            cuentaOrigen = egreso.getCuentaOrigen().getNombre();
+            cuentaDestino = egreso.getCategoria().getNombre();
+        } else if (movimiento instanceof Ingreso) {
+            Ingreso ingreso = (Ingreso) movimiento;
+            cuentaOrigen = ingreso.getCategoria().getNombre();
+            cuentaDestino = ingreso.getCuentaDestino().getNombre();
+        } else if (movimiento instanceof Transferencia) {
+            Transferencia transferencia = (Transferencia) movimiento;
+            cuentaOrigen = transferencia.getCuentaOrigen().getNombre();
+            cuentaDestino = transferencia.getCuentaDestino().getNombre();
+        }
+
+        return new MovimientoDTO(
+                movimiento.getId().toString(),
+                Date.valueOf(movimiento.getFecha()).toLocalDate(),
+                movimiento.getConcepto(),
+                movimiento.getValor(),
+                cuentaOrigen,
+                cuentaDestino
+        );
+    }
+
+    private List<Egreso> obtenerEgresosPorIdCuenta(EntityManager em, int idCuenta) {
+        String jpql = "SELECT e FROM Egreso e WHERE e.CuentaOrigen.id = :idCuenta";
+        TypedQuery<Egreso> query = em.createQuery(jpql, Egreso.class);
+        query.setParameter("idCuenta", idCuenta);
+        return query.getResultList();
+    }
+
+    private List<Ingreso> obtenerIngresosPorIdCuenta(EntityManager em, int idCuenta) {
+        String jpql = "SELECT i FROM Ingreso i WHERE i.CuentaDestino.id = :idCuenta";
+        TypedQuery<Ingreso> query = em.createQuery(jpql, Ingreso.class);
+        query.setParameter("idCuenta", idCuenta);
+        return query.getResultList();
+    }
+
+    private List<Transferencia> obtenerTransferenciasPorIdCuenta(EntityManager em, int idCuenta) {
+        String jpql = "SELECT t FROM Transferencia t WHERE t.CuentaDestino.id = :idCuenta";
+        TypedQuery<Transferencia> query = em.createQuery(jpql, Transferencia.class);
+        query.setParameter("idCuenta", idCuenta);
+        return query.getResultList();
+    }
+
+    private List<Egreso> obtenerEgresosPorIdCategoria(EntityManager em, int idCategoria, LocalDate desde, LocalDate hasta) {
+        String jpql = "SELECT e FROM Egreso e WHERE e.categoria.ID = :idCategoria AND e.Fecha >= :desde AND e.Fecha <= :hasta";
+        TypedQuery<Egreso> query = em.createQuery(jpql, Egreso.class);
+        query.setParameter("idCategoria", idCategoria);
+        query.setParameter("desde", desde);
+        query.setParameter("hasta", hasta);
+        return query.getResultList();
+    }
+
+
+    private List<Ingreso> obtenerIngresosPorIdCategoria(EntityManager em, int idCategoria, LocalDate desde, LocalDate hasta) {
+        String jpql = "SELECT i FROM Ingreso i WHERE i.categoria.ID = :idCategoria AND i.Fecha >= :desde AND i.Fecha <= :hasta";
+        TypedQuery<Ingreso> query = em.createQuery(jpql, Ingreso.class);
+        query.setParameter("idCategoria", idCategoria);
+        query.setParameter("desde", desde);
+        query.setParameter("hasta", hasta);
+        return query.getResultList();
+    }
+
+
+    private List<Transferencia> obtenerTransferenciasPorIdCategoria(EntityManager em, int idCategoria, LocalDate desde, LocalDate hasta) {
+        String jpql = "SELECT t FROM Transferencia t WHERE t.categoria.ID = :idCategoria AND t.Fecha >= :desde AND t.Fecha <= :hasta";
+        TypedQuery<Transferencia> query = em.createQuery(jpql, Transferencia.class);
+        query.setParameter("idCategoria", idCategoria);
+        query.setParameter("desde", desde);
+        query.setParameter("hasta", hasta);
+        return query.getResultList();
+    }
+
 }

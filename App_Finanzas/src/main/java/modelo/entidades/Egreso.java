@@ -13,12 +13,11 @@ import java.time.LocalDate;
 @DiscriminatorValue("EGRESO")
 public class Egreso extends Movimiento implements Serializable {
 
-
     private static final long serialVersionUID = 1L;
+
     @ManyToOne
     @JoinColumn(name = "CuentaOrigen_ID")
     private Cuenta CuentaOrigen;
-
 
     @ManyToOne
     @JoinColumn(name = "Categoria_ID")
@@ -47,8 +46,6 @@ public class Egreso extends Movimiento implements Serializable {
     public void setCategoria(CategoriaEgreso categoria) {
         this.categoria = categoria;
     }
-
-
 
     @Override
     public String toString() {

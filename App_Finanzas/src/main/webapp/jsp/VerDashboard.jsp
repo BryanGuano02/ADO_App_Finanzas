@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
+<%@ taglib prefix="fmt" uri="jakarta.tags.fmt" %>
 <!DOCTYPE html>
 <html lang="es">
 
@@ -8,21 +9,10 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/jsp/styles_dashboard.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/jsp/styles_verdashboard.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <title>Dashboard</title>
-    <script>
-        function cancelarEliminacion() {
-            // Ocultar el pop-up sin eliminar
-            document.getElementById('deleteModal').style.display = 'none';
-        }
-
-        function submitEliminarForm() {
-            // Enviar el formulario para confirmar la eliminación
-            document.getElementById('deleteForm').submit();
-        }
-    </script>
 </head>
 
 <body>
@@ -32,9 +22,9 @@
     </div>
     <div class="barraNavegacion">
         <ul>
-            <li><a href="#Inicio">Cuentas</a></li>
-            <li><a href="#">Categorías</a></li>
-            <li><a href="#">Movimientos</a></li>
+            <li><a href="#cuentas">Cuentas</a></li>
+            <li><a href="#categorias">Categorías</a></li>
+            <li><a href="#movimientos">Movimientos</a></li>
 
             <li>
                 <!-- Filtros por rango de fechas -->
@@ -62,7 +52,9 @@
             <form action="ContabilidadController?ruta=verCuenta" method="post">
                 <input type="hidden" name="idCuenta" value="${cuenta.id}">
                 <h1 class="nombre_cuenta" onclick="this.closest('form').submit()">${cuenta.nombre}</h1>
-                <h1 class="nombre_cuenta" onclick="this.closest('form').submit()">${cuenta.total}</h1>
+                <h1 class="nombre_cuenta" onclick="this.closest('form').submit()">
+                    <fmt:formatNumber value="${cuenta.total}" type="number" maxFractionDigits="2"/>
+                </h1>
             </form>
             <!-- Ingreso -->
             <form action="ContabilidadController?ruta=registrarIngreso" method="POST" style="display:inline;">
@@ -80,7 +72,6 @@
                 </button>
             </form>
 
-
             <!-- Transferencia -->
             <form action="ContabilidadController?ruta=registrarTransferencia" method="POST" style="display:inline;">
                 <input type="hidden" name="idCuenta" value="${cuenta.id}">
@@ -88,15 +79,11 @@
                     <i class="fas fa-arrow-up"></i> Transferencia
                 </button>
             </form>
-
-
-
         </div>
-
     </c:forEach>
 </div>
 
-<div class="categorias" id="categorias">
+<%--<div class="categorias" id="categorias">
     <h1>Categorias</h1>
 
     <h2>Categorias Ingreso</h2>
@@ -104,21 +91,69 @@
     <c:forEach items="${categoriasIngreso}" var="categoriaIngreso">
         <form action="ContabilidadController?ruta=verCategoria" method="post">
             <input type="hidden" name="idCategoria" value="${categoriaIngreso.ID}">
-            <h1 class="categoriaIngreso" onclick="this.closest('form').submit()">${categoriaIngreso.nombre}</h1>
-                <%--            <h1 class="categoriaIngreso" onclick="this.closest('form').submit()">${cuenta.total}</h1>--%>
+            <h1 class="categoriaIngreso" onclick="this.closest('form').submit()">
+                    ${categoriaIngreso.nombre}
+                <span> - Valor: ${valorCategoriasIngreso[categoriaIngreso.ID]}</span>
+            </h1>
         </form>
     </c:forEach>
-
 
     <h2>Categorias Egreso</h2>
 
     <c:forEach items="${categoriasEgreso}" var="categoriaEgreso">
         <form action="ContabilidadController?ruta=verCategoria" method="post">
             <input type="hidden" name="idCategoria" value="${categoriaEgreso.ID}">
-            <h1 class="categoriaEgreso" onclick="this.closest('form').submit()">${categoriaEgreso.nombre}</h1>
-                <%--            <h1 class="categoriaIngreso" onclick="this.closest('form').submit()">${cuenta.total}</h1>--%>
+            <h1 class="categoriaEgreso" onclick="this.closest('form').submit()">
+                    ${categoriaEgreso.nombre}
+                <span> - Valor: ${valorCategoriasEgreso[categoriaEgreso.ID]}</span>
+            </h1>
         </form>
     </c:forEach>
+</div>--%>
+<div class="categorias" id="categorias">
+    <h1>Categorías</h1>
+
+    <section >
+        <h2>Categorías Ingreso</h2>
+
+            <div class="categoria-contenedor" >
+                <c:forEach items="${categoriasIngreso}" var="categoriaIngreso">
+                <form action="ContabilidadController?ruta=verCategoria" method="post">
+                    <input type="hidden" name="idCategoria" value="${categoriaIngreso.ID}">
+                    <button type="submit" class="categoria-item">
+                        <h2>${categoriaIngreso.nombre}</h2>
+                        <div class="valoringreso">
+                            <fmt:formatNumber value="${valorCategoriasIngreso[categoriaIngreso.ID]}" type="number" maxFractionDigits="2"/>
+                        </div>
+                    </button>
+                </form>
+                </c:forEach>
+            </div>
+
+
+
+    </section>
+
+
+    <section >
+        <h2>Categorías Egreso</h2>
+
+            <div class="categoria-contenedor">
+                <c:forEach items="${categoriasEgreso}" var="categoriaEgreso">
+                <form action="ContabilidadController?ruta=verCategoria" method="post">
+                    <input type="hidden" name="idCategoria" value="${categoriaEgreso.ID}">
+                    <button type="submit" class="categoria-item">
+                        <h2>${categoriaEgreso.nombre}</h2>
+                        <div class="valoregreso">
+                            <fmt:formatNumber value="${valorCategoriasEgreso[categoriaEgreso.ID]}" type="number" maxFractionDigits="2"/>
+                        </div>
+                    </button>
+                </form>
+                </c:forEach>
+            </div>
+
+
+    </section>
 </div>
 
 <%--<div class="container">
@@ -160,12 +195,10 @@
         </tbody>
     </table>
 </div>--%>
-<div class="movimientos">
+<div class="movimientos" id="movimientos">
 
     <div class="container">
         <h1>Movimientos</h1>
-        <a href="ContabilidadController?ruta=verMovimientos">Ver todos los movimientos</a>
-
         <table>
             <thead>
             <tr>
@@ -192,7 +225,7 @@
                             <input type="hidden" name="id" value="${movimiento.id}">
                             <button type="submit" class="btn btn-update">Actualizar</button>
                         </form>
-                        <form action="ContabilidadController?ruta=eliminarMovimiento" method="POST" style="display:inline;" onsubmit="return confirmarEliminacion(this);">
+                        <form action="" method="POST" style="display:inline;" onsubmit="return confirmarEliminacion(this);">
                             <input type="hidden" name="id" value="${movimiento.id}">
                             <button type="submit" class="btn btn-danger">Eliminar</button>
                         </form>
@@ -205,18 +238,21 @@
 </div>
 
 <script>
-        function confirmarEliminacion(form) {
-            // Puedes personalizar el mensaje de confirmación aquí
-            var confirmacion = confirm("¿Estás seguro de que deseas eliminar este movimiento?");
-            if (confirmacion) {
-                // Si el usuario confirma, el formulario se enviará
-                return true;
-            } else {
-                // Si el usuario cancela, se evitará el envío del formulario
-                return false;
-            }
+    function confirmarEliminacion(form) {
+        var confirmacion = confirm("¿Estás seguro de que deseas eliminar este movimiento?");
+        if (confirmacion) {
+            // Si el usuario confirma, cambia la acción a confirmarMovimiento
+            form.action = "ContabilidadController?ruta=eliminarMovimiento";
+            return true;
+        } else {
+            // Si el usuario cancela, cambia la acción a cancelarMovimiento
+            form.action = "ContabilidadController?ruta=cancelar";
+            form.submit();
+            return false;
+
         }
-    </script>
+    }
+</script>
 
     <!-- Incluir Flatpickr JS -->
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>

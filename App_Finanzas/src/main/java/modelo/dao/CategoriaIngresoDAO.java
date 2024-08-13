@@ -1,7 +1,6 @@
 package modelo.dao;
 
 import jakarta.persistence.*;
-import modelo.entidades.CategoriaEgreso;
 import modelo.entidades.CategoriaIngreso;
 
 import java.io.Serializable;
@@ -19,24 +18,23 @@ public class CategoriaIngresoDAO implements Serializable {
         em = emf.createEntityManager();
     }
 
-
     public void ingresar(CategoriaIngreso categoriaIngreso) {
         EntityManager em = null;
         try {
             em = emf.createEntityManager();
-            em.getTransaction().begin();  // Inicia la transacción
+            em.getTransaction().begin();
 
-            em.persist(categoriaIngreso); // Persiste la entidad en la base de datos
+            em.persist(categoriaIngreso);
 
-            em.getTransaction().commit(); // Finaliza la transacción (commit)
+            em.getTransaction().commit();
         } catch (Exception e) {
             if (em != null && em.getTransaction().isActive()) {
-                em.getTransaction().rollback(); // Hace rollback si ocurre una excepción
+                em.getTransaction().rollback();
             }
             e.printStackTrace();
         } finally {
             if (em != null) {
-                em.close(); // Cierra el EntityManager
+                em.close();
             }
         }
     }
@@ -44,16 +42,15 @@ public class CategoriaIngresoDAO implements Serializable {
     public List<CategoriaIngreso> obtenerTodo() {
         List<CategoriaIngreso> categoriasIngreso = null;
         try {
-            // Consulta para obtener los Movimientos
+            // Get all categories
             String jpql = "SELECT ci FROM CategoriaIngreso ci";
             TypedQuery<CategoriaIngreso> query = em.createQuery(jpql, CategoriaIngreso.class);
 
             categoriasIngreso = query.getResultList();
-
         } catch (Exception e) {
-            e.printStackTrace(); // Manejo básico de excepciones
+            e.printStackTrace();
             if (em != null && em.getTransaction().isActive()) {
-                em.getTransaction().rollback(); // Hacer rollback en caso de excepción
+                em.getTransaction().rollback();
             }
         } finally {
             if (em != null && em.isOpen()) {
@@ -72,15 +69,14 @@ public class CategoriaIngresoDAO implements Serializable {
         try {
             em = emf.createEntityManager();
 
-            // Consulta para obtener los Movimientos
             String jpql = "SELECT ci FROM CategoriaIngreso ci WHERE ci.ID = :idCategoria ";
 
             TypedQuery<CategoriaIngreso> query = em.createQuery(jpql, CategoriaIngreso.class);
             query.setParameter("idCategoria", idCategoria);
 
-            categoriaIngreso =  query.getSingleResult();
+            categoriaIngreso = query.getSingleResult();
         } catch (Exception e) {
-            e.printStackTrace(); // Manejo básico de excepciones
+            e.printStackTrace();
         } finally {
             if (em != null && em.isOpen()) {
                 em.close();
@@ -93,28 +89,5 @@ public class CategoriaIngresoDAO implements Serializable {
         return categoriaIngreso;
     }
 
-//    public void actualizarSaldo(CategoriaIngreso categoriaIngreso, double valor) {
-//
-//        try {
-//            em = emf.createEntityManager();
-//            em.getTransaction().begin();
-//            // Consulta para obtener los movimientos entre dos fechas
-//            String jpql = "UPDATE CategoriaIngreso ci SET WHERE ci.ID = :idCategoria";
-//            Query query = em.createQuery(jpql);
-//            query.setParameter("valor", valor); // Asegúrate de que 'valor' esté definido en tu código
-//            query.setParameter("idCategoria", categoriaIngreso.getID());
-//
-//            query.executeUpdate();
-//            em.getTransaction().commit();
-//        } catch (Exception e) {
-//            if (em.getTransaction().isActive()) {
-//                em.getTransaction().rollback();
-//            }
-//            e.printStackTrace();
-//        } finally {
-//            if (em != null) {
-//                em.close();
-//            }
-//        }
 }
 

@@ -32,7 +32,6 @@ public class Transferencia extends Movimiento implements Serializable {
         this.categoria = categoria;
     }
 
-
     public Cuenta getCuentaDestino() {
         return CuentaDestino;
     }

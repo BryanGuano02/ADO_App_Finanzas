@@ -7,7 +7,6 @@ import jakarta.persistence.ManyToOne;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.Date;
 
 @Entity
 @DiscriminatorValue("INGRESO")

@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/jsp/styles_actualizarmovimeinto.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/jsp/styles_veractualizarmovimiento.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <title>Ver Actualizar Movimiento</title>
 </head>
@@ -52,7 +52,7 @@
             <input type="date" id="fecha" name="fecha" required>
 
             <label for="valor">Valor del movimiento:</label>
-            <input type="number" id="valor" name="valor" step="0.01" required>
+            <input type="number" id="valor" name="valor" required min="0.01" step="0.01">
 
             <label for="categoria">Categoría:</label>
             <select id="categoria" name="categoria" required>

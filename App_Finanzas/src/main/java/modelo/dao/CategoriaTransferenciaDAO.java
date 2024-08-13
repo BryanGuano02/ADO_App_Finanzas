@@ -22,16 +22,16 @@ public class CategoriaTransferenciaDAO {
     public List<CategoriaTransferencia> obtenerTodo() {
         List<CategoriaTransferencia> categoriasTransferencia = null;
         try {
-            // Consulta para obtener los Movimientos
+
             String jpql = "SELECT ct FROM CategoriaTransferencia ct";
             TypedQuery<CategoriaTransferencia> query = em.createQuery(jpql, CategoriaTransferencia.class);
 
             categoriasTransferencia = query.getResultList();
 
         } catch (Exception e) {
-            e.printStackTrace(); // Manejo básico de excepciones
+            e.printStackTrace();
             if (em != null && em.getTransaction().isActive()) {
-                em.getTransaction().rollback(); // Hacer rollback en caso de excepción
+                em.getTransaction().rollback();
             }
         } finally {
             if (em != null && em.isOpen()) {
@@ -50,7 +50,6 @@ public class CategoriaTransferenciaDAO {
         try {
             em = emf.createEntityManager();
 
-            // Consulta para obtener los Movimientos
             String jpql = "SELECT ct FROM CategoriaTransferencia ct WHERE ct.ID = :idCategoria ";
 
             TypedQuery<CategoriaTransferencia> query = em.createQuery(jpql, CategoriaTransferencia.class);
@@ -59,7 +58,7 @@ public class CategoriaTransferenciaDAO {
             categoriaTransferencia =  query.getSingleResult();
 
         } catch (Exception e) {
-            e.printStackTrace(); // Manejo básico de excepciones
+            e.printStackTrace();
         } finally {
             if (em != null && em.isOpen()) {
                 em.close();
@@ -74,40 +73,16 @@ public class CategoriaTransferenciaDAO {
 
     public void ingresar(CategoriaTransferencia categoriaTrans) {
         EntityManager em = null;
-        try {
-            em = emf.createEntityManager();
-            em.getTransaction().begin();  // Inicia la transacción
-
-            em.persist(categoriaTrans); // Persiste la entidad en la base de datos
-
-            em.getTransaction().commit(); // Finaliza la transacción (commit)
-        } catch (Exception e) {
-            if (em != null && em.getTransaction().isActive()) {
-                em.getTransaction().rollback(); // Hace rollback si ocurre una excepción
-            }
-            e.printStackTrace();
-        } finally {
-            if (em != null) {
-                em.close(); // Cierra el EntityManager
-            }
-        }
-    }
-/*
-    public void actualizarSaldo(CategoriaTransferencia categoriaTransferencia, double valor) {
-        EntityManager em = emf.createEntityManager();
 
         try {
             em = emf.createEntityManager();
+            em.getTransaction().begin();
 
-            // Consulta para obtener los movimientos entre dos fechas
-            String jpql = "UPDATE CategoriaTransferencia ct  WHERE ct.id = :idCategoria";
-            TypedQuery query = (TypedQuery) em.createQuery(jpql);
-            query.setParameter("valor", valor); // Asegúrate de que 'valor' esté definido en tu código
-            query.setParameter("idCategoria", categoriaTransferencia.getID());
-            query.executeUpdate();
+            em.persist(categoriaTrans);
+
             em.getTransaction().commit();
         } catch (Exception e) {
-            if (em.getTransaction().isActive()) {
+            if (em != null && em.getTransaction().isActive()) {
                 em.getTransaction().rollback();
             }
             e.printStackTrace();
@@ -116,5 +91,6 @@ public class CategoriaTransferenciaDAO {
                 em.close();
             }
         }
-    }*/
+    }
+
 }

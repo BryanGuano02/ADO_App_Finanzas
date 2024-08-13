@@ -38,7 +38,16 @@ public class RecursoContabilidad {
 
         return categoriasRecopiladas;
     }
-//hola
+
+
+//    @GET
+//    @Path("movimiento/{id}")
+//    @Produces(MediaType.APPLICATION_JSON)
+//    public Movimiento obtenerMovimientoPorId(@PathParam("id") int id) {
+//        MovimientoDAO movimientoDAO = new MovimientoDAO();
+//        return movimientoDAO.obtenerMovimientoPorIdMovimiento1(id);
+//    }
+    
     
     @GET
     @Path("cuenta/{idCuenta}")

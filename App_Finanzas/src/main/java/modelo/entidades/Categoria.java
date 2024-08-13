@@ -1,13 +1,7 @@
 package modelo.entidades;
 
 import jakarta.persistence.*;
-
-import java.io.Serial;
 import java.io.Serializable;
-import java.lang.reflect.Type;
-import java.time.LocalDate;
-import java.util.Date;
-import java.util.List;
 
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
@@ -16,15 +10,13 @@ import java.util.List;
 public class Categoria implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer ID;
-
 
     private String nombre;
 
 
     public Categoria() {
-
     }
 
     public Categoria(String nombre) {

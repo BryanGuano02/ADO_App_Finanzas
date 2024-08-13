@@ -5,7 +5,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/jsp/styles_cuenta.css.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/jsp/styles_vercuenta.css">
     <title>Ver Cuenta</title>
 </head>
 <body>

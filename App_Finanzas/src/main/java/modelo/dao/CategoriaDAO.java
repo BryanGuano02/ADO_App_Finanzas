@@ -24,10 +24,6 @@ public class CategoriaDAO implements Serializable {
         return emf.createEntityManager();
     }
 
-    public void getName() {
-        // Implementación futura
-    }
-
     public List<CategoriaEgreso> getExpenseCategories() {
         EntityManager em = getEntityManager();
         List<CategoriaEgreso> categorias = null;
@@ -40,7 +36,7 @@ public class CategoriaDAO implements Serializable {
         }
         return categorias;
     }
-
+//
     public List<CategoriaIngreso> getIncomeCategories() {
         EntityManager em = getEntityManager();
         List<CategoriaIngreso> categorias = null;
@@ -53,7 +49,7 @@ public class CategoriaDAO implements Serializable {
         }
         return categorias;
     }
-
+//
     public void updateBalance(double value) {
         EntityManager em = getEntityManager();
         try {
@@ -70,14 +66,14 @@ public class CategoriaDAO implements Serializable {
         Categoria categoria = null;
 
         try {
-            // Consulta para obtener la Categoría por ID
+            // JPQL query to get the Category by ID
             String jpql = "SELECT c FROM Categoria c WHERE c.ID = :idCategoria";
             TypedQuery<Categoria> query = em.createQuery(jpql, Categoria.class);
             query.setParameter("idCategoria", idCategoria);
 
             categoria = query.getSingleResult();
         } catch (Exception e) {
-            e.printStackTrace(); // Manejo básico de excepciones
+            e.printStackTrace();
         } finally {
             if (em != null && em.isOpen()) {
                 em.close();

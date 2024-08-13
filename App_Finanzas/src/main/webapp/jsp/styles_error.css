@@ -1,0 +1,84 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #eef2f7; /* Fondo similar al del primer código */
+    color: #34495e; /* Texto en color gris oscuro */
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden; /* Evita barras de desplazamiento causadas por la animación */
+}
+
+.container {
+    text-align: center;
+    background-color: #ffffff; /* Fondo blanco para el contenedor */
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    padding: 40px;
+    max-width: 500px;
+    width: 100%;
+    position: relative; /* Para posicionar el papagallo */
+}
+
+h1 {
+    font-size: 28px;
+    margin-bottom: 20px;
+    color: #2c3e50; /* Color de texto consistente con el primer código */
+}
+
+.error-message {
+    font-size: 18px;
+    margin-bottom: 20px;
+    color: #e74c3c; /* Color rojo para indicar error, consistente con el primer código */
+}
+
+p {
+    margin-bottom: 20px;
+}
+
+a {
+    display: inline-block;
+    background-color: #3498db; /* Color azul del primer código para los botones */
+    color: #ffffff;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+a:hover {
+    background-color: #2980b9; /* Azul más oscuro en hover */
+    color: #ffffff;
+}
+
+.parrot {
+    position: absolute;
+    width: 100px;
+    animation: fly 10s linear infinite;
+}
+
+@keyframes fly {
+    0% {
+        top: 0;
+        left: 0;
+    }
+    25% {
+        top: 0;
+        left: calc(100% - 100px);
+    }
+    50% {
+        top: calc(100% - 100px);
+        left: calc(100% - 100px);
+    }
+    75% {
+        top: calc(100% - 100px);
+        left: 0;
+    }
+    100% {
+        top: 0;
+        left: 0;
+    }
+}

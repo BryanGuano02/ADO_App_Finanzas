@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import modelo.entidades.Cuenta;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 public class CuentaDAO implements Serializable {
@@ -19,26 +20,19 @@ public class CuentaDAO implements Serializable {
         return emf.createEntityManager();
     }
 
+
     public List<Cuenta> obtenerTodo() {
         EntityManager em = getEntityManager();
-        List<Cuenta> cuentas = null;
+        List<Cuenta> cuentas = new ArrayList<>();
 
         try {
             TypedQuery<Cuenta> query = em.createQuery("SELECT c FROM Cuenta c", Cuenta.class);
             cuentas = query.getResultList();
-            if (cuentas.isEmpty()) {
-                cuentas.add(new Cuenta(1, "Bnc. Pichincha", 10));
-                cuentas.add(new Cuenta(2, "Bnc. Pichincha Papá", 21));
-                cuentas.add(new Cuenta(3, "Bnc. Guayaquil", 41.82));
-                cuentas.add(new Cuenta(4, "Bajo del colchón", 15.24));
-                cuentas.add(new Cuenta(5, "Billetera", 158));
 
-                em.getTransaction().begin();
-                for (Cuenta cuenta : cuentas) {
-                    em.persist(cuenta);
-                }
-                em.getTransaction().commit();
+            if (cuentas.isEmpty()) {
+                inicializarCuentas(em, cuentas);
             }
+
         } finally {
             if (em != null && em.isOpen()) {
                 em.close();
@@ -47,6 +41,7 @@ public class CuentaDAO implements Serializable {
 
         return cuentas;
     }
+
 
     public Cuenta obtenerCuentaPorId(int idCuenta) {
         EntityManager em = getEntityManager();
@@ -66,7 +61,6 @@ public class CuentaDAO implements Serializable {
     public void actualizarSaldo(Cuenta cuenta, double valor) {
         EntityManager em = getEntityManager();
 
-        System.out.println(cuenta.getNombre());
         int idCuenta = cuenta.getId();
 
         try {
@@ -90,9 +84,32 @@ public class CuentaDAO implements Serializable {
         }
     }
 
-    public void cerrar() {
-        if (emf != null && emf.isOpen()) {
-            emf.close();
+    //Support methods
+
+    private void inicializarCuentas(EntityManager em, List<Cuenta> cuentas) {
+        // Crear y añadir cuentas por defecto
+        cuentas.add(new Cuenta(1, "Bnc. Pichincha", 0));
+        cuentas.add(new Cuenta(2, "Bnc. Pichincha Papá", 0));
+        cuentas.add(new Cuenta(3, "Bnc. Guayaquil", 0));
+        cuentas.add(new Cuenta(4, "Bajo del colchón", 0));
+        cuentas.add(new Cuenta(5, "Billetera", 0));
+
+        // Persistir las cuentas por defecto
+        EntityTransaction transaction = em.getTransaction();
+
+        try {
+            transaction.begin();
+            for (Cuenta cuenta : cuentas) {
+                em.persist(cuenta);
+            }
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction.isActive()) {
+                transaction.rollback();
+            }
+            throw e;
         }
     }
+
+
 }

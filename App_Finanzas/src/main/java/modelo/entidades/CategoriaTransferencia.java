@@ -3,17 +3,16 @@ package modelo.entidades;
 import jakarta.persistence.Entity;
 
 import java.io.Serializable;
-import java.time.LocalDate;
+
 @Entity
 public class CategoriaTransferencia extends Categoria implements Serializable {
-
-
-    public CategoriaTransferencia(  String nombre) {
-        super( nombre);
-    }
-
+    private static final long serialVersionUID = 1L;
 
     public CategoriaTransferencia() {
 
+    }
+
+    public CategoriaTransferencia(String nombre) {
+        super(nombre);
     }
 }
